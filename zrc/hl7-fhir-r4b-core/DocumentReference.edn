@@ -1,0 +1,180 @@
+{ns hl7-fhir-r4b-core.DocumentReference,
+ import #{hl7-fhir-r4b-core.value-set.c80-practice-codes
+          hl7-fhir-r4b-core.Period
+          hl7-fhir-r4b-core.Group
+          hl7-fhir-r4b-core.DomainResource
+          zen.fhir
+          hl7-fhir-r4b-core.value-set.doc-typecodes
+          hl7-fhir-r4b-core.value-set.security-labels
+          hl7-fhir-r4b-core.value-set.document-relationship-type
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.Patient
+          hl7-fhir-r4b-core.DocumentReference
+          hl7-fhir-r4b-core.value-set.formatcodes
+          hl7-fhir-r4b-core.Encounter
+          hl7-fhir-r4b-core.string
+          hl7-fhir-r4b-core.value-set.doc-classcodes
+          hl7-fhir-r4b-core.BackboneElement
+          hl7-fhir-r4b-core.Practitioner
+          hl7-fhir-r4b-core.Organization
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.EpisodeOfCare
+          hl7-fhir-r4b-core.Attachment
+          hl7-fhir-r4b-core.value-set.composition-status
+          hl7-fhir-r4b-core.Coding
+          hl7-fhir-r4b-core.Device
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.value-set.c80-facilitycodes
+          hl7-fhir-r4b-core.instant
+          hl7-fhir-r4b-core.PractitionerRole
+          hl7-fhir-r4b-core.value-set.document-reference-status
+          hl7-fhir-r4b-core.Element
+          hl7-fhir-r4b-core.RelatedPerson},
+ schema {:zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/DocumentReference",
+         :require #{:content :status},
+         :type zen/map,
+         :zen/desc "A reference to a document of any kind for any purpose. Provides metadata about the document so that the document can be discovered and managed. The scope of a document is any seralized object with a mime-type, so includes formal patient centric documents (CDA), cliical notes, scanned paper, and non-patient specific documents like policy text.",
+         :keys {:description {:confirms #{hl7-fhir-r4b-core.string/schema},
+                              :fhir/flags #{:SU},
+                              :zen/desc "Human-readable description"},
+                :category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.doc-classcodes/value-set,
+                                                        :strength :example},
+                                   :zen/desc "Categorization of document"}},
+                :date {:confirms #{hl7-fhir-r4b-core.instant/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "When this document reference was created"},
+                :docStatus {:confirms #{hl7-fhir-r4b-core.code/schema},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.composition-status/value-set,
+                                                 :strength :required},
+                            :zen/desc "preliminary | final | amended | entered-in-error"},
+                :content {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                  :type zen/map,
+                                  :keys {:attachment {:confirms #{hl7-fhir-r4b-core.Attachment/schema},
+                                                      :fhir/flags #{:SU},
+                                                      :zen/desc "Where to access the document"},
+                                         :format {:confirms #{hl7-fhir-r4b-core.Coding/schema},
+                                                  :fhir/flags #{:SU},
+                                                  :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.formatcodes/value-set,
+                                                                       :strength :preferred},
+                                                  :zen/desc "Format/content rules for the document"}},
+                                  :require #{:attachment},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Document referenced"},
+                          :minItems 1},
+                :_date {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :_status {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :type {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.doc-typecodes/value-set,
+                                            :strength :preferred},
+                       :zen/desc "Kind of document (LOINC if possible)"},
+                :_description {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :author {:type zen/vector,
+                         :every {:confirms #{zen.fhir/Reference
+                                             hl7-fhir-r4b-core.Reference/schema},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                                hl7-fhir-r4b-core.PractitionerRole/schema
+                                                                hl7-fhir-r4b-core.Patient/schema
+                                                                hl7-fhir-r4b-core.Organization/schema
+                                                                hl7-fhir-r4b-core.Device/schema
+                                                                hl7-fhir-r4b-core.Practitioner/schema}},
+                                 :zen/desc "Who and/or what authored the document"}},
+                :masterIdentifier {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen/desc "Master Version Specific Identifier"},
+                :custodian {:confirms #{zen.fhir/Reference
+                                        hl7-fhir-r4b-core.Reference/schema},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Organization/schema}},
+                            :zen/desc "Organization which maintains the document"},
+                :status {:confirms #{hl7-fhir-r4b-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.document-reference-status/value-set,
+                                              :strength :required},
+                         :zen/desc "current | superseded | entered-in-error"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Other identifiers for the document"}},
+                :relatesTo {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:code {:confirms #{hl7-fhir-r4b-core.code/schema},
+                                                  :fhir/flags #{:SU},
+                                                  :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.document-relationship-type/value-set,
+                                                                       :strength :required},
+                                                  :zen/desc "replaces | transforms | signs | appends"},
+                                           :_code {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                           :target {:confirms #{zen.fhir/Reference
+                                                                hl7-fhir-r4b-core.Reference/schema},
+                                                    :fhir/flags #{:SU},
+                                                    :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.DocumentReference/schema}},
+                                                    :zen/desc "Target of the relationship"}},
+                                    :require #{:code :target},
+                                    :fhir/flags #{:SU},
+                                    :zen/desc "Relationships to other documents"}},
+                :context {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                          :type zen/map,
+                          :keys {:encounter {:type zen/vector,
+                                             :every {:confirms #{zen.fhir/Reference
+                                                                 hl7-fhir-r4b-core.Reference/schema},
+                                                     :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Encounter/schema
+                                                                                    hl7-fhir-r4b-core.EpisodeOfCare/schema}},
+                                                     :zen/desc "Context of the document  content"}},
+                                 :event {:type zen/vector,
+                                         :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                 :zen/desc "Main clinical acts documented"}},
+                                 :period {:confirms #{hl7-fhir-r4b-core.Period/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen/desc "Time of service that is being documented"},
+                                 :facilityType {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.c80-facilitycodes/value-set,
+                                                                     :strength :example},
+                                                :zen/desc "Kind of facility where patient was seen"},
+                                 :practiceSetting {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                   :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.c80-practice-codes/value-set,
+                                                                        :strength :example},
+                                                   :zen/desc "Additional details about where the content was created (e.g. clinical specialty)"},
+                                 :sourcePatientInfo {:confirms #{zen.fhir/Reference
+                                                                 hl7-fhir-r4b-core.Reference/schema},
+                                                     :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Patient/schema}},
+                                                     :zen/desc "Patient demographics from source"},
+                                 :related {:type zen/vector,
+                                           :every {:confirms #{zen.fhir/Reference
+                                                               hl7-fhir-r4b-core.Reference/schema},
+                                                   :zen.fhir/reference {:refers #{}},
+                                                   :zen/desc "Related identifiers or resources"}}},
+                          :fhir/flags #{:SU},
+                          :zen/desc "Clinical context of document"},
+                :securityLabel {:type zen/vector,
+                                :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                        :fhir/flags #{:SU},
+                                        :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.security-labels/value-set,
+                                                             :strength :extensible},
+                                        :zen/desc "Document security-tags"}},
+                :_docStatus {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :subject {:confirms #{zen.fhir/Reference
+                                      hl7-fhir-r4b-core.Reference/schema},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Group/schema
+                                                         hl7-fhir-r4b-core.Patient/schema
+                                                         hl7-fhir-r4b-core.Device/schema
+                                                         hl7-fhir-r4b-core.Practitioner/schema}},
+                          :zen/desc "Who/what is the subject of the document"},
+                :authenticator {:confirms #{zen.fhir/Reference
+                                            hl7-fhir-r4b-core.Reference/schema},
+                                :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.PractitionerRole/schema
+                                                               hl7-fhir-r4b-core.Organization/schema
+                                                               hl7-fhir-r4b-core.Practitioner/schema}},
+                                :zen/desc "Who/what authenticated the document"}},
+         :zen.fhir/type "DocumentReference"}}

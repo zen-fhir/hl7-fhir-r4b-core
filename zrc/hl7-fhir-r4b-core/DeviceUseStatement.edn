@@ -1,0 +1,121 @@
+{ns hl7-fhir-r4b-core.DeviceUseStatement,
+ import #{hl7-fhir-r4b-core.Period
+          hl7-fhir-r4b-core.Claim
+          hl7-fhir-r4b-core.value-set.device-statement-status
+          hl7-fhir-r4b-core.Group
+          hl7-fhir-r4b-core.DomainResource
+          zen.fhir
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Condition
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.Patient
+          hl7-fhir-r4b-core.Timing
+          hl7-fhir-r4b-core.DocumentReference
+          hl7-fhir-r4b-core.Observation
+          hl7-fhir-r4b-core.Practitioner
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.Annotation
+          hl7-fhir-r4b-core.ServiceRequest
+          hl7-fhir-r4b-core.Device
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.QuestionnaireResponse
+          hl7-fhir-r4b-core.DiagnosticReport
+          hl7-fhir-r4b-core.dateTime
+          hl7-fhir-r4b-core.PractitionerRole
+          hl7-fhir-r4b-core.value-set.body-site
+          hl7-fhir-r4b-core.Element
+          hl7-fhir-r4b-core.Media
+          hl7-fhir-r4b-core.Procedure
+          hl7-fhir-r4b-core.RelatedPerson},
+ schema {:zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/DeviceUseStatement",
+         :require #{:status :device :subject},
+         :type zen/map,
+         :zen/desc "A record of a device being used by a patient where the record is the result of a report from the patient or another clinician.",
+         :keys {:_recordedOn {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :derivedFrom {:type zen/vector,
+                              :every {:confirms #{zen.fhir/Reference
+                                                  hl7-fhir-r4b-core.Reference/schema},
+                                      :fhir/flags #{:SU},
+                                      :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Procedure/schema
+                                                                     hl7-fhir-r4b-core.Claim/schema
+                                                                     hl7-fhir-r4b-core.QuestionnaireResponse/schema
+                                                                     hl7-fhir-r4b-core.Observation/schema
+                                                                     hl7-fhir-r4b-core.ServiceRequest/schema
+                                                                     hl7-fhir-r4b-core.DocumentReference/schema}},
+                                      :zen/desc "Supporting information"}},
+                :_status {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :reasonCode {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Why device was used"}},
+                :source {:confirms #{zen.fhir/Reference
+                                     hl7-fhir-r4b-core.Reference/schema},
+                         :fhir/flags #{:SU},
+                         :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                        hl7-fhir-r4b-core.PractitionerRole/schema
+                                                        hl7-fhir-r4b-core.Patient/schema
+                                                        hl7-fhir-r4b-core.Practitioner/schema}},
+                         :zen/desc "Who made the statement"},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r4b-core.Annotation/schema},
+                               :zen/desc "Addition details (comments, instructions)"}},
+                :status {:confirms #{hl7-fhir-r4b-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.device-statement-status/value-set,
+                                              :strength :required},
+                         :zen/desc "active | completed | entered-in-error +"},
+                :timing {:fhir/polymorphic true,
+                         :type zen/map,
+                         :exclusive-keys #{#{:dateTime
+                                             :Period
+                                             :Timing}},
+                         :keys {:Timing {:confirms #{hl7-fhir-r4b-core.Timing/schema}},
+                                :Period {:confirms #{hl7-fhir-r4b-core.Period/schema}},
+                                :dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                                :_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                         :fhir/flags #{:SU},
+                         :zen/desc "How often  the device was used"},
+                :recordedOn {:confirms #{hl7-fhir-r4b-core.dateTime/schema},
+                             :fhir/flags #{:SU},
+                             :zen/desc "When statement was recorded"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "External identifier for this record"}},
+                :bodySite {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.body-site/value-set,
+                                                :strength :example},
+                           :zen/desc "Target body site"},
+                :device {:confirms #{zen.fhir/Reference
+                                     hl7-fhir-r4b-core.Reference/schema},
+                         :fhir/flags #{:SU},
+                         :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Device/schema}},
+                         :zen/desc "Reference to device used"},
+                :basedOn {:type zen/vector,
+                          :every {:confirms #{zen.fhir/Reference
+                                              hl7-fhir-r4b-core.Reference/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.ServiceRequest/schema}},
+                                  :zen/desc "Fulfills plan, proposal or order"}},
+                :subject {:confirms #{zen.fhir/Reference
+                                      hl7-fhir-r4b-core.Reference/schema},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Group/schema
+                                                         hl7-fhir-r4b-core.Patient/schema}},
+                          :zen/desc "Patient using device"},
+                :reasonReference {:type zen/vector,
+                                  :every {:confirms #{zen.fhir/Reference
+                                                      hl7-fhir-r4b-core.Reference/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Condition/schema
+                                                                         hl7-fhir-r4b-core.Media/schema
+                                                                         hl7-fhir-r4b-core.Observation/schema
+                                                                         hl7-fhir-r4b-core.DocumentReference/schema
+                                                                         hl7-fhir-r4b-core.DiagnosticReport/schema}},
+                                          :zen/desc "Why was DeviceUseStatement performed?"}}},
+         :zen.fhir/type "DeviceUseStatement"}}

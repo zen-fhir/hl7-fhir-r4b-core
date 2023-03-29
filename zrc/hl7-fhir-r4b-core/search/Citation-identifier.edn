@@ -1,0 +1,12 @@
+{ns hl7-fhir-r4b-core.search.Citation-identifier,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Citation-identifier",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Citation-identifier",
+         :fhir/type "token",
+         :name "identifier",
+         :expr {:Citation {:knife [["identifier"]],
+                           :jsonpath ["$.\"identifier\"[*]"],
+                           :data-types #{{:type "Identifier",
+                                          :polymorphic? false}},
+                           :template :token}}}}

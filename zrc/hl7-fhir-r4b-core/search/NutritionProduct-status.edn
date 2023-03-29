@@ -1,0 +1,12 @@
+{ns hl7-fhir-r4b-core.search.NutritionProduct-status,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "NutritionProduct-status",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/NutritionProduct-status",
+         :fhir/type "token",
+         :name "status",
+         :expr {:NutritionProduct {:knife [["status"]],
+                                   :jsonpath ["$.\"status\"[*]"],
+                                   :data-types #{{:type "code",
+                                                  :polymorphic? false}},
+                                   :template :token}}}}

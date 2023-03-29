@@ -1,0 +1,13 @@
+{ns hl7-fhir-r4b-core.search.ClinicalUseDefinition-effect,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ClinicalUseDefinition-effect",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ClinicalUseDefinition-effect",
+         :fhir/type "token",
+         :name "effect",
+         :expr {:ClinicalUseDefinition {:knife [["undesirableEffect"
+                                                 "symptomConditionEffect"]],
+                                        :jsonpath ["$.\"undesirableEffect\".\"symptomConditionEffect\"[*]"],
+                                        :data-types #{{:type "CodeableReference",
+                                                       :polymorphic? false}},
+                                        :template :token}}}}

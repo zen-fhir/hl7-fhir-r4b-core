@@ -1,0 +1,9 @@
+{ns hl7-fhir-r4b-core.value-set.allelename,
+ import #{zen.fhir},
+ value-set {:zen/tags #{zen.fhir/value-set},
+            :zen/desc "European Bioinformatics Institute",
+            :zen.fhir/version "0.6.20-2",
+            :fhir/code-systems #{{:fhir/url "http://www.ebi.ac.uk/ipd/imgt/hla",
+                                  :zen.fhir/content :not-present}},
+            :uri "http://hl7.org/fhir/ValueSet/allelename",
+            :version "4.3.0"}}

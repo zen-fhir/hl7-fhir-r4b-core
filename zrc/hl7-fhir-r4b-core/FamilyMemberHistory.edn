@@ -1,0 +1,179 @@
+{ns hl7-fhir-r4b-core.FamilyMemberHistory,
+ import #{hl7-fhir-r4b-core.value-set.history-absent-reason
+          hl7-fhir-r4b-core.Period
+          hl7-fhir-r4b-core.DomainResource
+          hl7-fhir-r4b-core.value-set.clinical-findings
+          zen.fhir
+          hl7-fhir-r4b-core.boolean
+          hl7-fhir-r4b-core.Age
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Condition
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.date
+          hl7-fhir-r4b-core.Patient
+          hl7-fhir-r4b-core.DocumentReference
+          hl7-fhir-r4b-core.Range
+          hl7-fhir-r4b-core.value-set.condition-code
+          hl7-fhir-r4b-core.string
+          hl7-fhir-r4b-core.Observation
+          hl7-fhir-r4b-core.BackboneElement
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.Annotation
+          hl7-fhir-r4b-core.uri
+          hl7-fhir-r4b-core.AllergyIntolerance
+          hl7-fhir-r4b-core.canonical
+          hl7-fhir-r4b-core.value-set.condition-outcome
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.QuestionnaireResponse
+          hl7-fhir-r4b-core.DiagnosticReport
+          hl7-fhir-r4b-core.dateTime
+          hl7-fhir-r4b-core.value-set.administrative-gender
+          hl7-fhir-r4b-core.Element
+          hl7-fhir-r4b-core.value-set.history-status},
+ schema {:zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/FamilyMemberHistory",
+         :require #{:patient :relationship :status},
+         :type zen/map,
+         :zen/desc "Significant health conditions for a person related to the patient relevant in the context of care for the patient.",
+         :keys {:patient {:confirms #{zen.fhir/Reference
+                                      hl7-fhir-r4b-core.Reference/schema},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Patient/schema}},
+                          :zen/desc "Patient history is about"},
+                :date {:confirms #{hl7-fhir-r4b-core.dateTime/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "When history was recorded or last updated"},
+                :instantiatesCanonical {:type zen/vector,
+                                        :every {:confirms #{hl7-fhir-r4b-core.canonical/schema},
+                                                :fhir/flags #{:SU},
+                                                :zen/desc "Instantiates FHIR protocol or definition"}},
+                :instantiatesUri {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r4b-core.uri/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen/desc "Instantiates external protocol or definition"}},
+                :age {:fhir/polymorphic true,
+                      :type zen/map,
+                      :exclusive-keys #{#{:string :Range :Age}},
+                      :keys {:Age {:confirms #{hl7-fhir-r4b-core.Age/schema}},
+                             :Range {:confirms #{hl7-fhir-r4b-core.Range/schema}},
+                             :string {:confirms #{hl7-fhir-r4b-core.string/schema}},
+                             :_string {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                      :fhir/flags #{:SU},
+                      :zen/desc "(approximate) age"},
+                :sex {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                      :fhir/flags #{:SU},
+                      :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.administrative-gender/value-set,
+                                           :strength :extensible},
+                      :zen/desc "male | female | other | unknown"},
+                :_date {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :name {:confirms #{hl7-fhir-r4b-core.string/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "The family member described"},
+                :_status {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :relationship {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "Relationship to the subject"},
+                :reasonCode {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.clinical-findings/value-set,
+                                                          :strength :example},
+                                     :zen/desc "Why was family member history performed?"}},
+                :_estimatedAge {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :deceased {:fhir/polymorphic true,
+                           :type zen/map,
+                           :exclusive-keys #{#{:date
+                                               :string
+                                               :Range
+                                               :boolean
+                                               :Age}},
+                           :keys {:boolean {:confirms #{hl7-fhir-r4b-core.boolean/schema}},
+                                  :_boolean {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                  :Age {:confirms #{hl7-fhir-r4b-core.Age/schema}},
+                                  :Range {:confirms #{hl7-fhir-r4b-core.Range/schema}},
+                                  :date {:confirms #{hl7-fhir-r4b-core.date/schema}},
+                                  :_date {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                  :string {:confirms #{hl7-fhir-r4b-core.string/schema}},
+                                  :_string {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                           :fhir/flags #{:SU},
+                           :zen/desc "Dead? How old/when?"},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r4b-core.Annotation/schema},
+                               :zen/desc "General note about related person"}},
+                :status {:confirms #{hl7-fhir-r4b-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.history-status/value-set,
+                                              :strength :required},
+                         :zen/desc "partial | completed | entered-in-error | health-unknown"},
+                :condition {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:code {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                  :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.condition-code/value-set,
+                                                                       :strength :example},
+                                                  :zen/desc "Condition suffered by relation"},
+                                           :outcome {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                     :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.condition-outcome/value-set,
+                                                                          :strength :example},
+                                                     :zen/desc "deceased | permanent disability | etc."},
+                                           :contributedToDeath {:confirms #{hl7-fhir-r4b-core.boolean/schema},
+                                                                :zen/desc "Whether the condition contributed to the cause of death"},
+                                           :_contributedToDeath {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                           :onset {:fhir/polymorphic true,
+                                                   :type zen/map,
+                                                   :exclusive-keys #{#{:string
+                                                                       :Range
+                                                                       :Period
+                                                                       :Age}},
+                                                   :keys {:Age {:confirms #{hl7-fhir-r4b-core.Age/schema}},
+                                                          :Range {:confirms #{hl7-fhir-r4b-core.Range/schema}},
+                                                          :Period {:confirms #{hl7-fhir-r4b-core.Period/schema}},
+                                                          :string {:confirms #{hl7-fhir-r4b-core.string/schema}},
+                                                          :_string {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                                   :zen/desc "When condition first manifested"},
+                                           :note {:type zen/vector,
+                                                  :every {:confirms #{hl7-fhir-r4b-core.Annotation/schema},
+                                                          :zen/desc "Extra information about condition"}}},
+                                    :require #{:code},
+                                    :zen/desc "Condition that the related person had"}},
+                :_name {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "External Id(s) for this record"}},
+                :born {:fhir/polymorphic true,
+                       :type zen/map,
+                       :exclusive-keys #{#{:date :string :Period}},
+                       :keys {:Period {:confirms #{hl7-fhir-r4b-core.Period/schema}},
+                              :date {:confirms #{hl7-fhir-r4b-core.date/schema}},
+                              :_date {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                              :string {:confirms #{hl7-fhir-r4b-core.string/schema}},
+                              :_string {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                       :zen/desc "(approximate) date of birth"},
+                :_instantiatesCanonical {:type zen/vector,
+                                         :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                :dataAbsentReason {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.history-absent-reason/value-set,
+                                                        :strength :example},
+                                   :zen/desc "subject-unknown | withheld | unable-to-obtain | deferred"},
+                :reasonReference {:type zen/vector,
+                                  :every {:confirms #{zen.fhir/Reference
+                                                      hl7-fhir-r4b-core.Reference/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.AllergyIntolerance/schema
+                                                                         hl7-fhir-r4b-core.Condition/schema
+                                                                         hl7-fhir-r4b-core.QuestionnaireResponse/schema
+                                                                         hl7-fhir-r4b-core.Observation/schema
+                                                                         hl7-fhir-r4b-core.DocumentReference/schema
+                                                                         hl7-fhir-r4b-core.DiagnosticReport/schema}},
+                                          :zen/desc "Why was family member history performed?"}},
+                :_instantiatesUri {:type zen/vector,
+                                   :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                :estimatedAge {:confirms #{hl7-fhir-r4b-core.boolean/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "Age is estimated?"}},
+         :zen.fhir/type "FamilyMemberHistory"}}

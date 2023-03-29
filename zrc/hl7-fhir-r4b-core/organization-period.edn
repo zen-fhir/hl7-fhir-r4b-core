@@ -1,0 +1,8 @@
+{ns hl7-fhir-r4b-core.organization-period,
+ import #{hl7-fhir-r4b-core.Period zen.fhir},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "The date range that this organization should be considered available.",
+         :zen.fhir/type "Period",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/organization-period",
+         :zen.fhir/version "0.6.20-2",
+         :confirms #{hl7-fhir-r4b-core.Period/schema}}}

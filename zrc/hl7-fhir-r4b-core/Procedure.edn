@@ -1,0 +1,260 @@
+{ns hl7-fhir-r4b-core.Procedure,
+ import #{hl7-fhir-r4b-core.Period
+          hl7-fhir-r4b-core.Group
+          hl7-fhir-r4b-core.DomainResource
+          hl7-fhir-r4b-core.value-set.procedure-outcome
+          hl7-fhir-r4b-core.CarePlan
+          zen.fhir
+          hl7-fhir-r4b-core.Age
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Condition
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.Patient
+          hl7-fhir-r4b-core.DocumentReference
+          hl7-fhir-r4b-core.Location
+          hl7-fhir-r4b-core.value-set.procedure-followup
+          hl7-fhir-r4b-core.Range
+          hl7-fhir-r4b-core.Encounter
+          hl7-fhir-r4b-core.value-set.condition-code
+          hl7-fhir-r4b-core.string
+          hl7-fhir-r4b-core.Observation
+          hl7-fhir-r4b-core.value-set.event-status
+          hl7-fhir-r4b-core.value-set.procedure-reason
+          hl7-fhir-r4b-core.Substance
+          hl7-fhir-r4b-core.BackboneElement
+          hl7-fhir-r4b-core.Practitioner
+          hl7-fhir-r4b-core.Organization
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.value-set.device-kind
+          hl7-fhir-r4b-core.Annotation
+          hl7-fhir-r4b-core.ServiceRequest
+          hl7-fhir-r4b-core.value-set.performer-role
+          hl7-fhir-r4b-core.uri
+          hl7-fhir-r4b-core.MedicationAdministration
+          hl7-fhir-r4b-core.Composition
+          hl7-fhir-r4b-core.canonical
+          hl7-fhir-r4b-core.Device
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.value-set.procedure-category
+          hl7-fhir-r4b-core.Medication
+          hl7-fhir-r4b-core.DiagnosticReport
+          hl7-fhir-r4b-core.dateTime
+          hl7-fhir-r4b-core.value-set.device-action
+          hl7-fhir-r4b-core.PractitionerRole
+          hl7-fhir-r4b-core.value-set.body-site
+          hl7-fhir-r4b-core.Element
+          hl7-fhir-r4b-core.value-set.procedure-not-performed-reason
+          hl7-fhir-r4b-core.Procedure
+          hl7-fhir-r4b-core.RelatedPerson
+          hl7-fhir-r4b-core.value-set.procedure-code},
+ schema {:zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Procedure",
+         :require #{:status :subject},
+         :type zen/map,
+         :zen/desc "An action that is or was performed on or for a patient. This can be a physical intervention like an operation, or less invasive like long term services, counseling, or hypnotherapy.",
+         :keys {:category {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.procedure-category/value-set,
+                                                :strength :example},
+                           :zen/desc "Classification of the procedure"},
+                :report {:type zen/vector,
+                         :every {:confirms #{zen.fhir/Reference
+                                             hl7-fhir-r4b-core.Reference/schema},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Composition/schema
+                                                                hl7-fhir-r4b-core.DocumentReference/schema
+                                                                hl7-fhir-r4b-core.DiagnosticReport/schema}},
+                                 :zen/desc "Any report resulting from the procedure"}},
+                :usedCode {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.device-kind/value-set,
+                                                        :strength :example},
+                                   :zen/desc "Coded items used during the procedure"}},
+                :usedReference {:type zen/vector,
+                                :every {:confirms #{zen.fhir/Reference
+                                                    hl7-fhir-r4b-core.Reference/schema},
+                                        :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Medication/schema
+                                                                       hl7-fhir-r4b-core.Device/schema
+                                                                       hl7-fhir-r4b-core.Substance/schema}},
+                                        :zen/desc "Items used during procedure"}},
+                :instantiatesCanonical {:type zen/vector,
+                                        :every {:confirms #{hl7-fhir-r4b-core.canonical/schema},
+                                                :fhir/flags #{:SU},
+                                                :zen/desc "Instantiates FHIR protocol or definition"}},
+                :instantiatesUri {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r4b-core.uri/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen/desc "Instantiates external protocol or definition"}},
+                :focalDevice {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                      :type zen/map,
+                                      :keys {:action {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                      :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.device-action/value-set,
+                                                                           :strength :preferred},
+                                                      :zen/desc "Kind of change to device"},
+                                             :manipulated {:confirms #{zen.fhir/Reference
+                                                                       hl7-fhir-r4b-core.Reference/schema},
+                                                           :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Device/schema}},
+                                                           :zen/desc "Device that was changed"}},
+                                      :require #{:manipulated},
+                                      :zen/desc "Manipulated, implanted, or removed device"}},
+                :encounter {:confirms #{zen.fhir/Reference
+                                        hl7-fhir-r4b-core.Reference/schema},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Encounter/schema}},
+                            :zen/desc "Encounter created as part of"},
+                :complicationDetail {:type zen/vector,
+                                     :every {:confirms #{zen.fhir/Reference
+                                                         hl7-fhir-r4b-core.Reference/schema},
+                                             :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Condition/schema}},
+                                             :zen/desc "A condition that is a result of the procedure"}},
+                :_status {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :reasonCode {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.procedure-reason/value-set,
+                                                          :strength :example},
+                                     :zen/desc "Coded reason procedure performed"}},
+                :statusReason {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                               :fhir/flags #{:SU},
+                               :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.procedure-not-performed-reason/value-set,
+                                                    :strength :example},
+                               :zen/desc "Reason for current status"},
+                :performed {:fhir/polymorphic true,
+                            :type zen/map,
+                            :exclusive-keys #{#{:string
+                                                :dateTime
+                                                :Range
+                                                :Period
+                                                :Age}},
+                            :keys {:dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                                   :_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                   :Period {:confirms #{hl7-fhir-r4b-core.Period/schema}},
+                                   :string {:confirms #{hl7-fhir-r4b-core.string/schema}},
+                                   :_string {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                   :Age {:confirms #{hl7-fhir-r4b-core.Age/schema}},
+                                   :Range {:confirms #{hl7-fhir-r4b-core.Range/schema}}},
+                            :fhir/flags #{:SU},
+                            :zen/desc "When the procedure was performed"},
+                :outcome {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.procedure-outcome/value-set,
+                                               :strength :example},
+                          :zen/desc "The result of procedure"},
+                :asserter {:confirms #{zen.fhir/Reference
+                                       hl7-fhir-r4b-core.Reference/schema},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                          hl7-fhir-r4b-core.PractitionerRole/schema
+                                                          hl7-fhir-r4b-core.Patient/schema
+                                                          hl7-fhir-r4b-core.Practitioner/schema}},
+                           :zen/desc "Person who asserts this procedure"},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r4b-core.Annotation/schema},
+                               :zen/desc "Additional information about the procedure"}},
+                :complication {:type zen/vector,
+                               :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                       :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.condition-code/value-set,
+                                                            :strength :example},
+                                       :zen/desc "Complication following the procedure"}},
+                :status {:confirms #{hl7-fhir-r4b-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.event-status/value-set,
+                                              :strength :required},
+                         :zen/desc "preparation | in-progress | not-done | on-hold | stopped | completed | entered-in-error | unknown"},
+                :recorder {:confirms #{zen.fhir/Reference
+                                       hl7-fhir-r4b-core.Reference/schema},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                          hl7-fhir-r4b-core.PractitionerRole/schema
+                                                          hl7-fhir-r4b-core.Patient/schema
+                                                          hl7-fhir-r4b-core.Practitioner/schema}},
+                           :zen/desc "Who recorded the procedure"},
+                :code {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.procedure-code/value-set,
+                                            :strength :example},
+                       :zen/desc "Identification of the procedure"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "External Identifiers for this procedure"}},
+                :bodySite {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.body-site/value-set,
+                                                        :strength :example},
+                                   :zen/desc "Target body sites"}},
+                :basedOn {:type zen/vector,
+                          :every {:confirms #{zen.fhir/Reference
+                                              hl7-fhir-r4b-core.Reference/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.CarePlan/schema
+                                                                 hl7-fhir-r4b-core.ServiceRequest/schema}},
+                                  :zen/desc "A request for this procedure"}},
+                :partOf {:type zen/vector,
+                         :every {:confirms #{zen.fhir/Reference
+                                             hl7-fhir-r4b-core.Reference/schema},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Procedure/schema
+                                                                hl7-fhir-r4b-core.MedicationAdministration/schema
+                                                                hl7-fhir-r4b-core.Observation/schema}},
+                                 :zen/desc "Part of referenced event"}},
+                :location {:confirms #{zen.fhir/Reference
+                                       hl7-fhir-r4b-core.Reference/schema},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Location/schema}},
+                           :zen/desc "Where the procedure happened"},
+                :followUp {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.procedure-followup/value-set,
+                                                        :strength :example},
+                                   :zen/desc "Instructions for follow up"}},
+                :_instantiatesCanonical {:type zen/vector,
+                                         :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                :subject {:confirms #{zen.fhir/Reference
+                                      hl7-fhir-r4b-core.Reference/schema},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Group/schema
+                                                         hl7-fhir-r4b-core.Patient/schema}},
+                          :zen/desc "Who the procedure was performed on"},
+                :performer {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:function {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                      :fhir/flags #{:SU},
+                                                      :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.performer-role/value-set,
+                                                                           :strength :example},
+                                                      :zen/desc "Type of performance"},
+                                           :actor {:confirms #{zen.fhir/Reference
+                                                               hl7-fhir-r4b-core.Reference/schema},
+                                                   :fhir/flags #{:SU},
+                                                   :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                                                  hl7-fhir-r4b-core.PractitionerRole/schema
+                                                                                  hl7-fhir-r4b-core.Patient/schema
+                                                                                  hl7-fhir-r4b-core.Organization/schema
+                                                                                  hl7-fhir-r4b-core.Device/schema
+                                                                                  hl7-fhir-r4b-core.Practitioner/schema}},
+                                                   :zen/desc "The reference to the practitioner"},
+                                           :onBehalfOf {:confirms #{zen.fhir/Reference
+                                                                    hl7-fhir-r4b-core.Reference/schema},
+                                                        :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Organization/schema}},
+                                                        :zen/desc "Organization the device or practitioner was acting for"}},
+                                    :require #{:actor},
+                                    :fhir/flags #{:SU},
+                                    :zen/desc "The people who performed the procedure"}},
+                :reasonReference {:type zen/vector,
+                                  :every {:confirms #{zen.fhir/Reference
+                                                      hl7-fhir-r4b-core.Reference/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Procedure/schema
+                                                                         hl7-fhir-r4b-core.Condition/schema
+                                                                         hl7-fhir-r4b-core.Observation/schema
+                                                                         hl7-fhir-r4b-core.DocumentReference/schema
+                                                                         hl7-fhir-r4b-core.DiagnosticReport/schema}},
+                                          :zen/desc "The justification that the procedure was performed"}},
+                :_instantiatesUri {:type zen/vector,
+                                   :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}}},
+         :zen.fhir/type "Procedure"}}

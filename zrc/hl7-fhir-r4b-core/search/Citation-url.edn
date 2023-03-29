@@ -1,0 +1,12 @@
+{ns hl7-fhir-r4b-core.search.Citation-url,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Citation-url",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Citation-url",
+         :fhir/type "uri",
+         :name "url",
+         :expr {:Citation {:knife [["url"]],
+                           :jsonpath ["$.\"url\"[*]"],
+                           :data-types #{{:type "uri",
+                                          :polymorphic? false}},
+                           :template :uri}}}}

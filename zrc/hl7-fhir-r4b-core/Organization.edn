@@ -1,0 +1,79 @@
+{ns hl7-fhir-r4b-core.Organization,
+ import #{hl7-fhir-r4b-core.value-set.organization-type
+          hl7-fhir-r4b-core.value-set.contactentity-type
+          hl7-fhir-r4b-core.DomainResource
+          zen.fhir
+          hl7-fhir-r4b-core.boolean
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.string
+          hl7-fhir-r4b-core.BackboneElement
+          hl7-fhir-r4b-core.Organization
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.HumanName
+          hl7-fhir-r4b-core.Address
+          hl7-fhir-r4b-core.Endpoint
+          hl7-fhir-r4b-core.ContactPoint
+          hl7-fhir-r4b-core.Element},
+ schema {:zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen/desc "A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, payer/insurer, etc.",
+         :zen.fhir/type "Organization",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Organization",
+         :zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :type zen/map,
+         :keys {:_active {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :address {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r4b-core.Address/schema},
+                                  :zen/desc "An address for the organization"}},
+                :name {:confirms #{hl7-fhir-r4b-core.string/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Name used for the organization"},
+                :type {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                               :fhir/flags #{:SU},
+                               :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.organization-type/value-set,
+                                                    :strength :example},
+                               :zen/desc "Kind of organization"}},
+                :alias {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                :zen/desc "A list of alternate names that the organization is known as, or was known as in the past"}},
+                :active {:confirms #{hl7-fhir-r4b-core.boolean/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen/desc "Whether the organization's record is still in active use"},
+                :_name {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Identifies this organization  across multiple systems"}},
+                :telecom {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r4b-core.ContactPoint/schema},
+                                  :zen/desc "A contact detail for the organization"}},
+                :partOf {:confirms #{zen.fhir/Reference
+                                     hl7-fhir-r4b-core.Reference/schema},
+                         :fhir/flags #{:SU},
+                         :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Organization/schema}},
+                         :zen/desc "The organization of which this organization forms a part"},
+                :_alias {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                :endpoint {:type zen/vector,
+                           :every {:confirms #{zen.fhir/Reference
+                                               hl7-fhir-r4b-core.Reference/schema},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Endpoint/schema}},
+                                   :zen/desc "Technical endpoints providing access to services operated for the organization"}},
+                :contact {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                  :type zen/map,
+                                  :keys {:purpose {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                   :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contactentity-type/value-set,
+                                                                        :strength :extensible},
+                                                   :zen/desc "The type of contact"},
+                                         :name {:confirms #{hl7-fhir-r4b-core.HumanName/schema},
+                                                :zen/desc "A name associated with the contact"},
+                                         :telecom {:type zen/vector,
+                                                   :every {:confirms #{hl7-fhir-r4b-core.ContactPoint/schema},
+                                                           :zen/desc "Contact details (telephone, email, etc.)  for a contact"}},
+                                         :address {:confirms #{hl7-fhir-r4b-core.Address/schema},
+                                                   :zen/desc "Visiting or postal addresses for the contact"}},
+                                  :zen/desc "Contact for the organization for a certain purpose"}}}}}

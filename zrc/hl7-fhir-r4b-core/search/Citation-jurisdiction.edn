@@ -1,0 +1,12 @@
+{ns hl7-fhir-r4b-core.search.Citation-jurisdiction,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Citation-jurisdiction",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Citation-jurisdiction",
+         :fhir/type "token",
+         :name "jurisdiction",
+         :expr {:Citation {:knife [["jurisdiction"]],
+                           :jsonpath ["$.\"jurisdiction\"[*]"],
+                           :data-types #{{:type "CodeableConcept",
+                                          :polymorphic? false}},
+                           :template :token}}}}

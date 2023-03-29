@@ -1,0 +1,222 @@
+{ns hl7-fhir-r4b-core.EvidenceReport,
+ import #{hl7-fhir-r4b-core.Person
+          hl7-fhir-r4b-core.Period
+          hl7-fhir-r4b-core.Group
+          hl7-fhir-r4b-core.DomainResource
+          hl7-fhir-r4b-core.value-set.focus-characteristic-code
+          zen.fhir
+          hl7-fhir-r4b-core.boolean
+          hl7-fhir-r4b-core.ContactDetail
+          hl7-fhir-r4b-core.UsageContext
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.markdown
+          hl7-fhir-r4b-core.Range
+          hl7-fhir-r4b-core.string
+          hl7-fhir-r4b-core.Narrative
+          hl7-fhir-r4b-core.BackboneElement
+          hl7-fhir-r4b-core.Citation
+          hl7-fhir-r4b-core.Organization
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.value-set.list-empty-reason
+          hl7-fhir-r4b-core.value-set.list-mode
+          hl7-fhir-r4b-core.Annotation
+          hl7-fhir-r4b-core.uri
+          hl7-fhir-r4b-core.EvidenceReport
+          hl7-fhir-r4b-core.RelatedArtifact
+          hl7-fhir-r4b-core.Device
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.value-set.evidence-report-type
+          hl7-fhir-r4b-core.value-set.report-relation-type
+          hl7-fhir-r4b-core.value-set.evidence-report-section
+          hl7-fhir-r4b-core.value-set.list-order
+          hl7-fhir-r4b-core.Quantity
+          hl7-fhir-r4b-core.value-set.publication-status
+          hl7-fhir-r4b-core.Element
+          hl7-fhir-r4b-core.value-set.evidence-classifier-code},
+ schema {:zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/EvidenceReport",
+         :require #{:status :subject},
+         :type zen/map,
+         :zen/desc "The EvidenceReport Resource is a specialized container for a collection of resources and codable concepts, adapted to support compositions of Evidence, EvidenceVariable, and Citation resources and related concepts.",
+         :keys {:endorser {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r4b-core.ContactDetail/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen/desc "Who endorsed the content"}},
+                :publisher {:confirms #{hl7-fhir-r4b-core.string/schema},
+                            :fhir/flags #{:SU},
+                            :zen/desc "Name of the publisher (organization or individual)"},
+                :_publisher {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :section {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r4b-core.EvidenceReport/section-schema}}},
+                :_status {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :citeAs {:fhir/polymorphic true,
+                         :type zen/map,
+                         :exclusive-keys #{#{:markdown :Reference}},
+                         :keys {:Reference {:confirms #{zen.fhir/Reference
+                                                        hl7-fhir-r4b-core.Reference/schema},
+                                            :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Citation/schema}}},
+                                :markdown {:confirms #{hl7-fhir-r4b-core.markdown/schema}},
+                                :_markdown {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                         :zen/desc "Citation for this report"},
+                :useContext {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.UsageContext/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "The context that the content is intended to support"}},
+                :type {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.evidence-report-type/value-set,
+                                            :strength :example},
+                       :zen/desc "Kind of report"},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r4b-core.Annotation/schema},
+                               :zen/desc "Used for footnotes and annotations"}},
+                :author {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r4b-core.ContactDetail/schema},
+                                 :fhir/flags #{:SU},
+                                 :zen/desc "Who authored the content"}},
+                :status {:confirms #{hl7-fhir-r4b-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.publication-status/value-set,
+                                              :strength :required},
+                         :zen/desc "draft | active | retired | unknown"},
+                :url {:confirms #{hl7-fhir-r4b-core.uri/schema},
+                      :fhir/flags #{:SU},
+                      :zen/desc "Canonical identifier for this EvidenceReport, represented as a globally unique URI"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Unique identifier for the evidence report"}},
+                :editor {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r4b-core.ContactDetail/schema},
+                                 :zen/desc "Who edited the content"}},
+                :relatesTo {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:code {:confirms #{hl7-fhir-r4b-core.code/schema},
+                                                  :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.report-relation-type/value-set,
+                                                                       :strength :required},
+                                                  :zen/desc "replaces | amends | appends | transforms | replacedWith | amendedWith | appendedWith | transformedWith"},
+                                           :_code {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                           :target {:fhir/polymorphic true,
+                                                    :type zen/map,
+                                                    :exclusive-keys #{#{:Identifier
+                                                                        :Reference}},
+                                                    :keys {:Identifier {:confirms #{hl7-fhir-r4b-core.Identifier/schema}},
+                                                           :Reference {:confirms #{zen.fhir/Reference
+                                                                                   hl7-fhir-r4b-core.Reference/schema},
+                                                                       :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.EvidenceReport/schema}}}},
+                                                    :zen/desc "Target of the relationship"}},
+                                    :require #{:code :target},
+                                    :zen/desc "Relationships to other compositions/documents"}},
+                :reviewer {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r4b-core.ContactDetail/schema},
+                                   :zen/desc "Who reviewed the content"}},
+                :relatedArtifact {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r4b-core.RelatedArtifact/schema},
+                                          :zen/desc "Link, description or reference to artifact associated with the report"}},
+                :contact {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r4b-core.ContactDetail/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Contact details for the publisher"}},
+                :relatedIdentifier {:type zen/vector,
+                                    :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                            :fhir/flags #{:SU},
+                                            :zen/desc "Identifiers for articles that may relate to more than one evidence report"}},
+                :subject {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                          :type zen/map,
+                          :keys {:characteristic {:type zen/vector,
+                                                  :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                                          :type zen/map,
+                                                          :keys {:code {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                                        :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.focus-characteristic-code/value-set,
+                                                                                             :strength :extensible},
+                                                                        :zen/desc "Characteristic code"},
+                                                                 :value {:fhir/polymorphic true,
+                                                                         :type zen/map,
+                                                                         :exclusive-keys #{#{:Range
+                                                                                             :CodeableConcept
+                                                                                             :Quantity
+                                                                                             :boolean
+                                                                                             :Reference}},
+                                                                         :keys {:Reference {:confirms #{zen.fhir/Reference
+                                                                                                        hl7-fhir-r4b-core.Reference/schema},
+                                                                                            :zen.fhir/reference {:refers #{}}},
+                                                                                :CodeableConcept {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema}},
+                                                                                :boolean {:confirms #{hl7-fhir-r4b-core.boolean/schema}},
+                                                                                :_boolean {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                                                :Quantity {:confirms #{hl7-fhir-r4b-core.Quantity/schema}},
+                                                                                :Range {:confirms #{hl7-fhir-r4b-core.Range/schema}}},
+                                                                         :zen/desc "Characteristic value"},
+                                                                 :exclude {:confirms #{hl7-fhir-r4b-core.boolean/schema},
+                                                                           :zen/desc "Is used to express not the characteristic"},
+                                                                 :_exclude {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                                 :period {:confirms #{hl7-fhir-r4b-core.Period/schema},
+                                                                          :zen/desc "Timeframe for the characteristic"}},
+                                                          :require #{:value
+                                                                     :code},
+                                                          :zen/desc "Characteristic"}},
+                                 :note {:type zen/vector,
+                                        :every {:confirms #{hl7-fhir-r4b-core.Annotation/schema},
+                                                :zen/desc "Footnotes and/or explanatory notes"}}},
+                          :fhir/flags #{:SU},
+                          :zen/desc "Focus of the report"},
+                :_url {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+         :zen.fhir/type "EvidenceReport"},
+ section-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+                 :zen.fhir/version "0.6.20-2",
+                 :confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                 :type zen/map,
+                 :keys {:orderedBy {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                    :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.list-order/value-set,
+                                                         :strength :preferred},
+                                    :zen/desc "Order of section entries"},
+                        :section {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r4b-core.EvidenceReport/section-schema},
+                                          :zen/desc "Nested Section"}},
+                        :mode {:confirms #{hl7-fhir-r4b-core.code/schema},
+                               :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.list-mode/value-set,
+                                                    :strength :required},
+                               :zen/desc "working | snapshot | changes"},
+                        :focusReference {:confirms #{zen.fhir/Reference
+                                                     hl7-fhir-r4b-core.Reference/schema},
+                                         :zen.fhir/reference {:refers #{}},
+                                         :zen/desc "Classification of section by Resource"},
+                        :title {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                :zen/desc "Label for section (e.g. for ToC)"},
+                        :emptyReason {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                      :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.list-empty-reason/value-set,
+                                                           :strength :preferred},
+                                      :zen/desc "Why the section is empty"},
+                        :author {:type zen/vector,
+                                 :every {:confirms #{zen.fhir/Reference
+                                                     hl7-fhir-r4b-core.Reference/schema},
+                                         :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Group/schema
+                                                                        hl7-fhir-r4b-core.Organization/schema
+                                                                        hl7-fhir-r4b-core.Device/schema
+                                                                        hl7-fhir-r4b-core.Person/schema}},
+                                         :zen/desc "Who and/or what authored the section"}},
+                        :focus {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.evidence-report-section/value-set,
+                                                     :strength :extensible},
+                                :zen/desc "Classification of section (recommended)"},
+                        :entryClassifier {:type zen/vector,
+                                          :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                  :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.evidence-classifier-code/value-set,
+                                                                       :strength :extensible},
+                                                  :zen/desc "Extensible classifiers as content"}},
+                        :_title {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                        :entryReference {:type zen/vector,
+                                         :every {:confirms #{zen.fhir/Reference
+                                                             hl7-fhir-r4b-core.Reference/schema},
+                                                 :zen.fhir/reference {:refers #{}},
+                                                 :zen/desc "Reference to resources as content"}},
+                        :_mode {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                        :entryQuantity {:type zen/vector,
+                                        :every {:confirms #{hl7-fhir-r4b-core.Quantity/schema},
+                                                :zen/desc "Quantity as content"}},
+                        :text {:confirms #{hl7-fhir-r4b-core.Narrative/schema},
+                               :zen/desc "Text summary of the section, for human interpretation"}},
+                 :zen/desc "Composition is broken into sections"}}

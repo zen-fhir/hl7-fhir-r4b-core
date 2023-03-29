@@ -1,0 +1,155 @@
+{ns hl7-fhir-r4b-core.SupplyRequest,
+ import #{hl7-fhir-r4b-core.Period
+          hl7-fhir-r4b-core.DomainResource
+          zen.fhir
+          hl7-fhir-r4b-core.value-set.supplyrequest-reason
+          hl7-fhir-r4b-core.boolean
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Condition
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.value-set.supplyrequest-status
+          hl7-fhir-r4b-core.Patient
+          hl7-fhir-r4b-core.Timing
+          hl7-fhir-r4b-core.DocumentReference
+          hl7-fhir-r4b-core.Location
+          hl7-fhir-r4b-core.Range
+          hl7-fhir-r4b-core.Observation
+          hl7-fhir-r4b-core.Substance
+          hl7-fhir-r4b-core.BackboneElement
+          hl7-fhir-r4b-core.Practitioner
+          hl7-fhir-r4b-core.Organization
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.HealthcareService
+          hl7-fhir-r4b-core.value-set.supplyrequest-kind
+          hl7-fhir-r4b-core.value-set.supply-item
+          hl7-fhir-r4b-core.Device
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.Medication
+          hl7-fhir-r4b-core.DiagnosticReport
+          hl7-fhir-r4b-core.dateTime
+          hl7-fhir-r4b-core.Quantity
+          hl7-fhir-r4b-core.PractitionerRole
+          hl7-fhir-r4b-core.Element
+          hl7-fhir-r4b-core.value-set.request-priority
+          hl7-fhir-r4b-core.RelatedPerson},
+ schema {:zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/SupplyRequest",
+         :require #{:item :quantity},
+         :type zen/map,
+         :zen/desc "A record of a request for a medication, substance or device used in the healthcare setting.",
+         :keys {:category {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.supplyrequest-kind/value-set,
+                                                :strength :example},
+                           :zen/desc "The kind of supply (central, non-stock, etc.)"},
+                :supplier {:type zen/vector,
+                           :every {:confirms #{zen.fhir/Reference
+                                               hl7-fhir-r4b-core.Reference/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.HealthcareService/schema
+                                                                  hl7-fhir-r4b-core.Organization/schema}},
+                                   :zen/desc "Who is intended to fulfill the request"}},
+                :deliverTo {:confirms #{zen.fhir/Reference
+                                        hl7-fhir-r4b-core.Reference/schema},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Patient/schema
+                                                           hl7-fhir-r4b-core.Organization/schema
+                                                           hl7-fhir-r4b-core.Location/schema}},
+                            :zen/desc "The destination of the supply"},
+                :_authoredOn {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :item {:fhir/polymorphic true,
+                       :type zen/map,
+                       :exclusive-keys #{#{:CodeableConcept
+                                           :Reference}},
+                       :keys {:CodeableConcept {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema}},
+                              :Reference {:confirms #{zen.fhir/Reference
+                                                      hl7-fhir-r4b-core.Reference/schema},
+                                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Medication/schema
+                                                                         hl7-fhir-r4b-core.Device/schema
+                                                                         hl7-fhir-r4b-core.Substance/schema}}}},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.supply-item/value-set,
+                                            :strength :example},
+                       :zen/desc "Medication, Substance, or Device requested to be supplied"},
+                :_priority {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :_status {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :reasonCode {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                     :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.supplyrequest-reason/value-set,
+                                                          :strength :example},
+                                     :zen/desc "The reason why the supply item was requested"}},
+                :authoredOn {:confirms #{hl7-fhir-r4b-core.dateTime/schema},
+                             :fhir/flags #{:SU},
+                             :zen/desc "When the request was made"},
+                :deliverFrom {:confirms #{zen.fhir/Reference
+                                          hl7-fhir-r4b-core.Reference/schema},
+                              :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Organization/schema
+                                                             hl7-fhir-r4b-core.Location/schema}},
+                              :zen/desc "The origin of the supply"},
+                :requester {:confirms #{zen.fhir/Reference
+                                        hl7-fhir-r4b-core.Reference/schema},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                           hl7-fhir-r4b-core.PractitionerRole/schema
+                                                           hl7-fhir-r4b-core.Patient/schema
+                                                           hl7-fhir-r4b-core.Organization/schema
+                                                           hl7-fhir-r4b-core.Device/schema
+                                                           hl7-fhir-r4b-core.Practitioner/schema}},
+                            :zen/desc "Individual making the request"},
+                :priority {:confirms #{hl7-fhir-r4b-core.code/schema},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.request-priority/value-set,
+                                                :strength :required},
+                           :zen/desc "routine | urgent | asap | stat"},
+                :status {:confirms #{hl7-fhir-r4b-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.supplyrequest-status/value-set,
+                                              :strength :required},
+                         :zen/desc "draft | active | suspended +"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Business Identifier for SupplyRequest"}},
+                :quantity {:confirms #{hl7-fhir-r4b-core.Quantity/schema},
+                           :fhir/flags #{:SU},
+                           :zen/desc "The requested amount of the item indicated"},
+                :parameter {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:code {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                  :zen/desc "Item detail"},
+                                           :value {:fhir/polymorphic true,
+                                                   :type zen/map,
+                                                   :exclusive-keys #{#{:Range
+                                                                       :CodeableConcept
+                                                                       :Quantity
+                                                                       :boolean}},
+                                                   :keys {:CodeableConcept {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema}},
+                                                          :Quantity {:confirms #{hl7-fhir-r4b-core.Quantity/schema}},
+                                                          :Range {:confirms #{hl7-fhir-r4b-core.Range/schema}},
+                                                          :boolean {:confirms #{hl7-fhir-r4b-core.boolean/schema}},
+                                                          :_boolean {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                                   :zen/desc "Value of detail"}},
+                                    :zen/desc "Ordered item details"}},
+                :occurrence {:fhir/polymorphic true,
+                             :type zen/map,
+                             :exclusive-keys #{#{:dateTime
+                                                 :Period
+                                                 :Timing}},
+                             :keys {:dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                                    :_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                    :Period {:confirms #{hl7-fhir-r4b-core.Period/schema}},
+                                    :Timing {:confirms #{hl7-fhir-r4b-core.Timing/schema}}},
+                             :fhir/flags #{:SU},
+                             :zen/desc "When the request should be fulfilled"},
+                :reasonReference {:type zen/vector,
+                                  :every {:confirms #{zen.fhir/Reference
+                                                      hl7-fhir-r4b-core.Reference/schema},
+                                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Condition/schema
+                                                                         hl7-fhir-r4b-core.Observation/schema
+                                                                         hl7-fhir-r4b-core.DocumentReference/schema
+                                                                         hl7-fhir-r4b-core.DiagnosticReport/schema}},
+                                          :zen/desc "The reason why the supply item was requested"}}},
+         :zen.fhir/type "SupplyRequest"}}

@@ -1,0 +1,55 @@
+{ns hl7-fhir-r4b-core.ResearchSubject,
+ import #{hl7-fhir-r4b-core.value-set.research-subject-status
+          hl7-fhir-r4b-core.Period
+          hl7-fhir-r4b-core.DomainResource
+          zen.fhir
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.Patient
+          hl7-fhir-r4b-core.string
+          hl7-fhir-r4b-core.ResearchStudy
+          hl7-fhir-r4b-core.Consent
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.Element},
+ schema {:zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/ResearchSubject",
+         :require #{:study :status :individual},
+         :type zen/map,
+         :zen/desc "A physical entity which is the primary unit of operational and/or administrative interest in a study.",
+         :keys {:study {:confirms #{zen.fhir/Reference
+                                    hl7-fhir-r4b-core.Reference/schema},
+                        :fhir/flags #{:SU},
+                        :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.ResearchStudy/schema}},
+                        :zen/desc "Study subject is part of"},
+                :_status {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :_assignedArm {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :consent {:confirms #{zen.fhir/Reference
+                                      hl7-fhir-r4b-core.Reference/schema},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Consent/schema}},
+                          :zen/desc "Agreement to participate in study"},
+                :assignedArm {:confirms #{hl7-fhir-r4b-core.string/schema},
+                              :zen/desc "What path should be followed"},
+                :status {:confirms #{hl7-fhir-r4b-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.research-subject-status/value-set,
+                                              :strength :required},
+                         :zen/desc "candidate | eligible | follow-up | ineligible | not-registered | off-study | on-study | on-study-intervention | on-study-observation | pending-on-study | potential-candidate | screening | withdrawn"},
+                :actualArm {:confirms #{hl7-fhir-r4b-core.string/schema},
+                            :zen/desc "What path was followed"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Business Identifier for research subject in a study"}},
+                :_actualArm {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :individual {:confirms #{zen.fhir/Reference
+                                         hl7-fhir-r4b-core.Reference/schema},
+                             :fhir/flags #{:SU},
+                             :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Patient/schema}},
+                             :zen/desc "Who is part of study"},
+                :period {:confirms #{hl7-fhir-r4b-core.Period/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "Start and end of participation"}},
+         :zen.fhir/type "ResearchSubject"}}

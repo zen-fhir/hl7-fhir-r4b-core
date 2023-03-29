@@ -1,0 +1,16 @@
+{ns hl7-fhir-r4b-core.cqf-initiatingPerson,
+ import #{hl7-fhir-r4b-core.Person
+          zen.fhir
+          hl7-fhir-r4b-core.Patient
+          hl7-fhir-r4b-core.Practitioner
+          hl7-fhir-r4b-core.RelatedPerson},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "The person initiating the request.",
+         :zen.fhir/type "Reference",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/cqf-initiatingPerson",
+         :zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Reference},
+         :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                        hl7-fhir-r4b-core.Patient/schema
+                                        hl7-fhir-r4b-core.Person/schema
+                                        hl7-fhir-r4b-core.Practitioner/schema}}}}

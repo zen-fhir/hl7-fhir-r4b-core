@@ -1,0 +1,128 @@
+{ns hl7-fhir-r4b-core.Provenance,
+ import #{hl7-fhir-r4b-core.value-set.security-role-type
+          hl7-fhir-r4b-core.Period
+          hl7-fhir-r4b-core.DomainResource
+          zen.fhir
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.Patient
+          hl7-fhir-r4b-core.Location
+          hl7-fhir-r4b-core.value-set.provenance-agent-type
+          hl7-fhir-r4b-core.BackboneElement
+          hl7-fhir-r4b-core.Practitioner
+          hl7-fhir-r4b-core.Organization
+          hl7-fhir-r4b-core.Signature
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.uri
+          hl7-fhir-r4b-core.Provenance
+          hl7-fhir-r4b-core.Device
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.dateTime
+          hl7-fhir-r4b-core.instant
+          hl7-fhir-r4b-core.value-set.provenance-entity-role
+          hl7-fhir-r4b-core.PractitionerRole
+          hl7-fhir-r4b-core.Element
+          hl7-fhir-r4b-core.RelatedPerson
+          hl7-fhir-r4b-core.value-set.provenance-activity-type},
+ agent-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+               :zen.fhir/version "0.6.20-2",
+               :confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+               :type zen/map,
+               :keys {:type {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                             :fhir/flags #{:SU},
+                             :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.provenance-agent-type/value-set,
+                                                  :strength :extensible},
+                             :zen/desc "How the agent participated"},
+                      :role {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                     :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.security-role-type/value-set,
+                                                          :strength :example},
+                                     :zen/desc "What the agents role was"}},
+                      :who {:confirms #{zen.fhir/Reference
+                                        hl7-fhir-r4b-core.Reference/schema},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                           hl7-fhir-r4b-core.PractitionerRole/schema
+                                                           hl7-fhir-r4b-core.Patient/schema
+                                                           hl7-fhir-r4b-core.Organization/schema
+                                                           hl7-fhir-r4b-core.Device/schema
+                                                           hl7-fhir-r4b-core.Practitioner/schema}},
+                            :zen/desc "Who participated"},
+                      :onBehalfOf {:confirms #{zen.fhir/Reference
+                                               hl7-fhir-r4b-core.Reference/schema},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                                  hl7-fhir-r4b-core.PractitionerRole/schema
+                                                                  hl7-fhir-r4b-core.Patient/schema
+                                                                  hl7-fhir-r4b-core.Organization/schema
+                                                                  hl7-fhir-r4b-core.Device/schema
+                                                                  hl7-fhir-r4b-core.Practitioner/schema}},
+                                   :zen/desc "Who the agent is representing"}},
+               :require #{:who},
+               :zen/desc "Actor involved"},
+ schema {:zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Provenance",
+         :require #{:recorded :agent :target},
+         :type zen/map,
+         :zen/desc "Provenance of a resource is a record that describes entities and processes involved in producing and delivering or otherwise influencing that resource. Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility. Provenance assertions are a form of contextual metadata and can themselves become important records with their own provenance. Provenance statement indicates clinical significance in terms of confidence in authenticity, reliability, and trustworthiness, integrity, and stage in lifecycle (e.g. Document Completion - has the artifact been legally authenticated), all of which may impact security, privacy, and trust policies.",
+         :keys {:occurred {:fhir/polymorphic true,
+                           :type zen/map,
+                           :exclusive-keys #{#{:dateTime :Period}},
+                           :keys {:Period {:confirms #{hl7-fhir-r4b-core.Period/schema}},
+                                  :dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                                  :_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                           :zen/desc "When the activity occurred"},
+                :signature {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r4b-core.Signature/schema},
+                                    :zen/desc "Signature on target"}},
+                :recorded {:confirms #{hl7-fhir-r4b-core.instant/schema},
+                           :fhir/flags #{:SU},
+                           :zen/desc "When the activity was recorded / updated"},
+                :agent {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r4b-core.Provenance/agent-schema}},
+                        :minItems 1},
+                :policy {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r4b-core.uri/schema},
+                                 :zen/desc "Policy or plan the activity was defined by"}},
+                :reason {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                 :zen/desc "Reason the activity is occurring"}},
+                :activity {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.provenance-activity-type/value-set,
+                                                :strength :extensible},
+                           :zen/desc "Activity that occurred"},
+                :_policy {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                :target {:type zen/vector,
+                         :every {:confirms #{zen.fhir/Reference
+                                             hl7-fhir-r4b-core.Reference/schema},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/reference {:refers #{}},
+                                 :zen/desc "Target Reference(s) (usually version specific)"},
+                         :minItems 1},
+                :_recorded {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :location {:confirms #{zen.fhir/Reference
+                                       hl7-fhir-r4b-core.Reference/schema},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Location/schema}},
+                           :zen/desc "Where the activity occurred, if relevant"},
+                :entity {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                 :type zen/map,
+                                 :keys {:role {:confirms #{hl7-fhir-r4b-core.code/schema},
+                                               :fhir/flags #{:SU},
+                                               :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.provenance-entity-role/value-set,
+                                                                    :strength :required},
+                                               :zen/desc "derivation | revision | quotation | source | removal"},
+                                        :_role {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                        :what {:confirms #{zen.fhir/Reference
+                                                           hl7-fhir-r4b-core.Reference/schema},
+                                               :fhir/flags #{:SU},
+                                               :zen.fhir/reference {:refers #{}},
+                                               :zen/desc "Identity of entity"},
+                                        :agent {:type zen/vector,
+                                                :every {:confirms #{hl7-fhir-r4b-core.Provenance/agent-schema},
+                                                        :zen/desc "Entity is attributed to this agent"}}},
+                                 :require #{:role :what},
+                                 :zen/desc "An entity used in this activity"}}},
+         :zen.fhir/type "Provenance"}}

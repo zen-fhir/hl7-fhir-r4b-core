@@ -1,0 +1,9 @@
+{ns hl7-fhir-r4b-core.value-set.provider-taxonomy,
+ import #{zen.fhir},
+ value-set {:zen/tags #{zen.fhir/value-set},
+            :zen/desc "NUCC Healthcare Provider Taxonomy codes",
+            :zen.fhir/version "0.6.20-2",
+            :fhir/code-systems #{{:fhir/url "http://nucc.org/provider-taxonomy",
+                                  :zen.fhir/content :not-present}},
+            :uri "http://hl7.org/fhir/ValueSet/provider-taxonomy",
+            :version "4.3.0"}}

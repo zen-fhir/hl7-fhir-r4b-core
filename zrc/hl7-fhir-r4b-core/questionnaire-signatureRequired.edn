@@ -1,0 +1,12 @@
+{ns hl7-fhir-r4b-core.questionnaire-signatureRequired,
+ import #{zen.fhir
+          hl7-fhir-r4b-core.value-set.signature-type
+          hl7-fhir-r4b-core.CodeableConcept},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "Indicates that a signature (of the specified type) is needed when completing the QuestionnaireResponse.",
+         :zen.fhir/type "CodeableConcept",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/questionnaire-signatureRequired",
+         :zen.fhir/version "0.6.20-2",
+         :confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.signature-type/value-set,
+                              :strength :preferred}}}

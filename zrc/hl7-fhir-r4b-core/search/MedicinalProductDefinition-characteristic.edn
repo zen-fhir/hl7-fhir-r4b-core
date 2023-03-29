@@ -1,0 +1,21 @@
+{ns hl7-fhir-r4b-core.search.MedicinalProductDefinition-characteristic,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "MedicinalProductDefinition-characteristic",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/MedicinalProductDefinition-characteristic",
+         :fhir/type "token",
+         :name "characteristic",
+         :expr {:MedicinalProductDefinition {:knife [["characteristic"
+                                                      "value"]],
+                                             :jsonpath ["$.\"characteristic\".\"value\"[*]"],
+                                             :data-types #{{:type "Quantity",
+                                                            :polymorphic? true}
+                                                           {:type "CodeableConcept",
+                                                            :polymorphic? true}
+                                                           {:type "date",
+                                                            :polymorphic? true}
+                                                           {:type "boolean",
+                                                            :polymorphic? true}
+                                                           {:type "Attachment",
+                                                            :polymorphic? true}},
+                                             :template :token}}}}

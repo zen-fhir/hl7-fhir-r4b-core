@@ -1,0 +1,147 @@
+{ns hl7-fhir-r4b-core.Invoice,
+ import #{hl7-fhir-r4b-core.Account
+          hl7-fhir-r4b-core.Group
+          hl7-fhir-r4b-core.DomainResource
+          zen.fhir
+          hl7-fhir-r4b-core.Money
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.Patient
+          hl7-fhir-r4b-core.markdown
+          hl7-fhir-r4b-core.string
+          hl7-fhir-r4b-core.BackboneElement
+          hl7-fhir-r4b-core.positiveInt
+          hl7-fhir-r4b-core.Practitioner
+          hl7-fhir-r4b-core.Organization
+          hl7-fhir-r4b-core.decimal
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.value-set.invoice-status
+          hl7-fhir-r4b-core.Annotation
+          hl7-fhir-r4b-core.Invoice
+          hl7-fhir-r4b-core.Device
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.dateTime
+          hl7-fhir-r4b-core.value-set.invoice-priceComponentType
+          hl7-fhir-r4b-core.PractitionerRole
+          hl7-fhir-r4b-core.ChargeItem
+          hl7-fhir-r4b-core.Element
+          hl7-fhir-r4b-core.RelatedPerson},
+ lineItem-priceComponent-schema {:zen/tags #{zen/schema
+                                             zen.fhir/structure-schema},
+                                 :zen.fhir/version "0.6.20-2",
+                                 :confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                 :type zen/map,
+                                 :keys {:type {:confirms #{hl7-fhir-r4b-core.code/schema},
+                                               :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.invoice-priceComponentType/value-set,
+                                                                    :strength :required},
+                                               :zen/desc "base | surcharge | deduction | discount | tax | informational"},
+                                        :_type {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                        :code {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                               :zen/desc "Code identifying the specific component"},
+                                        :factor {:confirms #{hl7-fhir-r4b-core.decimal/schema},
+                                                 :zen/desc "Factor used for calculating this component"},
+                                        :_factor {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                        :amount {:confirms #{hl7-fhir-r4b-core.Money/schema},
+                                                 :zen/desc "Monetary amount associated with this component"}},
+                                 :require #{:type},
+                                 :zen/desc "Components of total line item price"},
+ schema {:zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Invoice",
+         :require #{:status},
+         :type zen/map,
+         :zen/desc "Invoice containing collected ChargeItems from an Account with calculated individual and total price for Billing purpose.",
+         :keys {:date {:confirms #{hl7-fhir-r4b-core.dateTime/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Invoice date / posting date"},
+                :totalNet {:confirms #{hl7-fhir-r4b-core.Money/schema},
+                           :fhir/flags #{:SU},
+                           :zen/desc "Net total of this Invoice"},
+                :_date {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :_status {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :recipient {:confirms #{zen.fhir/Reference
+                                        hl7-fhir-r4b-core.Reference/schema},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                           hl7-fhir-r4b-core.Patient/schema
+                                                           hl7-fhir-r4b-core.Organization/schema}},
+                            :zen/desc "Recipient of this invoice"},
+                :totalPriceComponent {:type zen/vector,
+                                      :every {:confirms #{hl7-fhir-r4b-core.Invoice/lineItem-priceComponent-schema},
+                                              :zen/desc "Components of Invoice total"}},
+                :type {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Type of Invoice"},
+                :totalGross {:confirms #{hl7-fhir-r4b-core.Money/schema},
+                             :fhir/flags #{:SU},
+                             :zen/desc "Gross total of this Invoice"},
+                :participant {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                      :type zen/map,
+                                      :keys {:role {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                    :zen/desc "Type of involvement in creation of this Invoice"},
+                                             :actor {:confirms #{zen.fhir/Reference
+                                                                 hl7-fhir-r4b-core.Reference/schema},
+                                                     :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                                                    hl7-fhir-r4b-core.PractitionerRole/schema
+                                                                                    hl7-fhir-r4b-core.Patient/schema
+                                                                                    hl7-fhir-r4b-core.Organization/schema
+                                                                                    hl7-fhir-r4b-core.Device/schema
+                                                                                    hl7-fhir-r4b-core.Practitioner/schema}},
+                                                     :zen/desc "Individual who was involved"}},
+                                      :require #{:actor},
+                                      :zen/desc "Participant in creation of this Invoice"}},
+                :_cancelledReason {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :_paymentTerms {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r4b-core.Annotation/schema},
+                               :zen/desc "Comments made about the invoice"}},
+                :account {:confirms #{zen.fhir/Reference
+                                      hl7-fhir-r4b-core.Reference/schema},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Account/schema}},
+                          :zen/desc "Account that is being balanced"},
+                :status {:confirms #{hl7-fhir-r4b-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.invoice-status/value-set,
+                                              :strength :required},
+                         :zen/desc "draft | issued | balanced | cancelled | entered-in-error"},
+                :lineItem {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                   :type zen/map,
+                                   :keys {:sequence {:confirms #{hl7-fhir-r4b-core.positiveInt/schema},
+                                                     :zen/desc "Sequence number of line item"},
+                                          :_sequence {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                          :chargeItem {:fhir/polymorphic true,
+                                                       :type zen/map,
+                                                       :exclusive-keys #{#{:CodeableConcept
+                                                                           :Reference}},
+                                                       :keys {:Reference {:confirms #{zen.fhir/Reference
+                                                                                      hl7-fhir-r4b-core.Reference/schema},
+                                                                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.ChargeItem/schema}}},
+                                                              :CodeableConcept {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema}}},
+                                                       :zen/desc "Reference to ChargeItem containing details of this line item or an inline billing code"},
+                                          :priceComponent {:type zen/vector,
+                                                           :every {:confirms #{hl7-fhir-r4b-core.Invoice/lineItem-priceComponent-schema}}}},
+                                   :require #{:chargeItem},
+                                   :zen/desc "Line items of this Invoice"}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Business Identifier for item"}},
+                :issuer {:confirms #{zen.fhir/Reference
+                                     hl7-fhir-r4b-core.Reference/schema},
+                         :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Organization/schema}},
+                         :zen/desc "Issuing Organization of Invoice"},
+                :cancelledReason {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                  :zen/desc "Reason for cancellation of this Invoice"},
+                :paymentTerms {:confirms #{hl7-fhir-r4b-core.markdown/schema},
+                               :zen/desc "Payment details"},
+                :subject {:confirms #{zen.fhir/Reference
+                                      hl7-fhir-r4b-core.Reference/schema},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Group/schema
+                                                         hl7-fhir-r4b-core.Patient/schema}},
+                          :zen/desc "Recipient(s) of goods and services"}},
+         :zen.fhir/type "Invoice"}}

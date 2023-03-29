@@ -1,0 +1,328 @@
+{ns hl7-fhir-r4b-core.Observation,
+ import #{hl7-fhir-r4b-core.value-set.observation-codes
+          hl7-fhir-r4b-core.value-set.observation-methods
+          hl7-fhir-r4b-core.value-set.observation-interpretation
+          hl7-fhir-r4b-core.MolecularSequence
+          hl7-fhir-r4b-core.Specimen
+          hl7-fhir-r4b-core.Period
+          hl7-fhir-r4b-core.Immunization
+          hl7-fhir-r4b-core.Group
+          hl7-fhir-r4b-core.DomainResource
+          hl7-fhir-r4b-core.CarePlan
+          zen.fhir
+          hl7-fhir-r4b-core.boolean
+          hl7-fhir-r4b-core.MedicationStatement
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.Patient
+          hl7-fhir-r4b-core.Timing
+          hl7-fhir-r4b-core.DocumentReference
+          hl7-fhir-r4b-core.Location
+          hl7-fhir-r4b-core.ImmunizationRecommendation
+          hl7-fhir-r4b-core.Range
+          hl7-fhir-r4b-core.Encounter
+          hl7-fhir-r4b-core.SampledData
+          hl7-fhir-r4b-core.value-set.observation-status
+          hl7-fhir-r4b-core.CareTeam
+          hl7-fhir-r4b-core.string
+          hl7-fhir-r4b-core.Observation
+          hl7-fhir-r4b-core.Substance
+          hl7-fhir-r4b-core.BackboneElement
+          hl7-fhir-r4b-core.Practitioner
+          hl7-fhir-r4b-core.Organization
+          hl7-fhir-r4b-core.MedicationRequest
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.DeviceRequest
+          hl7-fhir-r4b-core.integer
+          hl7-fhir-r4b-core.Annotation
+          hl7-fhir-r4b-core.value-set.data-absent-reason
+          hl7-fhir-r4b-core.ServiceRequest
+          hl7-fhir-r4b-core.MedicationAdministration
+          hl7-fhir-r4b-core.value-set.observation-category
+          hl7-fhir-r4b-core.SimpleQuantity
+          hl7-fhir-r4b-core.Device
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.value-set.referencerange-meaning
+          hl7-fhir-r4b-core.Medication
+          hl7-fhir-r4b-core.QuestionnaireResponse
+          hl7-fhir-r4b-core.Ratio
+          hl7-fhir-r4b-core.DeviceMetric
+          hl7-fhir-r4b-core.dateTime
+          hl7-fhir-r4b-core.ImagingStudy
+          hl7-fhir-r4b-core.instant
+          hl7-fhir-r4b-core.MedicationDispense
+          hl7-fhir-r4b-core.Quantity
+          hl7-fhir-r4b-core.PractitionerRole
+          hl7-fhir-r4b-core.value-set.body-site
+          hl7-fhir-r4b-core.Element
+          hl7-fhir-r4b-core.value-set.referencerange-appliesto
+          hl7-fhir-r4b-core.NutritionOrder
+          hl7-fhir-r4b-core.Media
+          hl7-fhir-r4b-core.Procedure
+          hl7-fhir-r4b-core.RelatedPerson
+          hl7-fhir-r4b-core.time},
+ referenceRange-schema {:zen/tags #{zen/schema
+                                    zen.fhir/structure-schema},
+                        :zen.fhir/version "0.6.20-2",
+                        :confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                        :type zen/map,
+                        :keys {:low {:confirms #{hl7-fhir-r4b-core.SimpleQuantity/schema
+                                                 hl7-fhir-r4b-core.Quantity/schema},
+                                     :zen/desc "Low Range, if relevant"},
+                               :high {:confirms #{hl7-fhir-r4b-core.SimpleQuantity/schema
+                                                  hl7-fhir-r4b-core.Quantity/schema},
+                                      :zen/desc "High Range, if relevant"},
+                               :type {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                      :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.referencerange-meaning/value-set,
+                                                           :strength :preferred},
+                                      :zen/desc "Reference range qualifier"},
+                               :appliesTo {:type zen/vector,
+                                           :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                   :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.referencerange-appliesto/value-set,
+                                                                        :strength :example},
+                                                   :zen/desc "Reference range population"}},
+                               :age {:confirms #{hl7-fhir-r4b-core.Range/schema},
+                                     :zen/desc "Applicable age range, if relevant"},
+                               :text {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                      :zen/desc "Text based reference range in an observation"},
+                               :_text {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                        :zen/desc "Provides guide for interpretation"},
+ schema {:zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Observation",
+         :require #{:status :code},
+         :type zen/map,
+         :zen/desc "Measurements and simple assertions made about a patient, device or other subject.",
+         :keys {:category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.observation-category/value-set,
+                                                        :strength :preferred},
+                                   :zen/desc "Classification of  type of observation"}},
+                :_issued {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :referenceRange {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r4b-core.Observation/referenceRange-schema}}},
+                :hasMember {:type zen/vector,
+                            :every {:confirms #{zen.fhir/Reference
+                                                hl7-fhir-r4b-core.Reference/schema},
+                                    :fhir/flags #{:SU},
+                                    :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.MolecularSequence/schema
+                                                                   hl7-fhir-r4b-core.QuestionnaireResponse/schema
+                                                                   hl7-fhir-r4b-core.Observation/schema}},
+                                    :zen/desc "Related resource that belongs to the Observation group"}},
+                :derivedFrom {:type zen/vector,
+                              :every {:confirms #{zen.fhir/Reference
+                                                  hl7-fhir-r4b-core.Reference/schema},
+                                      :fhir/flags #{:SU},
+                                      :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.MolecularSequence/schema
+                                                                     hl7-fhir-r4b-core.QuestionnaireResponse/schema
+                                                                     hl7-fhir-r4b-core.Media/schema
+                                                                     hl7-fhir-r4b-core.ImagingStudy/schema
+                                                                     hl7-fhir-r4b-core.Observation/schema
+                                                                     hl7-fhir-r4b-core.DocumentReference/schema}},
+                                      :zen/desc "Related measurements the observation is made from"}},
+                :interpretation {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.observation-interpretation/value-set,
+                                                              :strength :extensible},
+                                         :zen/desc "High, low, normal, etc."}},
+                :encounter {:confirms #{zen.fhir/Reference
+                                        hl7-fhir-r4b-core.Reference/schema},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Encounter/schema}},
+                            :zen/desc "Healthcare event during which this observation is made"},
+                :method {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.observation-methods/value-set,
+                                              :strength :example},
+                         :zen/desc "How it was done"},
+                :specimen {:confirms #{zen.fhir/Reference
+                                       hl7-fhir-r4b-core.Reference/schema},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Specimen/schema}},
+                           :zen/desc "Specimen used for this observation"},
+                :value {:fhir/polymorphic true,
+                        :type zen/map,
+                        :exclusive-keys #{#{:time
+                                            :SampledData
+                                            :string
+                                            :dateTime
+                                            :Range
+                                            :integer
+                                            :Ratio
+                                            :Period
+                                            :CodeableConcept
+                                            :Quantity
+                                            :boolean}},
+                        :keys {:_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                               :time {:confirms #{hl7-fhir-r4b-core.time/schema}},
+                               :SampledData {:confirms #{hl7-fhir-r4b-core.SampledData/schema}},
+                               :string {:confirms #{hl7-fhir-r4b-core.string/schema}},
+                               :dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                               :_time {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                               :Range {:confirms #{hl7-fhir-r4b-core.Range/schema}},
+                               :integer {:confirms #{hl7-fhir-r4b-core.integer/schema}},
+                               :Ratio {:confirms #{hl7-fhir-r4b-core.Ratio/schema}},
+                               :_boolean {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                               :Period {:confirms #{hl7-fhir-r4b-core.Period/schema}},
+                               :_integer {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                               :CodeableConcept {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema}},
+                               :Quantity {:confirms #{hl7-fhir-r4b-core.Quantity/schema}},
+                               :boolean {:confirms #{hl7-fhir-r4b-core.boolean/schema}},
+                               :_string {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                        :fhir/flags #{:SU},
+                        :zen/desc "Actual result"},
+                :_status {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :component {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:code {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                  :fhir/flags #{:SU},
+                                                  :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.observation-codes/value-set,
+                                                                       :strength :example},
+                                                  :zen/desc "Type of component observation (code / type)"},
+                                           :value {:fhir/polymorphic true,
+                                                   :type zen/map,
+                                                   :exclusive-keys #{#{:time
+                                                                       :SampledData
+                                                                       :string
+                                                                       :dateTime
+                                                                       :Range
+                                                                       :integer
+                                                                       :Ratio
+                                                                       :Period
+                                                                       :CodeableConcept
+                                                                       :Quantity
+                                                                       :boolean}},
+                                                   :keys {:_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                          :time {:confirms #{hl7-fhir-r4b-core.time/schema}},
+                                                          :SampledData {:confirms #{hl7-fhir-r4b-core.SampledData/schema}},
+                                                          :string {:confirms #{hl7-fhir-r4b-core.string/schema}},
+                                                          :dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                                                          :_time {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                          :Range {:confirms #{hl7-fhir-r4b-core.Range/schema}},
+                                                          :integer {:confirms #{hl7-fhir-r4b-core.integer/schema}},
+                                                          :Ratio {:confirms #{hl7-fhir-r4b-core.Ratio/schema}},
+                                                          :_boolean {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                          :Period {:confirms #{hl7-fhir-r4b-core.Period/schema}},
+                                                          :_integer {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                          :CodeableConcept {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema}},
+                                                          :Quantity {:confirms #{hl7-fhir-r4b-core.Quantity/schema}},
+                                                          :boolean {:confirms #{hl7-fhir-r4b-core.boolean/schema}},
+                                                          :_string {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                                   :fhir/flags #{:SU},
+                                                   :zen/desc "Actual component result"},
+                                           :dataAbsentReason {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                              :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.data-absent-reason/value-set,
+                                                                                   :strength :extensible},
+                                                              :zen/desc "Why the component result is missing"},
+                                           :interpretation {:type zen/vector,
+                                                            :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                                    :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.observation-interpretation/value-set,
+                                                                                         :strength :extensible},
+                                                                    :zen/desc "High, low, normal, etc."}},
+                                           :referenceRange {:type zen/vector,
+                                                            :every {:confirms #{hl7-fhir-r4b-core.Observation/referenceRange-schema},
+                                                                    :zen/desc "Provides guide for interpretation of component result"}}},
+                                    :require #{:code},
+                                    :fhir/flags #{:SU},
+                                    :zen/desc "Component results"}},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r4b-core.Annotation/schema},
+                               :zen/desc "Comments about the observation"}},
+                :status {:confirms #{hl7-fhir-r4b-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.observation-status/value-set,
+                                              :strength :required},
+                         :zen/desc "registered | preliminary | final | amended +"},
+                :effective {:fhir/polymorphic true,
+                            :type zen/map,
+                            :exclusive-keys #{#{:instant
+                                                :dateTime
+                                                :Period
+                                                :Timing}},
+                            :keys {:dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                                   :_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                   :Period {:confirms #{hl7-fhir-r4b-core.Period/schema}},
+                                   :Timing {:confirms #{hl7-fhir-r4b-core.Timing/schema}},
+                                   :instant {:confirms #{hl7-fhir-r4b-core.instant/schema}},
+                                   :_instant {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                            :fhir/flags #{:SU},
+                            :zen/desc "Clinically relevant time/time-period for observation"},
+                :code {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.observation-codes/value-set,
+                                            :strength :example},
+                       :zen/desc "Type of observation (code / type)"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Business Identifier for observation"}},
+                :bodySite {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.body-site/value-set,
+                                                :strength :example},
+                           :zen/desc "Observed body part"},
+                :focus {:type zen/vector,
+                        :every {:confirms #{zen.fhir/Reference
+                                            hl7-fhir-r4b-core.Reference/schema},
+                                :fhir/flags #{:SU},
+                                :zen.fhir/reference {:refers #{}},
+                                :zen/desc "What the observation is about, when it is not about the subject of record"}},
+                :issued {:confirms #{hl7-fhir-r4b-core.instant/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "Date/Time this version was made available"},
+                :device {:confirms #{zen.fhir/Reference
+                                     hl7-fhir-r4b-core.Reference/schema},
+                         :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.DeviceMetric/schema
+                                                        hl7-fhir-r4b-core.Device/schema}},
+                         :zen/desc "(Measurement) Device"},
+                :basedOn {:type zen/vector,
+                          :every {:confirms #{zen.fhir/Reference
+                                              hl7-fhir-r4b-core.Reference/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.DeviceRequest/schema
+                                                                 hl7-fhir-r4b-core.MedicationRequest/schema
+                                                                 hl7-fhir-r4b-core.NutritionOrder/schema
+                                                                 hl7-fhir-r4b-core.CarePlan/schema
+                                                                 hl7-fhir-r4b-core.ServiceRequest/schema
+                                                                 hl7-fhir-r4b-core.ImmunizationRecommendation/schema}},
+                                  :zen/desc "Fulfills plan, proposal or order"}},
+                :partOf {:type zen/vector,
+                         :every {:confirms #{zen.fhir/Reference
+                                             hl7-fhir-r4b-core.Reference/schema},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Procedure/schema
+                                                                hl7-fhir-r4b-core.Immunization/schema
+                                                                hl7-fhir-r4b-core.MedicationDispense/schema
+                                                                hl7-fhir-r4b-core.MedicationStatement/schema
+                                                                hl7-fhir-r4b-core.MedicationAdministration/schema
+                                                                hl7-fhir-r4b-core.ImagingStudy/schema}},
+                                 :zen/desc "Part of referenced event"}},
+                :subject {:confirms #{zen.fhir/Reference
+                                      hl7-fhir-r4b-core.Reference/schema},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Procedure/schema
+                                                         hl7-fhir-r4b-core.Group/schema
+                                                         hl7-fhir-r4b-core.Medication/schema
+                                                         hl7-fhir-r4b-core.Patient/schema
+                                                         hl7-fhir-r4b-core.Organization/schema
+                                                         hl7-fhir-r4b-core.Device/schema
+                                                         hl7-fhir-r4b-core.Location/schema
+                                                         hl7-fhir-r4b-core.Practitioner/schema
+                                                         hl7-fhir-r4b-core.Substance/schema}},
+                          :zen/desc "Who and/or what the observation is about"},
+                :performer {:type zen/vector,
+                            :every {:confirms #{zen.fhir/Reference
+                                                hl7-fhir-r4b-core.Reference/schema},
+                                    :fhir/flags #{:SU},
+                                    :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                                   hl7-fhir-r4b-core.CareTeam/schema
+                                                                   hl7-fhir-r4b-core.PractitionerRole/schema
+                                                                   hl7-fhir-r4b-core.Patient/schema
+                                                                   hl7-fhir-r4b-core.Organization/schema
+                                                                   hl7-fhir-r4b-core.Practitioner/schema}},
+                                    :zen/desc "Who is responsible for the observation"}},
+                :dataAbsentReason {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.data-absent-reason/value-set,
+                                                        :strength :extensible},
+                                   :zen/desc "Why the result is missing"}},
+         :zen.fhir/type "Observation"}}

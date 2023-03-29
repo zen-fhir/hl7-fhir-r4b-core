@@ -1,0 +1,194 @@
+{ns hl7-fhir-r4b-core.MedicationAdministration,
+ import #{hl7-fhir-r4b-core.value-set.medication-admin-status
+          hl7-fhir-r4b-core.Period
+          hl7-fhir-r4b-core.Group
+          hl7-fhir-r4b-core.DomainResource
+          zen.fhir
+          hl7-fhir-r4b-core.value-set.med-admin-perform-function
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Condition
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.value-set.medication-codes
+          hl7-fhir-r4b-core.Patient
+          hl7-fhir-r4b-core.Encounter
+          hl7-fhir-r4b-core.string
+          hl7-fhir-r4b-core.value-set.approach-site-codes
+          hl7-fhir-r4b-core.Observation
+          hl7-fhir-r4b-core.BackboneElement
+          hl7-fhir-r4b-core.Practitioner
+          hl7-fhir-r4b-core.MedicationRequest
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.value-set.reason-medication-given-codes
+          hl7-fhir-r4b-core.Annotation
+          hl7-fhir-r4b-core.EpisodeOfCare
+          hl7-fhir-r4b-core.uri
+          hl7-fhir-r4b-core.MedicationAdministration
+          hl7-fhir-r4b-core.value-set.medication-admin-category
+          hl7-fhir-r4b-core.Provenance
+          hl7-fhir-r4b-core.SimpleQuantity
+          hl7-fhir-r4b-core.Device
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.value-set.reason-medication-not-given-codes
+          hl7-fhir-r4b-core.value-set.administration-method-codes
+          hl7-fhir-r4b-core.Medication
+          hl7-fhir-r4b-core.Ratio
+          hl7-fhir-r4b-core.DiagnosticReport
+          hl7-fhir-r4b-core.dateTime
+          hl7-fhir-r4b-core.Quantity
+          hl7-fhir-r4b-core.PractitionerRole
+          hl7-fhir-r4b-core.Element
+          hl7-fhir-r4b-core.value-set.route-codes
+          hl7-fhir-r4b-core.Procedure
+          hl7-fhir-r4b-core.RelatedPerson},
+ schema {:zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/MedicationAdministration",
+         :require #{:status :effective :subject :medication},
+         :type zen/map,
+         :zen/desc "Describes the event of a patient consuming or otherwise being administered a medication.  This may be as simple as swallowing a tablet or it may be a long running infusion.  Related resources tie this event to the authorizing prescription, and the specific encounter between patient and health care practitioner.",
+         :keys {:category {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.medication-admin-category/value-set,
+                                                :strength :preferred},
+                           :zen/desc "Type of medication usage"},
+                :request {:confirms #{zen.fhir/Reference
+                                      hl7-fhir-r4b-core.Reference/schema},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.MedicationRequest/schema}},
+                          :zen/desc "Request administration performed against"},
+                :eventHistory {:type zen/vector,
+                               :every {:confirms #{zen.fhir/Reference
+                                                   hl7-fhir-r4b-core.Reference/schema},
+                                       :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Provenance/schema}},
+                                       :zen/desc "A list of events of interest in the lifecycle"}},
+                :dosage {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                         :type zen/map,
+                         :keys {:text {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                       :zen/desc "Free text dosage instructions e.g. SIG"},
+                                :_text {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                :site {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                       :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.approach-site-codes/value-set,
+                                                            :strength :example},
+                                       :zen/desc "Body site administered to"},
+                                :route {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                        :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.route-codes/value-set,
+                                                             :strength :example},
+                                        :zen/desc "Path of substance into body"},
+                                :method {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.administration-method-codes/value-set,
+                                                              :strength :example},
+                                         :zen/desc "How drug was administered"},
+                                :dose {:confirms #{hl7-fhir-r4b-core.SimpleQuantity/schema
+                                                   hl7-fhir-r4b-core.Quantity/schema},
+                                       :zen/desc "Amount of medication per dose"},
+                                :rate {:fhir/polymorphic true,
+                                       :type zen/map,
+                                       :exclusive-keys #{#{:Ratio
+                                                           :Quantity}},
+                                       :keys {:Ratio {:confirms #{hl7-fhir-r4b-core.Ratio/schema}},
+                                              :Quantity {:confirms #{hl7-fhir-r4b-core.Quantity/schema}}},
+                                       :zen/desc "Dose quantity per unit of time"}},
+                         :zen/desc "Details of how medication was taken"},
+                :instantiates {:type zen/vector,
+                               :every {:confirms #{hl7-fhir-r4b-core.uri/schema},
+                                       :fhir/flags #{:SU},
+                                       :zen/desc "Instantiates protocol or definition"}},
+                :_instantiates {:type zen/vector,
+                                :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                :_status {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :reasonCode {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                     :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.reason-medication-given-codes/value-set,
+                                                          :strength :example},
+                                     :zen/desc "Reason administration performed"}},
+                :statusReason {:type zen/vector,
+                               :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                       :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.reason-medication-not-given-codes/value-set,
+                                                            :strength :example},
+                                       :zen/desc "Reason administration not performed"}},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r4b-core.Annotation/schema},
+                               :zen/desc "Information about the administration"}},
+                :supportingInformation {:type zen/vector,
+                                        :every {:confirms #{zen.fhir/Reference
+                                                            hl7-fhir-r4b-core.Reference/schema},
+                                                :zen.fhir/reference {:refers #{}},
+                                                :zen/desc "Additional information to support administration"}},
+                :status {:confirms #{hl7-fhir-r4b-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.medication-admin-status/value-set,
+                                              :strength :required},
+                         :zen/desc "in-progress | not-done | on-hold | completed | entered-in-error | stopped | unknown"},
+                :effective {:fhir/polymorphic true,
+                            :type zen/map,
+                            :exclusive-keys #{#{:dateTime :Period}},
+                            :keys {:dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                                   :_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                   :Period {:confirms #{hl7-fhir-r4b-core.Period/schema}}},
+                            :fhir/flags #{:SU},
+                            :zen/desc "Start and end time of administration"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :zen/desc "External identifier"}},
+                :context {:confirms #{zen.fhir/Reference
+                                      hl7-fhir-r4b-core.Reference/schema},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Encounter/schema
+                                                         hl7-fhir-r4b-core.EpisodeOfCare/schema}},
+                          :zen/desc "Encounter or Episode of Care administered as part of"},
+                :device {:type zen/vector,
+                         :every {:confirms #{zen.fhir/Reference
+                                             hl7-fhir-r4b-core.Reference/schema},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Device/schema}},
+                                 :zen/desc "Device used to administer"}},
+                :partOf {:type zen/vector,
+                         :every {:confirms #{zen.fhir/Reference
+                                             hl7-fhir-r4b-core.Reference/schema},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Procedure/schema
+                                                                hl7-fhir-r4b-core.MedicationAdministration/schema}},
+                                 :zen/desc "Part of referenced event"}},
+                :subject {:confirms #{zen.fhir/Reference
+                                      hl7-fhir-r4b-core.Reference/schema},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Group/schema
+                                                         hl7-fhir-r4b-core.Patient/schema}},
+                          :zen/desc "Who received medication"},
+                :performer {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:function {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                      :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.med-admin-perform-function/value-set,
+                                                                           :strength :example},
+                                                      :zen/desc "Type of performance"},
+                                           :actor {:confirms #{zen.fhir/Reference
+                                                               hl7-fhir-r4b-core.Reference/schema},
+                                                   :fhir/flags #{:SU},
+                                                   :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                                                  hl7-fhir-r4b-core.PractitionerRole/schema
+                                                                                  hl7-fhir-r4b-core.Patient/schema
+                                                                                  hl7-fhir-r4b-core.Device/schema
+                                                                                  hl7-fhir-r4b-core.Practitioner/schema}},
+                                                   :zen/desc "Who performed the medication administration"}},
+                                    :require #{:actor},
+                                    :fhir/flags #{:SU},
+                                    :zen/desc "Who performed the medication administration and what they did"}},
+                :medication {:fhir/polymorphic true,
+                             :type zen/map,
+                             :exclusive-keys #{#{:CodeableConcept
+                                                 :Reference}},
+                             :keys {:CodeableConcept {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema}},
+                                    :Reference {:confirms #{zen.fhir/Reference
+                                                            hl7-fhir-r4b-core.Reference/schema},
+                                                :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Medication/schema}}}},
+                             :fhir/flags #{:SU},
+                             :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.medication-codes/value-set,
+                                                  :strength :example},
+                             :zen/desc "What was administered"},
+                :reasonReference {:type zen/vector,
+                                  :every {:confirms #{zen.fhir/Reference
+                                                      hl7-fhir-r4b-core.Reference/schema},
+                                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Condition/schema
+                                                                         hl7-fhir-r4b-core.Observation/schema
+                                                                         hl7-fhir-r4b-core.DiagnosticReport/schema}},
+                                          :zen/desc "Condition or observation that supports why the medication was administered"}}},
+         :zen.fhir/type "MedicationAdministration"}}

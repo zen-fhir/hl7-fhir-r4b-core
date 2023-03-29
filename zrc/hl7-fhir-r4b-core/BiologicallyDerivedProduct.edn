@@ -1,0 +1,137 @@
+{ns hl7-fhir-r4b-core.BiologicallyDerivedProduct,
+ import #{hl7-fhir-r4b-core.Period
+          hl7-fhir-r4b-core.DomainResource
+          zen.fhir
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.Patient
+          hl7-fhir-r4b-core.string
+          hl7-fhir-r4b-core.Substance
+          hl7-fhir-r4b-core.BackboneElement
+          hl7-fhir-r4b-core.Practitioner
+          hl7-fhir-r4b-core.Organization
+          hl7-fhir-r4b-core.decimal
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.integer
+          hl7-fhir-r4b-core.BiologicallyDerivedProduct
+          hl7-fhir-r4b-core.ServiceRequest
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.value-set.product-category
+          hl7-fhir-r4b-core.dateTime
+          hl7-fhir-r4b-core.value-set.product-storage-scale
+          hl7-fhir-r4b-core.PractitionerRole
+          hl7-fhir-r4b-core.value-set.product-status
+          hl7-fhir-r4b-core.Element
+          hl7-fhir-r4b-core.value-set.procedure-code},
+ schema {:zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen/desc "A material substance originating from a biological entity intended to be transplanted or infused\ninto another (possibly the same) biological entity.",
+         :zen.fhir/type "BiologicallyDerivedProduct",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/BiologicallyDerivedProduct",
+         :zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :type zen/map,
+         :keys {:_quantity {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :request {:type zen/vector,
+                          :every {:confirms #{zen.fhir/Reference
+                                              hl7-fhir-r4b-core.Reference/schema},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.ServiceRequest/schema}},
+                                  :zen/desc "Procedure request"}},
+                :processing {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                     :type zen/map,
+                                     :keys {:description {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                          :zen/desc "Description of of processing"},
+                                            :_description {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                            :procedure {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                        :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.procedure-code/value-set,
+                                                                             :strength :example},
+                                                        :zen/desc "Procesing code"},
+                                            :additive {:confirms #{zen.fhir/Reference
+                                                                   hl7-fhir-r4b-core.Reference/schema},
+                                                       :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Substance/schema}},
+                                                       :zen/desc "Substance added during processing"},
+                                            :time {:fhir/polymorphic true,
+                                                   :type zen/map,
+                                                   :exclusive-keys #{#{:dateTime
+                                                                       :Period}},
+                                                   :keys {:dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                                                          :_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                          :Period {:confirms #{hl7-fhir-r4b-core.Period/schema}}},
+                                                   :zen/desc "Time of processing"}},
+                                     :zen/desc "Any processing of the product during collection"}},
+                :_productCategory {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :parent {:type zen/vector,
+                         :every {:confirms #{zen.fhir/Reference
+                                             hl7-fhir-r4b-core.Reference/schema},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.BiologicallyDerivedProduct/schema}},
+                                 :zen/desc "BiologicallyDerivedProduct parent"}},
+                :_status {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :status {:confirms #{hl7-fhir-r4b-core.code/schema},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.product-status/value-set,
+                                              :strength :required},
+                         :zen/desc "available | unavailable"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "External ids for this item"}},
+                :productCode {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                              :zen/desc "What this biologically derived product is"},
+                :storage {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                  :type zen/map,
+                                  :keys {:description {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                       :zen/desc "Description of storage"},
+                                         :_description {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                         :temperature {:confirms #{hl7-fhir-r4b-core.decimal/schema},
+                                                       :zen/desc "Storage temperature"},
+                                         :_temperature {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                         :scale {:confirms #{hl7-fhir-r4b-core.code/schema},
+                                                 :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.product-storage-scale/value-set,
+                                                                      :strength :required},
+                                                 :zen/desc "farenheit | celsius | kelvin"},
+                                         :_scale {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                         :duration {:confirms #{hl7-fhir-r4b-core.Period/schema},
+                                                    :zen/desc "Storage timeperiod"}},
+                                  :zen/desc "Product storage"}},
+                :quantity {:confirms #{hl7-fhir-r4b-core.integer/schema},
+                           :zen/desc "The amount of this biologically derived product"},
+                :productCategory {:confirms #{hl7-fhir-r4b-core.code/schema},
+                                  :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.product-category/value-set,
+                                                       :strength :required},
+                                  :zen/desc "organ | tissue | fluid | cells | biologicalAgent"},
+                :manipulation {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                               :type zen/map,
+                               :keys {:description {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                    :zen/desc "Description of manipulation"},
+                                      :_description {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                      :time {:fhir/polymorphic true,
+                                             :type zen/map,
+                                             :exclusive-keys #{#{:dateTime
+                                                                 :Period}},
+                                             :keys {:dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                                                    :_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                    :Period {:confirms #{hl7-fhir-r4b-core.Period/schema}}},
+                                             :zen/desc "Time of manipulation"}},
+                               :zen/desc "Any manipulation of product post-collection"},
+                :collection {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                             :type zen/map,
+                             :keys {:collector {:confirms #{zen.fhir/Reference
+                                                            hl7-fhir-r4b-core.Reference/schema},
+                                                :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.PractitionerRole/schema
+                                                                               hl7-fhir-r4b-core.Practitioner/schema}},
+                                                :zen/desc "Individual performing collection"},
+                                    :source {:confirms #{zen.fhir/Reference
+                                                         hl7-fhir-r4b-core.Reference/schema},
+                                             :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Patient/schema
+                                                                            hl7-fhir-r4b-core.Organization/schema}},
+                                             :zen/desc "Who is product from"},
+                                    :collected {:fhir/polymorphic true,
+                                                :type zen/map,
+                                                :exclusive-keys #{#{:dateTime
+                                                                    :Period}},
+                                                :keys {:dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                                                       :_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                       :Period {:confirms #{hl7-fhir-r4b-core.Period/schema}}},
+                                                :zen/desc "Time of product collection"}},
+                             :zen/desc "How this product was collected"}}}}

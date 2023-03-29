@@ -1,0 +1,8 @@
+{ns hl7-fhir-r4b-core.value-set.security-labels,
+ import #{zen.fhir},
+ value-set {:zen/tags #{zen.fhir/value-set},
+            :zen/desc "A single value set for all security labels defined by FHIR.",
+            :zen.fhir/version "0.6.20-2",
+            :fhir/code-systems #{},
+            :uri "http://hl7.org/fhir/ValueSet/security-labels",
+            :version "4.3.0"}}

@@ -1,0 +1,175 @@
+{ns hl7-fhir-r4b-core.Condition,
+ import #{hl7-fhir-r4b-core.value-set.condition-category
+          hl7-fhir-r4b-core.Period
+          hl7-fhir-r4b-core.Group
+          hl7-fhir-r4b-core.DomainResource
+          zen.fhir
+          hl7-fhir-r4b-core.value-set.manifestation-or-symptom
+          hl7-fhir-r4b-core.value-set.condition-clinical
+          hl7-fhir-r4b-core.Age
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.Patient
+          hl7-fhir-r4b-core.Range
+          hl7-fhir-r4b-core.Encounter
+          hl7-fhir-r4b-core.value-set.condition-code
+          hl7-fhir-r4b-core.string
+          hl7-fhir-r4b-core.Observation
+          hl7-fhir-r4b-core.BackboneElement
+          hl7-fhir-r4b-core.Practitioner
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.value-set.condition-stage
+          hl7-fhir-r4b-core.value-set.condition-stage-type
+          hl7-fhir-r4b-core.Annotation
+          hl7-fhir-r4b-core.value-set.condition-ver-status
+          hl7-fhir-r4b-core.DiagnosticReport
+          hl7-fhir-r4b-core.dateTime
+          hl7-fhir-r4b-core.value-set.condition-severity
+          hl7-fhir-r4b-core.PractitionerRole
+          hl7-fhir-r4b-core.value-set.body-site
+          hl7-fhir-r4b-core.Element
+          hl7-fhir-r4b-core.RelatedPerson
+          hl7-fhir-r4b-core.ClinicalImpression},
+ schema {:zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Condition",
+         :require #{:subject},
+         :type zen/map,
+         :zen/desc "A clinical condition, problem, diagnosis, or other event, situation, issue, or clinical concept that has risen to a level of concern.",
+         :keys {:onset {:fhir/polymorphic true,
+                        :type zen/map,
+                        :exclusive-keys #{#{:string
+                                            :dateTime
+                                            :Range
+                                            :Period
+                                            :Age}},
+                        :keys {:dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                               :_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                               :Age {:confirms #{hl7-fhir-r4b-core.Age/schema}},
+                               :Period {:confirms #{hl7-fhir-r4b-core.Period/schema}},
+                               :Range {:confirms #{hl7-fhir-r4b-core.Range/schema}},
+                               :string {:confirms #{hl7-fhir-r4b-core.string/schema}},
+                               :_string {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                        :fhir/flags #{:SU},
+                        :zen/desc "Estimated or actual date,  date-time, or age"},
+                :category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.condition-category/value-set,
+                                                        :strength :extensible},
+                                   :zen/desc "problem-list-item | encounter-diagnosis"}},
+                :clinicalStatus {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                 :fhir/flags #{:SU :?!},
+                                 :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.condition-clinical/value-set,
+                                                      :strength :required},
+                                 :zen/desc "active | recurrence | relapse | inactive | remission | resolved"},
+                :stage {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                :type zen/map,
+                                :keys {:summary {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                 :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.condition-stage/value-set,
+                                                                      :strength :example},
+                                                 :zen/desc "Simple summary (disease specific)"},
+                                       :assessment {:type zen/vector,
+                                                    :every {:confirms #{zen.fhir/Reference
+                                                                        hl7-fhir-r4b-core.Reference/schema},
+                                                            :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Observation/schema
+                                                                                           hl7-fhir-r4b-core.ClinicalImpression/schema
+                                                                                           hl7-fhir-r4b-core.DiagnosticReport/schema}},
+                                                            :zen/desc "Formal record of assessment"}},
+                                       :type {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                              :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.condition-stage-type/value-set,
+                                                                   :strength :example},
+                                              :zen/desc "Kind of staging"}},
+                                :zen/desc "Stage/grade, usually assessed formally"}},
+                :encounter {:confirms #{zen.fhir/Reference
+                                        hl7-fhir-r4b-core.Reference/schema},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Encounter/schema}},
+                            :zen/desc "Encounter created as part of"},
+                :evidence {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                   :type zen/map,
+                                   :keys {:code {:type zen/vector,
+                                                 :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                         :fhir/flags #{:SU},
+                                                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.manifestation-or-symptom/value-set,
+                                                                              :strength :example},
+                                                         :zen/desc "Manifestation/symptom"}},
+                                          :detail {:type zen/vector,
+                                                   :every {:confirms #{zen.fhir/Reference
+                                                                       hl7-fhir-r4b-core.Reference/schema},
+                                                           :fhir/flags #{:SU},
+                                                           :zen.fhir/reference {:refers #{}},
+                                                           :zen/desc "Supporting information found elsewhere"}}},
+                                   :zen/desc "Supporting evidence"}},
+                :abatement {:fhir/polymorphic true,
+                            :type zen/map,
+                            :exclusive-keys #{#{:string
+                                                :dateTime
+                                                :Range
+                                                :Period
+                                                :Age}},
+                            :keys {:dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                                   :_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                   :Age {:confirms #{hl7-fhir-r4b-core.Age/schema}},
+                                   :Period {:confirms #{hl7-fhir-r4b-core.Period/schema}},
+                                   :Range {:confirms #{hl7-fhir-r4b-core.Range/schema}},
+                                   :string {:confirms #{hl7-fhir-r4b-core.string/schema}},
+                                   :_string {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                            :zen/desc "When in resolution/remission"},
+                :asserter {:confirms #{zen.fhir/Reference
+                                       hl7-fhir-r4b-core.Reference/schema},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                          hl7-fhir-r4b-core.PractitionerRole/schema
+                                                          hl7-fhir-r4b-core.Patient/schema
+                                                          hl7-fhir-r4b-core.Practitioner/schema}},
+                           :zen/desc "Person who asserts this condition"},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r4b-core.Annotation/schema},
+                               :zen/desc "Additional information about the Condition"}},
+                :recordedDate {:confirms #{hl7-fhir-r4b-core.dateTime/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "Date record was first recorded"},
+                :_recordedDate {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :recorder {:confirms #{zen.fhir/Reference
+                                       hl7-fhir-r4b-core.Reference/schema},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                          hl7-fhir-r4b-core.PractitionerRole/schema
+                                                          hl7-fhir-r4b-core.Patient/schema
+                                                          hl7-fhir-r4b-core.Practitioner/schema}},
+                           :zen/desc "Who recorded the condition"},
+                :severity {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.condition-severity/value-set,
+                                                :strength :preferred},
+                           :zen/desc "Subjective severity of condition"},
+                :code {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.condition-code/value-set,
+                                            :strength :example},
+                       :zen/desc "Identification of the condition, problem or diagnosis"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "External Ids for this condition"}},
+                :bodySite {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.body-site/value-set,
+                                                        :strength :example},
+                                   :zen/desc "Anatomical location, if relevant"}},
+                :verificationStatus {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                     :fhir/flags #{:SU :?!},
+                                     :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.condition-ver-status/value-set,
+                                                          :strength :required},
+                                     :zen/desc "unconfirmed | provisional | differential | confirmed | refuted | entered-in-error"},
+                :subject {:confirms #{zen.fhir/Reference
+                                      hl7-fhir-r4b-core.Reference/schema},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Group/schema
+                                                         hl7-fhir-r4b-core.Patient/schema}},
+                          :zen/desc "Who has the condition?"}},
+         :zen.fhir/type "Condition"}}

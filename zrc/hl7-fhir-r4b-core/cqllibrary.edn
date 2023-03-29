@@ -1,0 +1,18 @@
+{ns hl7-fhir-r4b-core.cqllibrary,
+ import #{zen.fhir hl7-fhir-r4b-core.Library},
+ schema {:zen.fhir/version "0.6.20-2",
+         :confirms #{hl7-fhir-r4b-core.Library/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/cqllibrary",
+         :require #{:type},
+         :type zen/map,
+         :zen/desc "Represents a CQL logic library",
+         :keys {:type {:const {:value {:coding [{:system "http://terminology.hl7.org/CodeSystem/library-type",
+                                                 :code "logic-library",
+                                                 :display "Logic Library"}]}}},
+                :parameter {:type zen/vector,
+                            :every {:fhir/flags #{:MS}}},
+                :dataRequirement {:type zen/vector,
+                                  :every {:fhir/flags #{:MS}}}},
+         :zen.fhir/type "Library"}}

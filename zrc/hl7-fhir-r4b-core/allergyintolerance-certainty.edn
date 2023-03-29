@@ -1,0 +1,12 @@
+{ns hl7-fhir-r4b-core.allergyintolerance-certainty,
+ import #{zen.fhir
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.value-set.reaction-event-certainty},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "Statement about the degree of clinical certainty that the specific substance was the cause of the manifestation in this reaction event.",
+         :zen.fhir/type "CodeableConcept",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/allergyintolerance-certainty",
+         :zen.fhir/version "0.6.20-2",
+         :confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.reaction-event-certainty/value-set,
+                              :strength :extensible}}}

@@ -1,0 +1,919 @@
+{ns hl7-fhir-r4b-core.ElementDefinition,
+ import #{hl7-fhir-r4b-core.value-set.observation-codes
+          hl7-fhir-r4b-core.DataRequirement
+          hl7-fhir-r4b-core.RatioRange
+          hl7-fhir-r4b-core.Period
+          hl7-fhir-r4b-core.Duration
+          zen.fhir
+          hl7-fhir-r4b-core.boolean
+          hl7-fhir-r4b-core.url
+          hl7-fhir-r4b-core.ContactDetail
+          hl7-fhir-r4b-core.UsageContext
+          hl7-fhir-r4b-core.Money
+          hl7-fhir-r4b-core.Age
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.date
+          hl7-fhir-r4b-core.CodeableReference
+          hl7-fhir-r4b-core.Timing
+          hl7-fhir-r4b-core.markdown
+          hl7-fhir-r4b-core.Range
+          hl7-fhir-r4b-core.SampledData
+          hl7-fhir-r4b-core.Distance
+          hl7-fhir-r4b-core.string
+          hl7-fhir-r4b-core.value-set.binding-strength
+          hl7-fhir-r4b-core.BackboneElement
+          hl7-fhir-r4b-core.positiveInt
+          hl7-fhir-r4b-core.Signature
+          hl7-fhir-r4b-core.decimal
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.integer
+          hl7-fhir-r4b-core.Contributor
+          hl7-fhir-r4b-core.Annotation
+          hl7-fhir-r4b-core.value-set.mimetypes
+          hl7-fhir-r4b-core.Attachment
+          hl7-fhir-r4b-core.unsignedInt
+          hl7-fhir-r4b-core.Expression
+          hl7-fhir-r4b-core.value-set.fhir-element-types
+          hl7-fhir-r4b-core.HumanName
+          hl7-fhir-r4b-core.Address
+          hl7-fhir-r4b-core.uri
+          hl7-fhir-r4b-core.RelatedArtifact
+          hl7-fhir-r4b-core.ParameterDefinition
+          hl7-fhir-r4b-core.canonical
+          hl7-fhir-r4b-core.Coding
+          hl7-fhir-r4b-core.Dosage
+          hl7-fhir-r4b-core.TriggerDefinition
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.Ratio
+          hl7-fhir-r4b-core.dateTime
+          hl7-fhir-r4b-core.value-set.resource-slicing-rules
+          hl7-fhir-r4b-core.id
+          hl7-fhir-r4b-core.instant
+          hl7-fhir-r4b-core.value-set.property-representation
+          hl7-fhir-r4b-core.ContactPoint
+          hl7-fhir-r4b-core.value-set.constraint-severity
+          hl7-fhir-r4b-core.base64Binary
+          hl7-fhir-r4b-core.Quantity
+          hl7-fhir-r4b-core.Element
+          hl7-fhir-r4b-core.value-set.resource-aggregation-mode
+          hl7-fhir-r4b-core.oid
+          hl7-fhir-r4b-core.Count
+          hl7-fhir-r4b-core.value-set.reference-version-rules
+          hl7-fhir-r4b-core.uuid
+          hl7-fhir-r4b-core.value-set.discriminator-type
+          hl7-fhir-r4b-core.time},
+ schema {:zen.fhir/version "0.6.20-2",
+         :confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+         :zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/ElementDefinition",
+         :require #{:path},
+         :type zen/map,
+         :zen/desc "Base StructureDefinition for ElementDefinition Type: Captures constraints on each element within the resource, profile, or extension.",
+         :keys {:constraint {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Element/schema},
+                                     :type zen/map,
+                                     :keys {:requirements {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                           :fhir/flags #{:SU},
+                                                           :zen/desc "Why this constraint is necessary or appropriate"},
+                                            :expression {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                         :fhir/flags #{:SU},
+                                                         :zen/desc "FHIRPath expression of constraint"},
+                                            :key {:confirms #{hl7-fhir-r4b-core.id/schema},
+                                                  :fhir/flags #{:SU},
+                                                  :zen/desc "Target of 'condition' reference above"},
+                                            :_requirements {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                            :human {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                    :fhir/flags #{:SU},
+                                                    :zen/desc "Human description of constraint"},
+                                            :xpath {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                    :fhir/flags #{:SU},
+                                                    :zen/desc "XPath expression of constraint"},
+                                            :source {:confirms #{hl7-fhir-r4b-core.canonical/schema},
+                                                     :fhir/flags #{:SU},
+                                                     :zen/desc "Reference to original source of constraint"},
+                                            :_expression {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                            :_human {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                            :severity {:confirms #{hl7-fhir-r4b-core.code/schema},
+                                                       :fhir/flags #{:SU},
+                                                       :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.constraint-severity/value-set,
+                                                                            :strength :required},
+                                                       :zen/desc "error | warning"},
+                                            :_severity {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                            :_source {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                            :_xpath {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                            :_key {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                     :require #{:key :human :severity},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Condition that must evaluate to true"}},
+                :_representation {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                :path {:confirms #{hl7-fhir-r4b-core.string/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Path of the element in the hierarchy of elements"},
+                :requirements {:confirms #{hl7-fhir-r4b-core.markdown/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "Why this resource has been created"},
+                :min {:confirms #{hl7-fhir-r4b-core.unsignedInt/schema},
+                      :fhir/flags #{:SU},
+                      :zen/desc "Minimum Cardinality"},
+                :definition {:confirms #{hl7-fhir-r4b-core.markdown/schema},
+                             :fhir/flags #{:SU},
+                             :zen/desc "Full formal definition as narrative text"},
+                :maxValue {:fhir/polymorphic true,
+                           :type zen/map,
+                           :exclusive-keys #{#{:unsignedInt
+                                               :date
+                                               :instant
+                                               :time
+                                               :dateTime
+                                               :integer
+                                               :decimal
+                                               :positiveInt
+                                               :Quantity}},
+                           :keys {:_decimal {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                  :unsignedInt {:confirms #{hl7-fhir-r4b-core.unsignedInt/schema}},
+                                  :date {:confirms #{hl7-fhir-r4b-core.date/schema}},
+                                  :instant {:confirms #{hl7-fhir-r4b-core.instant/schema}},
+                                  :_positiveInt {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                  :_date {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                  :_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                  :time {:confirms #{hl7-fhir-r4b-core.time/schema}},
+                                  :dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                                  :_time {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                  :integer {:confirms #{hl7-fhir-r4b-core.integer/schema}},
+                                  :decimal {:confirms #{hl7-fhir-r4b-core.decimal/schema}},
+                                  :positiveInt {:confirms #{hl7-fhir-r4b-core.positiveInt/schema}},
+                                  :_integer {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                  :Quantity {:confirms #{hl7-fhir-r4b-core.Quantity/schema}},
+                                  :_instant {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                  :_unsignedInt {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                           :fhir/flags #{:SU},
+                           :zen/desc "Maximum Allowed Value (for some types)"},
+                :_meaningWhenMissing {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :_maxLength {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :isModifier {:confirms #{hl7-fhir-r4b-core.boolean/schema},
+                             :fhir/flags #{:SU},
+                             :zen/desc "If this modifies the meaning of other elements"},
+                :short {:confirms #{hl7-fhir-r4b-core.string/schema},
+                        :fhir/flags #{:SU},
+                        :zen/desc "Concise definition for space-constrained presentation"},
+                :_path {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :_orderMeaning {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :_requirements {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :_mustSupport {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :_definition {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :_sliceName {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :mapping {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r4b-core.Element/schema},
+                                  :type zen/map,
+                                  :keys {:identity {:confirms #{hl7-fhir-r4b-core.id/schema},
+                                                    :fhir/flags #{:SU},
+                                                    :zen/desc "Reference to mapping declaration"},
+                                         :_identity {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                         :language {:confirms #{hl7-fhir-r4b-core.code/schema},
+                                                    :fhir/flags #{:SU},
+                                                    :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.mimetypes/value-set,
+                                                                         :strength :required},
+                                                    :zen/desc "Computable language of mapping"},
+                                         :_language {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                         :map {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                               :fhir/flags #{:SU},
+                                               :zen/desc "Details of the mapping"},
+                                         :_map {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                         :comment {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                   :fhir/flags #{:SU},
+                                                   :zen/desc "Comments about the mapping or its use"},
+                                         :_comment {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                  :require #{:identity :map},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Map element to another set of definitions"}},
+                :contentReference {:confirms #{hl7-fhir-r4b-core.uri/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen/desc "Reference to definition of content for the element"},
+                :_isSummary {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :_sliceIsConstraining {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :slicing {:confirms #{hl7-fhir-r4b-core.Element/schema},
+                          :type zen/map,
+                          :keys {:discriminator {:type zen/vector,
+                                                 :every {:confirms #{hl7-fhir-r4b-core.Element/schema},
+                                                         :type zen/map,
+                                                         :keys {:type {:confirms #{hl7-fhir-r4b-core.code/schema},
+                                                                       :fhir/flags #{:SU},
+                                                                       :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.discriminator-type/value-set,
+                                                                                            :strength :required},
+                                                                       :zen/desc "value | exists | pattern | type | profile"},
+                                                                :_type {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                                :path {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                                       :fhir/flags #{:SU},
+                                                                       :zen/desc "Path to element value"},
+                                                                :_path {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                                         :require #{:path
+                                                                    :type},
+                                                         :fhir/flags #{:SU},
+                                                         :zen/desc "Element values that are used to distinguish the slices"}},
+                                 :description {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                               :fhir/flags #{:SU},
+                                               :zen/desc "Text description of how slicing works (or not)"},
+                                 :_description {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                 :ordered {:confirms #{hl7-fhir-r4b-core.boolean/schema},
+                                           :fhir/flags #{:SU},
+                                           :zen/desc "If elements must be in same order as slices"},
+                                 :_ordered {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                 :rules {:confirms #{hl7-fhir-r4b-core.code/schema},
+                                         :fhir/flags #{:SU},
+                                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.resource-slicing-rules/value-set,
+                                                              :strength :required},
+                                         :zen/desc "closed | open | openAtEnd"},
+                                 :_rules {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                          :require #{:rules},
+                          :fhir/flags #{:SU},
+                          :zen/desc "This element is sliced - slices follow"},
+                :type {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r4b-core.Element/schema},
+                               :type zen/map,
+                               :keys {:_code {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                      :_aggregation {:type zen/vector,
+                                                     :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                      :_profile {:type zen/vector,
+                                                 :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                      :code {:confirms #{hl7-fhir-r4b-core.uri/schema},
+                                             :fhir/flags #{:SU},
+                                             :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.fhir-element-types/value-set,
+                                                                  :strength :extensible},
+                                             :zen/desc "Data type or Resource (reference to definition)"},
+                                      :targetProfile {:type zen/vector,
+                                                      :every {:confirms #{hl7-fhir-r4b-core.canonical/schema},
+                                                              :fhir/flags #{:SU},
+                                                              :zen/desc "Profile (StructureDefinition or IG) on the Reference/canonical target - one must apply"}},
+                                      :aggregation {:type zen/vector,
+                                                    :every {:confirms #{hl7-fhir-r4b-core.code/schema},
+                                                            :fhir/flags #{:SU},
+                                                            :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.resource-aggregation-mode/value-set,
+                                                                                 :strength :required},
+                                                            :zen/desc "contained | referenced | bundled - how aggregated"}},
+                                      :versioning {:confirms #{hl7-fhir-r4b-core.code/schema},
+                                                   :fhir/flags #{:SU},
+                                                   :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.reference-version-rules/value-set,
+                                                                        :strength :required},
+                                                   :zen/desc "either | independent | specific"},
+                                      :_targetProfile {:type zen/vector,
+                                                       :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                      :profile {:type zen/vector,
+                                                :every {:confirms #{hl7-fhir-r4b-core.canonical/schema},
+                                                        :fhir/flags #{:SU},
+                                                        :zen/desc "Profiles (StructureDefinition or IG) - one must apply"}},
+                                      :_versioning {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                               :require #{:code},
+                               :fhir/flags #{:SU},
+                               :zen/desc "Data type and Profile for this element"}},
+                :mustSupport {:confirms #{hl7-fhir-r4b-core.boolean/schema},
+                              :fhir/flags #{:SU},
+                              :zen/desc "If the element must be supported"},
+                :_short {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :minValue {:fhir/polymorphic true,
+                           :type zen/map,
+                           :exclusive-keys #{#{:unsignedInt
+                                               :date
+                                               :instant
+                                               :time
+                                               :dateTime
+                                               :integer
+                                               :decimal
+                                               :positiveInt
+                                               :Quantity}},
+                           :keys {:_decimal {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                  :unsignedInt {:confirms #{hl7-fhir-r4b-core.unsignedInt/schema}},
+                                  :date {:confirms #{hl7-fhir-r4b-core.date/schema}},
+                                  :instant {:confirms #{hl7-fhir-r4b-core.instant/schema}},
+                                  :_positiveInt {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                  :_date {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                  :_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                  :time {:confirms #{hl7-fhir-r4b-core.time/schema}},
+                                  :dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                                  :_time {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                  :integer {:confirms #{hl7-fhir-r4b-core.integer/schema}},
+                                  :decimal {:confirms #{hl7-fhir-r4b-core.decimal/schema}},
+                                  :positiveInt {:confirms #{hl7-fhir-r4b-core.positiveInt/schema}},
+                                  :_integer {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                  :Quantity {:confirms #{hl7-fhir-r4b-core.Quantity/schema}},
+                                  :_instant {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                  :_unsignedInt {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                           :fhir/flags #{:SU},
+                           :zen/desc "Minimum Allowed Value (for some types)"},
+                :sliceName {:confirms #{hl7-fhir-r4b-core.string/schema},
+                            :fhir/flags #{:SU},
+                            :zen/desc "Name for this particular element (in a set of slices)"},
+                :meaningWhenMissing {:confirms #{hl7-fhir-r4b-core.markdown/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Implicit meaning when this element is missing"},
+                :_contentReference {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :_min {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :_label {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :binding {:confirms #{hl7-fhir-r4b-core.Element/schema},
+                          :type zen/map,
+                          :keys {:strength {:confirms #{hl7-fhir-r4b-core.code/schema},
+                                            :fhir/flags #{:SU},
+                                            :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.binding-strength/value-set,
+                                                                 :strength :required},
+                                            :zen/desc "required | extensible | preferred | example"},
+                                 :_strength {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                 :description {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                               :fhir/flags #{:SU},
+                                               :zen/desc "Human explanation of the value set"},
+                                 :_description {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                 :valueSet {:confirms #{hl7-fhir-r4b-core.canonical/schema},
+                                            :fhir/flags #{:SU},
+                                            :zen/desc "Source of value set"},
+                                 :_valueSet {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                          :require #{:strength},
+                          :fhir/flags #{:SU},
+                          :zen/desc "ValueSet details if this is coded"},
+                :alias {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                :fhir/flags #{:SU},
+                                :zen/desc "Other names"}},
+                :representation {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r4b-core.code/schema},
+                                         :fhir/flags #{:SU},
+                                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.property-representation/value-set,
+                                                              :strength :required},
+                                         :zen/desc "xmlAttr | xmlText | typeAttr | cdaText | xhtml"}},
+                :_isModifier {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :_condition {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                :max {:confirms #{hl7-fhir-r4b-core.string/schema},
+                      :fhir/flags #{:SU},
+                      :zen/desc "Maximum Cardinality (a number or *)"},
+                :label {:confirms #{hl7-fhir-r4b-core.string/schema},
+                        :fhir/flags #{:SU},
+                        :zen/desc "Name for element to display with or prompt for element"},
+                :condition {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r4b-core.id/schema},
+                                    :fhir/flags #{:SU},
+                                    :zen/desc "Reference to invariant about presence"}},
+                :comment {:confirms #{hl7-fhir-r4b-core.markdown/schema},
+                          :fhir/flags #{:SU},
+                          :zen/desc "Comments about the use of this element"},
+                :code {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r4b-core.Coding/schema},
+                               :fhir/flags #{:SU},
+                               :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.observation-codes/value-set,
+                                                    :strength :example},
+                               :zen/desc "Corresponding codes in terminologies"}},
+                :maxLength {:confirms #{hl7-fhir-r4b-core.integer/schema},
+                            :fhir/flags #{:SU},
+                            :zen/desc "Max length for strings"},
+                :_isModifierReason {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :sliceIsConstraining {:confirms #{hl7-fhir-r4b-core.boolean/schema},
+                                      :fhir/flags #{:SU},
+                                      :zen/desc "If this slice definition constrains an inherited slice definition (or not)"},
+                :example {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r4b-core.Element/schema},
+                                  :type zen/map,
+                                  :keys {:label {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                 :fhir/flags #{:SU},
+                                                 :zen/desc "Describes the purpose of this example"},
+                                         :_label {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                         :value {:fhir/polymorphic true,
+                                                 :type zen/map,
+                                                 :exclusive-keys #{#{:unsignedInt
+                                                                     :Signature
+                                                                     :markdown
+                                                                     :date
+                                                                     :Dosage
+                                                                     :ContactDetail
+                                                                     :RelatedArtifact
+                                                                     :instant
+                                                                     :UsageContext
+                                                                     :time
+                                                                     :DataRequirement
+                                                                     :base64Binary
+                                                                     :Distance
+                                                                     :SampledData
+                                                                     :TriggerDefinition
+                                                                     :Identifier
+                                                                     :string
+                                                                     :Address
+                                                                     :Expression
+                                                                     :RatioRange
+                                                                     :dateTime
+                                                                     :Range
+                                                                     :integer
+                                                                     :Ratio
+                                                                     :oid
+                                                                     :ContactPoint
+                                                                     :Money
+                                                                     :decimal
+                                                                     :id
+                                                                     :Attachment
+                                                                     :Contributor
+                                                                     :Period
+                                                                     :canonical
+                                                                     :url
+                                                                     :code
+                                                                     :HumanName
+                                                                     :positiveInt
+                                                                     :ParameterDefinition
+                                                                     :Coding
+                                                                     :Timing
+                                                                     :Duration
+                                                                     :uri
+                                                                     :CodeableConcept
+                                                                     :uuid
+                                                                     :Count
+                                                                     :Quantity
+                                                                     :boolean
+                                                                     :CodeableReference
+                                                                     :Annotation
+                                                                     :Age
+                                                                     :Reference}},
+                                                 :keys {:_decimal {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                        :unsignedInt {:confirms #{hl7-fhir-r4b-core.unsignedInt/schema}},
+                                                        :Signature {:confirms #{hl7-fhir-r4b-core.Signature/schema}},
+                                                        :markdown {:confirms #{hl7-fhir-r4b-core.markdown/schema}},
+                                                        :_id {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                        :_code {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                        :date {:confirms #{hl7-fhir-r4b-core.date/schema}},
+                                                        :_canonical {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                        :Dosage {:confirms #{hl7-fhir-r4b-core.Dosage/schema}},
+                                                        :ContactDetail {:confirms #{hl7-fhir-r4b-core.ContactDetail/schema}},
+                                                        :RelatedArtifact {:confirms #{hl7-fhir-r4b-core.RelatedArtifact/schema}},
+                                                        :instant {:confirms #{hl7-fhir-r4b-core.instant/schema}},
+                                                        :_positiveInt {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                        :_uri {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                        :_date {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                        :_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                        :UsageContext {:confirms #{hl7-fhir-r4b-core.UsageContext/schema}},
+                                                        :time {:confirms #{hl7-fhir-r4b-core.time/schema}},
+                                                        :DataRequirement {:confirms #{hl7-fhir-r4b-core.DataRequirement/schema}},
+                                                        :base64Binary {:confirms #{hl7-fhir-r4b-core.base64Binary/schema}},
+                                                        :Distance {:confirms #{hl7-fhir-r4b-core.Distance/schema}},
+                                                        :SampledData {:confirms #{hl7-fhir-r4b-core.SampledData/schema}},
+                                                        :TriggerDefinition {:confirms #{hl7-fhir-r4b-core.TriggerDefinition/schema}},
+                                                        :Identifier {:confirms #{hl7-fhir-r4b-core.Identifier/schema}},
+                                                        :string {:confirms #{hl7-fhir-r4b-core.string/schema}},
+                                                        :Address {:confirms #{hl7-fhir-r4b-core.Address/schema}},
+                                                        :Expression {:confirms #{hl7-fhir-r4b-core.Expression/schema}},
+                                                        :RatioRange {:confirms #{hl7-fhir-r4b-core.RatioRange/schema}},
+                                                        :dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                                                        :_time {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                        :Range {:confirms #{hl7-fhir-r4b-core.Range/schema}},
+                                                        :integer {:confirms #{hl7-fhir-r4b-core.integer/schema}},
+                                                        :Ratio {:confirms #{hl7-fhir-r4b-core.Ratio/schema}},
+                                                        :oid {:confirms #{hl7-fhir-r4b-core.oid/schema}},
+                                                        :ContactPoint {:confirms #{hl7-fhir-r4b-core.ContactPoint/schema}},
+                                                        :Money {:confirms #{hl7-fhir-r4b-core.Money/schema}},
+                                                        :_boolean {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                        :decimal {:confirms #{hl7-fhir-r4b-core.decimal/schema}},
+                                                        :id {:confirms #{hl7-fhir-r4b-core.id/schema}},
+                                                        :Attachment {:confirms #{hl7-fhir-r4b-core.Attachment/schema}},
+                                                        :Contributor {:confirms #{hl7-fhir-r4b-core.Contributor/schema}},
+                                                        :Period {:confirms #{hl7-fhir-r4b-core.Period/schema}},
+                                                        :_base64Binary {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                        :canonical {:confirms #{hl7-fhir-r4b-core.canonical/schema}},
+                                                        :url {:confirms #{hl7-fhir-r4b-core.url/schema}},
+                                                        :code {:confirms #{hl7-fhir-r4b-core.code/schema}},
+                                                        :HumanName {:confirms #{hl7-fhir-r4b-core.HumanName/schema}},
+                                                        :positiveInt {:confirms #{hl7-fhir-r4b-core.positiveInt/schema}},
+                                                        :ParameterDefinition {:confirms #{hl7-fhir-r4b-core.ParameterDefinition/schema}},
+                                                        :Coding {:confirms #{hl7-fhir-r4b-core.Coding/schema}},
+                                                        :_markdown {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                        :Timing {:confirms #{hl7-fhir-r4b-core.Timing/schema}},
+                                                        :_uuid {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                        :_integer {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                        :Duration {:confirms #{hl7-fhir-r4b-core.Duration/schema}},
+                                                        :uri {:confirms #{hl7-fhir-r4b-core.uri/schema}},
+                                                        :CodeableConcept {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema}},
+                                                        :uuid {:confirms #{hl7-fhir-r4b-core.uuid/schema}},
+                                                        :Count {:confirms #{hl7-fhir-r4b-core.Count/schema}},
+                                                        :Quantity {:confirms #{hl7-fhir-r4b-core.Quantity/schema}},
+                                                        :_instant {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                        :_oid {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                        :boolean {:confirms #{hl7-fhir-r4b-core.boolean/schema}},
+                                                        :_unsignedInt {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                        :_url {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                        :CodeableReference {:confirms #{hl7-fhir-r4b-core.CodeableReference/schema}},
+                                                        :_string {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                        :Annotation {:confirms #{hl7-fhir-r4b-core.Annotation/schema}},
+                                                        :Age {:confirms #{hl7-fhir-r4b-core.Age/schema}},
+                                                        :Reference {:confirms #{zen.fhir/Reference
+                                                                                hl7-fhir-r4b-core.Reference/schema},
+                                                                    :zen.fhir/reference {:refers #{}}}},
+                                                 :fhir/flags #{:SU},
+                                                 :zen/desc "Value of Example (one of allowed types)"}},
+                                  :require #{:value :label},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Example value (as defined for type)"}},
+                :_max {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :orderMeaning {:confirms #{hl7-fhir-r4b-core.string/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "What the order of the elements means"},
+                :defaultValue {:fhir/polymorphic true,
+                               :type zen/map,
+                               :exclusive-keys #{#{:unsignedInt
+                                                   :Signature
+                                                   :markdown
+                                                   :date
+                                                   :Dosage
+                                                   :ContactDetail
+                                                   :RelatedArtifact
+                                                   :instant
+                                                   :UsageContext
+                                                   :time
+                                                   :DataRequirement
+                                                   :base64Binary
+                                                   :Distance
+                                                   :SampledData
+                                                   :TriggerDefinition
+                                                   :Identifier
+                                                   :string
+                                                   :Address
+                                                   :Expression
+                                                   :RatioRange
+                                                   :dateTime
+                                                   :Range
+                                                   :integer
+                                                   :Ratio
+                                                   :oid
+                                                   :ContactPoint
+                                                   :Money
+                                                   :decimal
+                                                   :id
+                                                   :Attachment
+                                                   :Contributor
+                                                   :Period
+                                                   :canonical
+                                                   :url
+                                                   :code
+                                                   :HumanName
+                                                   :positiveInt
+                                                   :ParameterDefinition
+                                                   :Coding
+                                                   :Timing
+                                                   :Duration
+                                                   :uri
+                                                   :CodeableConcept
+                                                   :uuid
+                                                   :Count
+                                                   :Quantity
+                                                   :boolean
+                                                   :CodeableReference
+                                                   :Annotation
+                                                   :Age
+                                                   :Reference}},
+                               :keys {:_decimal {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                      :unsignedInt {:confirms #{hl7-fhir-r4b-core.unsignedInt/schema}},
+                                      :Signature {:confirms #{hl7-fhir-r4b-core.Signature/schema}},
+                                      :markdown {:confirms #{hl7-fhir-r4b-core.markdown/schema}},
+                                      :_id {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                      :_code {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                      :date {:confirms #{hl7-fhir-r4b-core.date/schema}},
+                                      :_canonical {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                      :Dosage {:confirms #{hl7-fhir-r4b-core.Dosage/schema}},
+                                      :ContactDetail {:confirms #{hl7-fhir-r4b-core.ContactDetail/schema}},
+                                      :RelatedArtifact {:confirms #{hl7-fhir-r4b-core.RelatedArtifact/schema}},
+                                      :instant {:confirms #{hl7-fhir-r4b-core.instant/schema}},
+                                      :_positiveInt {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                      :_uri {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                      :_date {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                      :_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                      :UsageContext {:confirms #{hl7-fhir-r4b-core.UsageContext/schema}},
+                                      :time {:confirms #{hl7-fhir-r4b-core.time/schema}},
+                                      :DataRequirement {:confirms #{hl7-fhir-r4b-core.DataRequirement/schema}},
+                                      :base64Binary {:confirms #{hl7-fhir-r4b-core.base64Binary/schema}},
+                                      :Distance {:confirms #{hl7-fhir-r4b-core.Distance/schema}},
+                                      :SampledData {:confirms #{hl7-fhir-r4b-core.SampledData/schema}},
+                                      :TriggerDefinition {:confirms #{hl7-fhir-r4b-core.TriggerDefinition/schema}},
+                                      :Identifier {:confirms #{hl7-fhir-r4b-core.Identifier/schema}},
+                                      :string {:confirms #{hl7-fhir-r4b-core.string/schema}},
+                                      :Address {:confirms #{hl7-fhir-r4b-core.Address/schema}},
+                                      :Expression {:confirms #{hl7-fhir-r4b-core.Expression/schema}},
+                                      :RatioRange {:confirms #{hl7-fhir-r4b-core.RatioRange/schema}},
+                                      :dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                                      :_time {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                      :Range {:confirms #{hl7-fhir-r4b-core.Range/schema}},
+                                      :integer {:confirms #{hl7-fhir-r4b-core.integer/schema}},
+                                      :Ratio {:confirms #{hl7-fhir-r4b-core.Ratio/schema}},
+                                      :oid {:confirms #{hl7-fhir-r4b-core.oid/schema}},
+                                      :ContactPoint {:confirms #{hl7-fhir-r4b-core.ContactPoint/schema}},
+                                      :Money {:confirms #{hl7-fhir-r4b-core.Money/schema}},
+                                      :_boolean {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                      :decimal {:confirms #{hl7-fhir-r4b-core.decimal/schema}},
+                                      :id {:confirms #{hl7-fhir-r4b-core.id/schema}},
+                                      :Attachment {:confirms #{hl7-fhir-r4b-core.Attachment/schema}},
+                                      :Contributor {:confirms #{hl7-fhir-r4b-core.Contributor/schema}},
+                                      :Period {:confirms #{hl7-fhir-r4b-core.Period/schema}},
+                                      :_base64Binary {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                      :canonical {:confirms #{hl7-fhir-r4b-core.canonical/schema}},
+                                      :url {:confirms #{hl7-fhir-r4b-core.url/schema}},
+                                      :code {:confirms #{hl7-fhir-r4b-core.code/schema}},
+                                      :HumanName {:confirms #{hl7-fhir-r4b-core.HumanName/schema}},
+                                      :positiveInt {:confirms #{hl7-fhir-r4b-core.positiveInt/schema}},
+                                      :ParameterDefinition {:confirms #{hl7-fhir-r4b-core.ParameterDefinition/schema}},
+                                      :Coding {:confirms #{hl7-fhir-r4b-core.Coding/schema}},
+                                      :_markdown {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                      :Timing {:confirms #{hl7-fhir-r4b-core.Timing/schema}},
+                                      :_uuid {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                      :_integer {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                      :Duration {:confirms #{hl7-fhir-r4b-core.Duration/schema}},
+                                      :uri {:confirms #{hl7-fhir-r4b-core.uri/schema}},
+                                      :CodeableConcept {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema}},
+                                      :uuid {:confirms #{hl7-fhir-r4b-core.uuid/schema}},
+                                      :Count {:confirms #{hl7-fhir-r4b-core.Count/schema}},
+                                      :Quantity {:confirms #{hl7-fhir-r4b-core.Quantity/schema}},
+                                      :_instant {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                      :_oid {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                      :boolean {:confirms #{hl7-fhir-r4b-core.boolean/schema}},
+                                      :_unsignedInt {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                      :_url {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                      :CodeableReference {:confirms #{hl7-fhir-r4b-core.CodeableReference/schema}},
+                                      :_string {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                      :Annotation {:confirms #{hl7-fhir-r4b-core.Annotation/schema}},
+                                      :Age {:confirms #{hl7-fhir-r4b-core.Age/schema}},
+                                      :Reference {:confirms #{zen.fhir/Reference
+                                                              hl7-fhir-r4b-core.Reference/schema},
+                                                  :zen.fhir/reference {:refers #{}}}},
+                               :fhir/flags #{:SU},
+                               :zen/desc "Specified value if missing from instance"},
+                :fixed {:fhir/polymorphic true,
+                        :type zen/map,
+                        :exclusive-keys #{#{:unsignedInt
+                                            :Signature
+                                            :markdown
+                                            :date
+                                            :Dosage
+                                            :ContactDetail
+                                            :RelatedArtifact
+                                            :instant
+                                            :UsageContext
+                                            :time
+                                            :DataRequirement
+                                            :base64Binary
+                                            :Distance
+                                            :SampledData
+                                            :TriggerDefinition
+                                            :Identifier
+                                            :string
+                                            :Address
+                                            :Expression
+                                            :RatioRange
+                                            :dateTime
+                                            :Range
+                                            :integer
+                                            :Ratio
+                                            :oid
+                                            :ContactPoint
+                                            :Money
+                                            :decimal
+                                            :id
+                                            :Attachment
+                                            :Contributor
+                                            :Period
+                                            :canonical
+                                            :url
+                                            :code
+                                            :HumanName
+                                            :positiveInt
+                                            :ParameterDefinition
+                                            :Coding
+                                            :Timing
+                                            :Duration
+                                            :uri
+                                            :CodeableConcept
+                                            :uuid
+                                            :Count
+                                            :Quantity
+                                            :boolean
+                                            :CodeableReference
+                                            :Annotation
+                                            :Age
+                                            :Reference}},
+                        :keys {:_decimal {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                               :unsignedInt {:confirms #{hl7-fhir-r4b-core.unsignedInt/schema}},
+                               :Signature {:confirms #{hl7-fhir-r4b-core.Signature/schema}},
+                               :markdown {:confirms #{hl7-fhir-r4b-core.markdown/schema}},
+                               :_id {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                               :_code {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                               :date {:confirms #{hl7-fhir-r4b-core.date/schema}},
+                               :_canonical {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                               :Dosage {:confirms #{hl7-fhir-r4b-core.Dosage/schema}},
+                               :ContactDetail {:confirms #{hl7-fhir-r4b-core.ContactDetail/schema}},
+                               :RelatedArtifact {:confirms #{hl7-fhir-r4b-core.RelatedArtifact/schema}},
+                               :instant {:confirms #{hl7-fhir-r4b-core.instant/schema}},
+                               :_positiveInt {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                               :_uri {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                               :_date {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                               :_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                               :UsageContext {:confirms #{hl7-fhir-r4b-core.UsageContext/schema}},
+                               :time {:confirms #{hl7-fhir-r4b-core.time/schema}},
+                               :DataRequirement {:confirms #{hl7-fhir-r4b-core.DataRequirement/schema}},
+                               :base64Binary {:confirms #{hl7-fhir-r4b-core.base64Binary/schema}},
+                               :Distance {:confirms #{hl7-fhir-r4b-core.Distance/schema}},
+                               :SampledData {:confirms #{hl7-fhir-r4b-core.SampledData/schema}},
+                               :TriggerDefinition {:confirms #{hl7-fhir-r4b-core.TriggerDefinition/schema}},
+                               :Identifier {:confirms #{hl7-fhir-r4b-core.Identifier/schema}},
+                               :string {:confirms #{hl7-fhir-r4b-core.string/schema}},
+                               :Address {:confirms #{hl7-fhir-r4b-core.Address/schema}},
+                               :Expression {:confirms #{hl7-fhir-r4b-core.Expression/schema}},
+                               :RatioRange {:confirms #{hl7-fhir-r4b-core.RatioRange/schema}},
+                               :dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                               :_time {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                               :Range {:confirms #{hl7-fhir-r4b-core.Range/schema}},
+                               :integer {:confirms #{hl7-fhir-r4b-core.integer/schema}},
+                               :Ratio {:confirms #{hl7-fhir-r4b-core.Ratio/schema}},
+                               :oid {:confirms #{hl7-fhir-r4b-core.oid/schema}},
+                               :ContactPoint {:confirms #{hl7-fhir-r4b-core.ContactPoint/schema}},
+                               :Money {:confirms #{hl7-fhir-r4b-core.Money/schema}},
+                               :_boolean {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                               :decimal {:confirms #{hl7-fhir-r4b-core.decimal/schema}},
+                               :id {:confirms #{hl7-fhir-r4b-core.id/schema}},
+                               :Attachment {:confirms #{hl7-fhir-r4b-core.Attachment/schema}},
+                               :Contributor {:confirms #{hl7-fhir-r4b-core.Contributor/schema}},
+                               :Period {:confirms #{hl7-fhir-r4b-core.Period/schema}},
+                               :_base64Binary {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                               :canonical {:confirms #{hl7-fhir-r4b-core.canonical/schema}},
+                               :url {:confirms #{hl7-fhir-r4b-core.url/schema}},
+                               :code {:confirms #{hl7-fhir-r4b-core.code/schema}},
+                               :HumanName {:confirms #{hl7-fhir-r4b-core.HumanName/schema}},
+                               :positiveInt {:confirms #{hl7-fhir-r4b-core.positiveInt/schema}},
+                               :ParameterDefinition {:confirms #{hl7-fhir-r4b-core.ParameterDefinition/schema}},
+                               :Coding {:confirms #{hl7-fhir-r4b-core.Coding/schema}},
+                               :_markdown {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                               :Timing {:confirms #{hl7-fhir-r4b-core.Timing/schema}},
+                               :_uuid {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                               :_integer {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                               :Duration {:confirms #{hl7-fhir-r4b-core.Duration/schema}},
+                               :uri {:confirms #{hl7-fhir-r4b-core.uri/schema}},
+                               :CodeableConcept {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema}},
+                               :uuid {:confirms #{hl7-fhir-r4b-core.uuid/schema}},
+                               :Count {:confirms #{hl7-fhir-r4b-core.Count/schema}},
+                               :Quantity {:confirms #{hl7-fhir-r4b-core.Quantity/schema}},
+                               :_instant {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                               :_oid {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                               :boolean {:confirms #{hl7-fhir-r4b-core.boolean/schema}},
+                               :_unsignedInt {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                               :_url {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                               :CodeableReference {:confirms #{hl7-fhir-r4b-core.CodeableReference/schema}},
+                               :_string {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                               :Annotation {:confirms #{hl7-fhir-r4b-core.Annotation/schema}},
+                               :Age {:confirms #{hl7-fhir-r4b-core.Age/schema}},
+                               :Reference {:confirms #{zen.fhir/Reference
+                                                       hl7-fhir-r4b-core.Reference/schema},
+                                           :zen.fhir/reference {:refers #{}}}},
+                        :fhir/flags #{:SU},
+                        :zen/desc "Value must be exactly this"},
+                :_alias {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                :base {:confirms #{hl7-fhir-r4b-core.Element/schema},
+                       :type zen/map,
+                       :keys {:path {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Path that identifies the base element"},
+                              :_path {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                              :min {:confirms #{hl7-fhir-r4b-core.unsignedInt/schema},
+                                    :fhir/flags #{:SU},
+                                    :zen/desc "Min cardinality of the base element"},
+                              :_min {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                              :max {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                    :fhir/flags #{:SU},
+                                    :zen/desc "Max cardinality of the base element"},
+                              :_max {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                       :require #{:path :min :max},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Base definition information for tools"},
+                :isModifierReason {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen/desc "Reason that this element is marked as a modifier"},
+                :_comment {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :isSummary {:confirms #{hl7-fhir-r4b-core.boolean/schema},
+                            :fhir/flags #{:SU},
+                            :zen/desc "Include when _summary = true?"},
+                :pattern {:fhir/polymorphic true,
+                          :type zen/map,
+                          :exclusive-keys #{#{:unsignedInt
+                                              :Signature
+                                              :markdown
+                                              :date
+                                              :Dosage
+                                              :ContactDetail
+                                              :RelatedArtifact
+                                              :instant
+                                              :UsageContext
+                                              :time
+                                              :DataRequirement
+                                              :base64Binary
+                                              :Distance
+                                              :SampledData
+                                              :TriggerDefinition
+                                              :Identifier
+                                              :string
+                                              :Address
+                                              :Expression
+                                              :RatioRange
+                                              :dateTime
+                                              :Range
+                                              :integer
+                                              :Ratio
+                                              :oid
+                                              :ContactPoint
+                                              :Money
+                                              :decimal
+                                              :id
+                                              :Attachment
+                                              :Contributor
+                                              :Period
+                                              :canonical
+                                              :url
+                                              :code
+                                              :HumanName
+                                              :positiveInt
+                                              :ParameterDefinition
+                                              :Coding
+                                              :Timing
+                                              :Duration
+                                              :uri
+                                              :CodeableConcept
+                                              :uuid
+                                              :Count
+                                              :Quantity
+                                              :boolean
+                                              :CodeableReference
+                                              :Annotation
+                                              :Age
+                                              :Reference}},
+                          :keys {:_decimal {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                 :unsignedInt {:confirms #{hl7-fhir-r4b-core.unsignedInt/schema}},
+                                 :Signature {:confirms #{hl7-fhir-r4b-core.Signature/schema}},
+                                 :markdown {:confirms #{hl7-fhir-r4b-core.markdown/schema}},
+                                 :_id {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                 :_code {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                 :date {:confirms #{hl7-fhir-r4b-core.date/schema}},
+                                 :_canonical {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                 :Dosage {:confirms #{hl7-fhir-r4b-core.Dosage/schema}},
+                                 :ContactDetail {:confirms #{hl7-fhir-r4b-core.ContactDetail/schema}},
+                                 :RelatedArtifact {:confirms #{hl7-fhir-r4b-core.RelatedArtifact/schema}},
+                                 :instant {:confirms #{hl7-fhir-r4b-core.instant/schema}},
+                                 :_positiveInt {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                 :_uri {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                 :_date {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                 :_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                 :UsageContext {:confirms #{hl7-fhir-r4b-core.UsageContext/schema}},
+                                 :time {:confirms #{hl7-fhir-r4b-core.time/schema}},
+                                 :DataRequirement {:confirms #{hl7-fhir-r4b-core.DataRequirement/schema}},
+                                 :base64Binary {:confirms #{hl7-fhir-r4b-core.base64Binary/schema}},
+                                 :Distance {:confirms #{hl7-fhir-r4b-core.Distance/schema}},
+                                 :SampledData {:confirms #{hl7-fhir-r4b-core.SampledData/schema}},
+                                 :TriggerDefinition {:confirms #{hl7-fhir-r4b-core.TriggerDefinition/schema}},
+                                 :Identifier {:confirms #{hl7-fhir-r4b-core.Identifier/schema}},
+                                 :string {:confirms #{hl7-fhir-r4b-core.string/schema}},
+                                 :Address {:confirms #{hl7-fhir-r4b-core.Address/schema}},
+                                 :Expression {:confirms #{hl7-fhir-r4b-core.Expression/schema}},
+                                 :RatioRange {:confirms #{hl7-fhir-r4b-core.RatioRange/schema}},
+                                 :dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                                 :_time {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                 :Range {:confirms #{hl7-fhir-r4b-core.Range/schema}},
+                                 :integer {:confirms #{hl7-fhir-r4b-core.integer/schema}},
+                                 :Ratio {:confirms #{hl7-fhir-r4b-core.Ratio/schema}},
+                                 :oid {:confirms #{hl7-fhir-r4b-core.oid/schema}},
+                                 :ContactPoint {:confirms #{hl7-fhir-r4b-core.ContactPoint/schema}},
+                                 :Money {:confirms #{hl7-fhir-r4b-core.Money/schema}},
+                                 :_boolean {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                 :decimal {:confirms #{hl7-fhir-r4b-core.decimal/schema}},
+                                 :id {:confirms #{hl7-fhir-r4b-core.id/schema}},
+                                 :Attachment {:confirms #{hl7-fhir-r4b-core.Attachment/schema}},
+                                 :Contributor {:confirms #{hl7-fhir-r4b-core.Contributor/schema}},
+                                 :Period {:confirms #{hl7-fhir-r4b-core.Period/schema}},
+                                 :_base64Binary {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                 :canonical {:confirms #{hl7-fhir-r4b-core.canonical/schema}},
+                                 :url {:confirms #{hl7-fhir-r4b-core.url/schema}},
+                                 :code {:confirms #{hl7-fhir-r4b-core.code/schema}},
+                                 :HumanName {:confirms #{hl7-fhir-r4b-core.HumanName/schema}},
+                                 :positiveInt {:confirms #{hl7-fhir-r4b-core.positiveInt/schema}},
+                                 :ParameterDefinition {:confirms #{hl7-fhir-r4b-core.ParameterDefinition/schema}},
+                                 :Coding {:confirms #{hl7-fhir-r4b-core.Coding/schema}},
+                                 :_markdown {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                 :Timing {:confirms #{hl7-fhir-r4b-core.Timing/schema}},
+                                 :_uuid {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                 :_integer {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                 :Duration {:confirms #{hl7-fhir-r4b-core.Duration/schema}},
+                                 :uri {:confirms #{hl7-fhir-r4b-core.uri/schema}},
+                                 :CodeableConcept {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema}},
+                                 :uuid {:confirms #{hl7-fhir-r4b-core.uuid/schema}},
+                                 :Count {:confirms #{hl7-fhir-r4b-core.Count/schema}},
+                                 :Quantity {:confirms #{hl7-fhir-r4b-core.Quantity/schema}},
+                                 :_instant {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                 :_oid {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                 :boolean {:confirms #{hl7-fhir-r4b-core.boolean/schema}},
+                                 :_unsignedInt {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                 :_url {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                 :CodeableReference {:confirms #{hl7-fhir-r4b-core.CodeableReference/schema}},
+                                 :_string {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                 :Annotation {:confirms #{hl7-fhir-r4b-core.Annotation/schema}},
+                                 :Age {:confirms #{hl7-fhir-r4b-core.Age/schema}},
+                                 :Reference {:confirms #{zen.fhir/Reference
+                                                         hl7-fhir-r4b-core.Reference/schema},
+                                             :zen.fhir/reference {:refers #{}}}},
+                          :fhir/flags #{:SU},
+                          :zen/desc "Value must have at least these property values"}},
+         :zen.fhir/type "ElementDefinition"}}

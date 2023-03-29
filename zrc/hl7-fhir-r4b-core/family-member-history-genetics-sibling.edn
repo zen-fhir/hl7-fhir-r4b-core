@@ -1,0 +1,20 @@
+{ns hl7-fhir-r4b-core.family-member-history-genetics-sibling,
+ import #{zen.fhir
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.FamilyMemberHistory
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.value-set.sibling-relationship-codes},
+ schema {:zen.fhir/version "0.6.20-2",
+         :zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/family-member-history-genetics-sibling",
+         :require #{:type :reference},
+         :type zen/map,
+         :zen/desc "Identifies a sibling of the relative.",
+         :keys {:type {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.sibling-relationship-codes/value-set,
+                                            :strength :required},
+                       :zen/desc "sibling | brother | sister | etc."},
+                :reference {:confirms #{zen.fhir/Reference
+                                        hl7-fhir-r4b-core.Reference/schema},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.FamilyMemberHistory/schema}},
+                            :zen/desc "Link to sibling relative(s)"}}}}

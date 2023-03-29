@@ -1,0 +1,12 @@
+{ns hl7-fhir-r4b-core.codesystem-alternate,
+ import #{zen.fhir hl7-fhir-r4b-core.Coding hl7-fhir-r4b-core.code},
+ schema {:zen.fhir/version "0.6.20-2",
+         :zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/codesystem-alternate",
+         :require #{:use :code},
+         :type zen/map,
+         :zen/desc "An additional code that may be used to represent the concept.",
+         :keys {:code {:confirms #{hl7-fhir-r4b-core.code/schema},
+                       :zen/desc "Code that represents the concept"},
+                :use {:confirms #{hl7-fhir-r4b-core.Coding/schema},
+                      :zen/desc "Expected use of the code"}}}}

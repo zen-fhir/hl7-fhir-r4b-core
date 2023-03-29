@@ -1,0 +1,168 @@
+{ns hl7-fhir-r4b-core.QuestionnaireResponse,
+ import #{hl7-fhir-r4b-core.DomainResource
+          hl7-fhir-r4b-core.CarePlan
+          zen.fhir
+          hl7-fhir-r4b-core.boolean
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.date
+          hl7-fhir-r4b-core.Patient
+          hl7-fhir-r4b-core.Encounter
+          hl7-fhir-r4b-core.string
+          hl7-fhir-r4b-core.Observation
+          hl7-fhir-r4b-core.BackboneElement
+          hl7-fhir-r4b-core.Practitioner
+          hl7-fhir-r4b-core.Organization
+          hl7-fhir-r4b-core.decimal
+          hl7-fhir-r4b-core.integer
+          hl7-fhir-r4b-core.Attachment
+          hl7-fhir-r4b-core.ServiceRequest
+          hl7-fhir-r4b-core.value-set.questionnaire-answers-status
+          hl7-fhir-r4b-core.uri
+          hl7-fhir-r4b-core.canonical
+          hl7-fhir-r4b-core.value-set.questionnaire-answers
+          hl7-fhir-r4b-core.Coding
+          hl7-fhir-r4b-core.Device
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.QuestionnaireResponse
+          hl7-fhir-r4b-core.dateTime
+          hl7-fhir-r4b-core.Quantity
+          hl7-fhir-r4b-core.PractitionerRole
+          hl7-fhir-r4b-core.Element
+          hl7-fhir-r4b-core.Procedure
+          hl7-fhir-r4b-core.RelatedPerson
+          hl7-fhir-r4b-core.time},
+ item-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+              :zen.fhir/version "0.6.20-2",
+              :confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+              :type zen/map,
+              :keys {:linkId {:confirms #{hl7-fhir-r4b-core.string/schema},
+                              :zen/desc "Pointer to specific item from Questionnaire"},
+                     :_linkId {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                     :definition {:confirms #{hl7-fhir-r4b-core.uri/schema},
+                                  :zen/desc "ElementDefinition - details for the item"},
+                     :_definition {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                     :text {:confirms #{hl7-fhir-r4b-core.string/schema},
+                            :zen/desc "Name for group or question text"},
+                     :_text {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                     :answer {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                      :type zen/map,
+                                      :keys {:value {:fhir/polymorphic true,
+                                                     :type zen/map,
+                                                     :exclusive-keys #{#{:date
+                                                                         :time
+                                                                         :string
+                                                                         :dateTime
+                                                                         :integer
+                                                                         :decimal
+                                                                         :Attachment
+                                                                         :Coding
+                                                                         :uri
+                                                                         :Quantity
+                                                                         :boolean
+                                                                         :Reference}},
+                                                     :keys {:_decimal {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                            :date {:confirms #{hl7-fhir-r4b-core.date/schema}},
+                                                            :_uri {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                            :_date {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                            :_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                            :time {:confirms #{hl7-fhir-r4b-core.time/schema}},
+                                                            :string {:confirms #{hl7-fhir-r4b-core.string/schema}},
+                                                            :dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                                                            :_time {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                            :integer {:confirms #{hl7-fhir-r4b-core.integer/schema}},
+                                                            :_boolean {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                            :decimal {:confirms #{hl7-fhir-r4b-core.decimal/schema}},
+                                                            :Attachment {:confirms #{hl7-fhir-r4b-core.Attachment/schema}},
+                                                            :Coding {:confirms #{hl7-fhir-r4b-core.Coding/schema}},
+                                                            :_integer {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                            :uri {:confirms #{hl7-fhir-r4b-core.uri/schema}},
+                                                            :Quantity {:confirms #{hl7-fhir-r4b-core.Quantity/schema}},
+                                                            :boolean {:confirms #{hl7-fhir-r4b-core.boolean/schema}},
+                                                            :_string {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                            :Reference {:confirms #{zen.fhir/Reference
+                                                                                    hl7-fhir-r4b-core.Reference/schema},
+                                                                        :zen.fhir/reference {:refers #{}}}},
+                                                     :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.questionnaire-answers/value-set,
+                                                                          :strength :example},
+                                                     :zen/desc "Single-valued answer to the question"},
+                                             :item {:type zen/vector,
+                                                    :every {:confirms #{hl7-fhir-r4b-core.QuestionnaireResponse/item-schema},
+                                                            :zen/desc "Nested groups and questions"}}},
+                                      :zen/desc "The response(s) to the question"}},
+                     :item {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r4b-core.QuestionnaireResponse/item-schema},
+                                    :zen/desc "Nested questionnaire response items"}}},
+              :require #{:linkId},
+              :zen/desc "Groups and questions"},
+ schema {:zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/QuestionnaireResponse",
+         :require #{:status},
+         :type zen/map,
+         :zen/desc "A structured set of questions and their answers. The questions are ordered and grouped into coherent subsets, corresponding to the structure of the grouping of the questionnaire being responded to.",
+         :keys {:questionnaire {:confirms #{hl7-fhir-r4b-core.canonical/schema},
+                                :fhir/flags #{:SU},
+                                :zen/desc "Form being answered"},
+                :encounter {:confirms #{zen.fhir/Reference
+                                        hl7-fhir-r4b-core.Reference/schema},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Encounter/schema}},
+                            :zen/desc "Encounter created as part of"},
+                :item {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r4b-core.QuestionnaireResponse/item-schema}}},
+                :_status {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :_authored {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :source {:confirms #{zen.fhir/Reference
+                                     hl7-fhir-r4b-core.Reference/schema},
+                         :fhir/flags #{:SU},
+                         :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                        hl7-fhir-r4b-core.PractitionerRole/schema
+                                                        hl7-fhir-r4b-core.Patient/schema
+                                                        hl7-fhir-r4b-core.Practitioner/schema}},
+                         :zen/desc "The person who answered the questions"},
+                :author {:confirms #{zen.fhir/Reference
+                                     hl7-fhir-r4b-core.Reference/schema},
+                         :fhir/flags #{:SU},
+                         :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                        hl7-fhir-r4b-core.PractitionerRole/schema
+                                                        hl7-fhir-r4b-core.Patient/schema
+                                                        hl7-fhir-r4b-core.Organization/schema
+                                                        hl7-fhir-r4b-core.Device/schema
+                                                        hl7-fhir-r4b-core.Practitioner/schema}},
+                         :zen/desc "Person who received and recorded the answers"},
+                :status {:confirms #{hl7-fhir-r4b-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.questionnaire-answers-status/value-set,
+                                              :strength :required},
+                         :zen/desc "in-progress | completed | amended | entered-in-error | stopped"},
+                :identifier {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                             :fhir/flags #{:SU},
+                             :zen/desc "Unique id for this set of answers"},
+                :basedOn {:type zen/vector,
+                          :every {:confirms #{zen.fhir/Reference
+                                              hl7-fhir-r4b-core.Reference/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.CarePlan/schema
+                                                                 hl7-fhir-r4b-core.ServiceRequest/schema}},
+                                  :zen/desc "Request fulfilled by this QuestionnaireResponse"}},
+                :authored {:confirms #{hl7-fhir-r4b-core.dateTime/schema},
+                           :fhir/flags #{:SU},
+                           :zen/desc "Date the answers were gathered"},
+                :partOf {:type zen/vector,
+                         :every {:confirms #{zen.fhir/Reference
+                                             hl7-fhir-r4b-core.Reference/schema},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Procedure/schema
+                                                                hl7-fhir-r4b-core.Observation/schema}},
+                                 :zen/desc "Part of this action"}},
+                :subject {:confirms #{zen.fhir/Reference
+                                      hl7-fhir-r4b-core.Reference/schema},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{}},
+                          :zen/desc "The subject of the questions"},
+                :_questionnaire {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+         :zen.fhir/type "QuestionnaireResponse"}}

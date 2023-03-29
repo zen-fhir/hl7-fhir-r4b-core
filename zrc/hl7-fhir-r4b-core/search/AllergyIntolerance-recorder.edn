@@ -1,0 +1,12 @@
+{ns hl7-fhir-r4b-core.search.AllergyIntolerance-recorder,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "AllergyIntolerance-recorder",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/AllergyIntolerance-recorder",
+         :fhir/type "reference",
+         :name "recorder",
+         :expr {:AllergyIntolerance {:knife [["recorder"]],
+                                     :jsonpath ["$.\"recorder\"[*]"],
+                                     :data-types #{{:type "Reference",
+                                                    :polymorphic? false}},
+                                     :template :reference}}}}

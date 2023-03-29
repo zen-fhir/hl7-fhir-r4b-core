@@ -1,0 +1,171 @@
+{ns hl7-fhir-r4b-core.MeasureReport,
+ import #{hl7-fhir-r4b-core.value-set.measure-report-status
+          hl7-fhir-r4b-core.Period
+          hl7-fhir-r4b-core.Group
+          hl7-fhir-r4b-core.DomainResource
+          zen.fhir
+          hl7-fhir-r4b-core.value-set.measure-improvement-notation
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.Patient
+          hl7-fhir-r4b-core.value-set.measure-group-example
+          hl7-fhir-r4b-core.Location
+          hl7-fhir-r4b-core.List
+          hl7-fhir-r4b-core.BackboneElement
+          hl7-fhir-r4b-core.Practitioner
+          hl7-fhir-r4b-core.Organization
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.integer
+          hl7-fhir-r4b-core.value-set.measure-population
+          hl7-fhir-r4b-core.canonical
+          hl7-fhir-r4b-core.Device
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.dateTime
+          hl7-fhir-r4b-core.Quantity
+          hl7-fhir-r4b-core.PractitionerRole
+          hl7-fhir-r4b-core.value-set.measure-report-type
+          hl7-fhir-r4b-core.value-set.measure-stratifier-example
+          hl7-fhir-r4b-core.Element
+          hl7-fhir-r4b-core.RelatedPerson
+          hl7-fhir-r4b-core.value-set.measurereport-stratifier-value-example},
+ schema {:zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/MeasureReport",
+         :require #{:type :measure :status :period},
+         :type zen/map,
+         :zen/desc "The MeasureReport resource contains the results of the calculation of a measure; and optionally a reference to the resources involved in that calculation.",
+         :keys {:evaluatedResource {:type zen/vector,
+                                    :every {:confirms #{zen.fhir/Reference
+                                                        hl7-fhir-r4b-core.Reference/schema},
+                                            :zen.fhir/reference {:refers #{}},
+                                            :zen/desc "What data was used to calculate the measure score"}},
+                :_measure {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :date {:confirms #{hl7-fhir-r4b-core.dateTime/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "When the report was generated"},
+                :group {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                :type zen/map,
+                                :keys {:code {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                              :fhir/flags #{:SU},
+                                              :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.measure-group-example/value-set,
+                                                                   :strength :example},
+                                              :zen/desc "Meaning of the group"},
+                                       :population {:type zen/vector,
+                                                    :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                                            :type zen/map,
+                                                            :keys {:code {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                                          :fhir/flags #{:SU},
+                                                                          :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.measure-population/value-set,
+                                                                                               :strength :extensible},
+                                                                          :zen/desc "initial-population | numerator | numerator-exclusion | denominator | denominator-exclusion | denominator-exception | measure-population | measure-population-exclusion | measure-observation"},
+                                                                   :count {:confirms #{hl7-fhir-r4b-core.integer/schema},
+                                                                           :zen/desc "Size of the population"},
+                                                                   :_count {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                                   :subjectResults {:confirms #{zen.fhir/Reference
+                                                                                                hl7-fhir-r4b-core.Reference/schema},
+                                                                                    :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.List/schema}},
+                                                                                    :zen/desc "For subject-list reports, the subject results in this population"}},
+                                                            :zen/desc "The populations in the group"}},
+                                       :measureScore {:confirms #{hl7-fhir-r4b-core.Quantity/schema},
+                                                      :fhir/flags #{:SU},
+                                                      :zen/desc "What score this group achieved"},
+                                       :stratifier {:type zen/vector,
+                                                    :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                                            :type zen/map,
+                                                            :keys {:code {:type zen/vector,
+                                                                          :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                                                  :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.measure-stratifier-example/value-set,
+                                                                                                       :strength :example},
+                                                                                  :zen/desc "What stratifier of the group"}},
+                                                                   :stratum {:type zen/vector,
+                                                                             :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                                                                     :type zen/map,
+                                                                                     :keys {:value {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                                                                    :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.measurereport-stratifier-value-example/value-set,
+                                                                                                                         :strength :example},
+                                                                                                    :zen/desc "The stratum value, e.g. male"},
+                                                                                            :component {:type zen/vector,
+                                                                                                        :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                                                                                                :type zen/map,
+                                                                                                                :keys {:code {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                                                                                              :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.measure-stratifier-example/value-set,
+                                                                                                                                                   :strength :example},
+                                                                                                                              :zen/desc "What stratifier component of the group"},
+                                                                                                                       :value {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                                                                                               :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.measurereport-stratifier-value-example/value-set,
+                                                                                                                                                    :strength :example},
+                                                                                                                               :zen/desc "The stratum component value, e.g. male"}},
+                                                                                                                :require #{:value
+                                                                                                                           :code},
+                                                                                                                :zen/desc "Stratifier component values"}},
+                                                                                            :population {:type zen/vector,
+                                                                                                         :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                                                                                                 :type zen/map,
+                                                                                                                 :keys {:code {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                                                                                               :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.measure-population/value-set,
+                                                                                                                                                    :strength :extensible},
+                                                                                                                               :zen/desc "initial-population | numerator | numerator-exclusion | denominator | denominator-exclusion | denominator-exception | measure-population | measure-population-exclusion | measure-observation"},
+                                                                                                                        :count {:confirms #{hl7-fhir-r4b-core.integer/schema},
+                                                                                                                                :zen/desc "Size of the population"},
+                                                                                                                        :_count {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                                                                                        :subjectResults {:confirms #{zen.fhir/Reference
+                                                                                                                                                     hl7-fhir-r4b-core.Reference/schema},
+                                                                                                                                         :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.List/schema}},
+                                                                                                                                         :zen/desc "For subject-list reports, the subject results in this population"}},
+                                                                                                                 :zen/desc "Population results in this stratum"}},
+                                                                                            :measureScore {:confirms #{hl7-fhir-r4b-core.Quantity/schema},
+                                                                                                           :zen/desc "What score this stratum achieved"}},
+                                                                                     :zen/desc "Stratum results, one for each unique value, or set of values, in the stratifier, or stratifier components"}}},
+                                                            :zen/desc "Stratification results"}}},
+                                :zen/desc "Measure results for each group"}},
+                :_date {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :_type {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :_status {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :type {:confirms #{hl7-fhir-r4b-core.code/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.measure-report-type/value-set,
+                                            :strength :required},
+                       :zen/desc "individual | subject-list | summary | data-collection"},
+                :measure {:confirms #{hl7-fhir-r4b-core.canonical/schema},
+                          :fhir/flags #{:SU},
+                          :zen/desc "What measure was calculated"},
+                :reporter {:confirms #{zen.fhir/Reference
+                                       hl7-fhir-r4b-core.Reference/schema},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.PractitionerRole/schema
+                                                          hl7-fhir-r4b-core.Organization/schema
+                                                          hl7-fhir-r4b-core.Location/schema
+                                                          hl7-fhir-r4b-core.Practitioner/schema}},
+                           :zen/desc "Who is reporting the data"},
+                :status {:confirms #{hl7-fhir-r4b-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.measure-report-status/value-set,
+                                              :strength :required},
+                         :zen/desc "complete | pending | error"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Additional identifier for the MeasureReport"}},
+                :period {:confirms #{hl7-fhir-r4b-core.Period/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "What period the report covers"},
+                :improvementNotation {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                      :fhir/flags #{:SU :?!},
+                                      :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.measure-improvement-notation/value-set,
+                                                           :strength :required},
+                                      :zen/desc "increase | decrease"},
+                :subject {:confirms #{zen.fhir/Reference
+                                      hl7-fhir-r4b-core.Reference/schema},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                         hl7-fhir-r4b-core.Group/schema
+                                                         hl7-fhir-r4b-core.PractitionerRole/schema
+                                                         hl7-fhir-r4b-core.Patient/schema
+                                                         hl7-fhir-r4b-core.Device/schema
+                                                         hl7-fhir-r4b-core.Location/schema
+                                                         hl7-fhir-r4b-core.Practitioner/schema}},
+                          :zen/desc "What individual(s) the report is for"}},
+         :zen.fhir/type "MeasureReport"}}

@@ -1,0 +1,178 @@
+{ns hl7-fhir-r4b-core.Specimen,
+ import #{hl7-fhir-r4b-core.Specimen
+          hl7-fhir-r4b-core.Period
+          hl7-fhir-r4b-core.Duration
+          hl7-fhir-r4b-core.Group
+          hl7-fhir-r4b-core.DomainResource
+          zen.fhir
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.Patient
+          hl7-fhir-r4b-core.value-set.specimen-status
+          hl7-fhir-r4b-core.Location
+          hl7-fhir-r4b-core.string
+          hl7-fhir-r4b-core.Substance
+          hl7-fhir-r4b-core.BackboneElement
+          hl7-fhir-r4b-core.Practitioner
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.Annotation
+          hl7-fhir-r4b-core.ServiceRequest
+          hl7-fhir-r4b-core.SimpleQuantity
+          hl7-fhir-r4b-core.Device
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.value-set.specimen-container-type
+          hl7-fhir-r4b-core.value-set.specimen-collection-method
+          hl7-fhir-r4b-core.dateTime
+          hl7-fhir-r4b-core.Quantity
+          hl7-fhir-r4b-core.value-set.specimen-processing-procedure
+          hl7-fhir-r4b-core.PractitionerRole
+          hl7-fhir-r4b-core.value-set.body-site
+          hl7-fhir-r4b-core.Element},
+ schema {:zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen/desc "A sample to be used for analysis.",
+         :zen.fhir/type "Specimen",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Specimen",
+         :zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :type zen/map,
+         :keys {:request {:type zen/vector,
+                          :every {:confirms #{zen.fhir/Reference
+                                              hl7-fhir-r4b-core.Reference/schema},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.ServiceRequest/schema}},
+                                  :zen/desc "Why the specimen was collected"}},
+                :receivedTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "The time when specimen was received for processing"},
+                :processing {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                     :type zen/map,
+                                     :keys {:description {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                          :zen/desc "Textual description of procedure"},
+                                            :_description {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                            :procedure {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                        :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.specimen-processing-procedure/value-set,
+                                                                             :strength :example},
+                                                        :zen/desc "Indicates the treatment step  applied to the specimen"},
+                                            :additive {:type zen/vector,
+                                                       :every {:confirms #{zen.fhir/Reference
+                                                                           hl7-fhir-r4b-core.Reference/schema},
+                                                               :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Substance/schema}},
+                                                               :zen/desc "Material used in the processing step"}},
+                                            :time {:fhir/polymorphic true,
+                                                   :type zen/map,
+                                                   :exclusive-keys #{#{:dateTime
+                                                                       :Period}},
+                                                   :keys {:dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                                                          :_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                          :Period {:confirms #{hl7-fhir-r4b-core.Period/schema}}},
+                                                   :zen/desc "Date and time of specimen processing"}},
+                                     :zen/desc "Processing and processing step details"}},
+                :parent {:type zen/vector,
+                         :every {:confirms #{zen.fhir/Reference
+                                             hl7-fhir-r4b-core.Reference/schema},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Specimen/schema}},
+                                 :zen/desc "Specimen from which this specimen originated"}},
+                :_status {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :type {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Kind of material that forms the specimen"},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r4b-core.Annotation/schema},
+                               :zen/desc "Comments"}},
+                :status {:confirms #{hl7-fhir-r4b-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.specimen-status/value-set,
+                                              :strength :required},
+                         :zen/desc "available | unavailable | unsatisfactory | entered-in-error"},
+                :condition {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                    :fhir/flags #{:SU},
+                                    :zen/desc "State of the specimen"}},
+                :container {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:identifier {:type zen/vector,
+                                                        :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                                                :fhir/flags #{:SU},
+                                                                :zen/desc "Id for the container"}},
+                                           :description {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                         :zen/desc "Textual description of the container"},
+                                           :_description {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                           :type {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                  :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.specimen-container-type/value-set,
+                                                                       :strength :example},
+                                                  :zen/desc "Kind of container directly associated with specimen"},
+                                           :capacity {:confirms #{hl7-fhir-r4b-core.SimpleQuantity/schema
+                                                                  hl7-fhir-r4b-core.Quantity/schema},
+                                                      :zen/desc "Container volume or size"},
+                                           :specimenQuantity {:confirms #{hl7-fhir-r4b-core.SimpleQuantity/schema
+                                                                          hl7-fhir-r4b-core.Quantity/schema},
+                                                              :zen/desc "Quantity of specimen within container"},
+                                           :additive {:fhir/polymorphic true,
+                                                      :type zen/map,
+                                                      :exclusive-keys #{#{:CodeableConcept
+                                                                          :Reference}},
+                                                      :keys {:CodeableConcept {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema}},
+                                                             :Reference {:confirms #{zen.fhir/Reference
+                                                                                     hl7-fhir-r4b-core.Reference/schema},
+                                                                         :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Substance/schema}}}},
+                                                      :zen/desc "Additive associated with container"}},
+                                    :zen/desc "Direct container of specimen (tube/slide, etc.)"}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "External Identifier"}},
+                :accessionIdentifier {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                      :fhir/flags #{:SU},
+                                      :zen/desc "Identifier assigned by the lab"},
+                :_receivedTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :collection {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                             :type zen/map,
+                             :keys {:collector {:confirms #{zen.fhir/Reference
+                                                            hl7-fhir-r4b-core.Reference/schema},
+                                                :fhir/flags #{:SU},
+                                                :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.PractitionerRole/schema
+                                                                               hl7-fhir-r4b-core.Practitioner/schema}},
+                                                :zen/desc "Who collected the specimen"},
+                                    :collected {:fhir/polymorphic true,
+                                                :type zen/map,
+                                                :exclusive-keys #{#{:dateTime
+                                                                    :Period}},
+                                                :keys {:dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                                                       :_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                       :Period {:confirms #{hl7-fhir-r4b-core.Period/schema}}},
+                                                :fhir/flags #{:SU},
+                                                :zen/desc "Collection time"},
+                                    :duration {:confirms #{hl7-fhir-r4b-core.Duration/schema},
+                                               :fhir/flags #{:SU},
+                                               :zen/desc "How long it took to collect specimen"},
+                                    :quantity {:confirms #{hl7-fhir-r4b-core.SimpleQuantity/schema
+                                                           hl7-fhir-r4b-core.Quantity/schema},
+                                               :zen/desc "The quantity of specimen collected"},
+                                    :method {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                             :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.specimen-collection-method/value-set,
+                                                                  :strength :example},
+                                             :zen/desc "Technique used to perform collection"},
+                                    :bodySite {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                               :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.body-site/value-set,
+                                                                    :strength :example},
+                                               :zen/desc "Anatomical collection site"},
+                                    :fastingStatus {:fhir/polymorphic true,
+                                                    :type zen/map,
+                                                    :exclusive-keys #{#{:Duration
+                                                                        :CodeableConcept}},
+                                                    :keys {:CodeableConcept {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema}},
+                                                           :Duration {:confirms #{hl7-fhir-r4b-core.Duration/schema}}},
+                                                    :fhir/flags #{:SU},
+                                                    :zen/desc "Whether or how long patient abstained from food and/or drink"}},
+                             :zen/desc "Collection details"},
+                :subject {:confirms #{zen.fhir/Reference
+                                      hl7-fhir-r4b-core.Reference/schema},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Group/schema
+                                                         hl7-fhir-r4b-core.Patient/schema
+                                                         hl7-fhir-r4b-core.Device/schema
+                                                         hl7-fhir-r4b-core.Location/schema
+                                                         hl7-fhir-r4b-core.Substance/schema}},
+                          :zen/desc "Where the specimen came from. This may be from patient(s), from a location (e.g., the source of an environmental sample), or a sampling of a substance or a device"}}}}

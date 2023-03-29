@@ -1,0 +1,8 @@
+{ns hl7-fhir-r4b-core.composition-section-subject,
+ import #{zen.fhir hl7-fhir-r4b-core.string},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "Specifies that the section has a different subject that the Composition, or it's container section.",
+         :zen.fhir/type "string",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/composition-section-subject",
+         :zen.fhir/version "0.6.20-2",
+         :confirms #{hl7-fhir-r4b-core.string/schema}}}

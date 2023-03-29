@@ -1,0 +1,83 @@
+{ns hl7-fhir-r4b-core.OrganizationAffiliation,
+ import #{hl7-fhir-r4b-core.value-set.c80-practice-codes
+          hl7-fhir-r4b-core.Period
+          hl7-fhir-r4b-core.DomainResource
+          zen.fhir
+          hl7-fhir-r4b-core.boolean
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.Location
+          hl7-fhir-r4b-core.value-set.organization-role
+          hl7-fhir-r4b-core.Organization
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.HealthcareService
+          hl7-fhir-r4b-core.Endpoint
+          hl7-fhir-r4b-core.ContactPoint
+          hl7-fhir-r4b-core.Element},
+ schema {:zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen/desc "Defines an affiliation/assotiation/relationship between 2 distinct oganizations, that is not a part-of relationship/sub-division relationship.",
+         :zen.fhir/type "OrganizationAffiliation",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/OrganizationAffiliation",
+         :zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :type zen/map,
+         :keys {:_active {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :specialty {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                    :fhir/flags #{:SU},
+                                    :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.c80-practice-codes/value-set,
+                                                         :strength :preferred},
+                                    :zen/desc "Specific specialty of the participatingOrganization in the context of the role"}},
+                :organization {:confirms #{zen.fhir/Reference
+                                           hl7-fhir-r4b-core.Reference/schema},
+                               :fhir/flags #{:SU},
+                               :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Organization/schema}},
+                               :zen/desc "Organization where the role is available"},
+                :participatingOrganization {:confirms #{zen.fhir/Reference
+                                                        hl7-fhir-r4b-core.Reference/schema},
+                                            :fhir/flags #{:SU},
+                                            :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Organization/schema}},
+                                            :zen/desc "Organization that provides/performs the role (e.g. providing services or is a member of)"},
+                :active {:confirms #{hl7-fhir-r4b-core.boolean/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "Whether this organization affiliation record is in active use"},
+                :code {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                               :fhir/flags #{:SU},
+                               :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.organization-role/value-set,
+                                                    :strength :example},
+                               :zen/desc "Definition of the role the participatingOrganization plays"}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Business identifiers that are specific to this role"}},
+                :telecom {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r4b-core.ContactPoint/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Contact details at the participatingOrganization relevant to this Affiliation"}},
+                :network {:type zen/vector,
+                          :every {:confirms #{zen.fhir/Reference
+                                              hl7-fhir-r4b-core.Reference/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Organization/schema}},
+                                  :zen/desc "Health insurance provider network in which the participatingOrganization provides the role's services (if defined) at the indicated locations (if defined)"}},
+                :period {:confirms #{hl7-fhir-r4b-core.Period/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "The period during which the participatingOrganization is affiliated with the primary organization"},
+                :location {:type zen/vector,
+                           :every {:confirms #{zen.fhir/Reference
+                                               hl7-fhir-r4b-core.Reference/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Location/schema}},
+                                   :zen/desc "The location(s) at which the role occurs"}},
+                :endpoint {:type zen/vector,
+                           :every {:confirms #{zen.fhir/Reference
+                                               hl7-fhir-r4b-core.Reference/schema},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Endpoint/schema}},
+                                   :zen/desc "Technical endpoints providing access to services operated for this role"}},
+                :healthcareService {:type zen/vector,
+                                    :every {:confirms #{zen.fhir/Reference
+                                                        hl7-fhir-r4b-core.Reference/schema},
+                                            :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.HealthcareService/schema}},
+                                            :zen/desc "Healthcare services provided through the role"}}}}}

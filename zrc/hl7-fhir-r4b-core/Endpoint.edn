@@ -1,0 +1,81 @@
+{ns hl7-fhir-r4b-core.Endpoint,
+ import #{hl7-fhir-r4b-core.Period
+          hl7-fhir-r4b-core.DomainResource
+          hl7-fhir-r4b-core.value-set.endpoint-payload-type
+          zen.fhir
+          hl7-fhir-r4b-core.value-set.endpoint-status
+          hl7-fhir-r4b-core.url
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.string
+          hl7-fhir-r4b-core.value-set.endpoint-connection-type
+          hl7-fhir-r4b-core.Organization
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.value-set.mimetypes
+          hl7-fhir-r4b-core.Coding
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.ContactPoint
+          hl7-fhir-r4b-core.Element},
+ schema {:zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Endpoint",
+         :require #{:connectionType :address :payloadType :status},
+         :type zen/map,
+         :zen/desc "The technical details of an endpoint that can be used for electronic services, such as for web services providing XDS.b or a REST endpoint for another FHIR server. This may include any security context information.",
+         :keys {:_address {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :connectionType {:confirms #{hl7-fhir-r4b-core.Coding/schema},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.endpoint-connection-type/value-set,
+                                                      :strength :extensible},
+                                 :zen/desc "Protocol/Profile/Standard to be used with this endpoint connection"},
+                :address {:confirms #{hl7-fhir-r4b-core.url/schema},
+                          :fhir/flags #{:SU},
+                          :zen/desc "The technical base address for connecting to this endpoint"},
+                :managingOrganization {:confirms #{zen.fhir/Reference
+                                                   hl7-fhir-r4b-core.Reference/schema},
+                                       :fhir/flags #{:SU},
+                                       :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Organization/schema}},
+                                       :zen/desc "Organization that manages this endpoint (might not be the organization that exposes the endpoint)"},
+                :name {:confirms #{hl7-fhir-r4b-core.string/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "A name that this endpoint can be identified by"},
+                :payloadMimeType {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r4b-core.code/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.mimetypes/value-set,
+                                                               :strength :required},
+                                          :zen/desc "Mimetype to send. If not specified, the content could be anything (including no payload, if the connectionType defined this)"}},
+                :_status {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :_header {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                :payloadType {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                      :fhir/flags #{:SU},
+                                      :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.endpoint-payload-type/value-set,
+                                                           :strength :example},
+                                      :zen/desc "The type of content that may be used at this endpoint (e.g. XDS Discharge summaries)"},
+                              :minItems 1},
+                :header {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                 :zen/desc "Usage depends on the channel type"}},
+                :status {:confirms #{hl7-fhir-r4b-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.endpoint-status/value-set,
+                                              :strength :required},
+                         :zen/desc "active | suspended | error | off | entered-in-error | test"},
+                :_name {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Identifies this endpoint across multiple systems"}},
+                :period {:confirms #{hl7-fhir-r4b-core.Period/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "Interval the endpoint is expected to be operational"},
+                :contact {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r4b-core.ContactPoint/schema},
+                                  :zen/desc "Contact details for source (e.g. troubleshooting)"}},
+                :_payloadMimeType {:type zen/vector,
+                                   :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}}},
+         :zen.fhir/type "Endpoint"}}

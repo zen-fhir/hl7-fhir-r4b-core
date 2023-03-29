@@ -1,0 +1,58 @@
+{ns hl7-fhir-r4b-core.observation-genetics,
+ import #{hl7-fhir-r4b-core.observation-geneticsGenomicSourceClass
+          hl7-fhir-r4b-core.observation-geneticsInterpretation
+          hl7-fhir-r4b-core.observation-geneticsCopyNumberEvent
+          zen.fhir
+          hl7-fhir-r4b-core.observation-geneticsGene
+          hl7-fhir-r4b-core.observation-genetics
+          hl7-fhir-r4b-core.Observation
+          hl7-fhir-r4b-core.observation-geneticsAllele
+          hl7-fhir-r4b-core.observation-geneticsDNARegionName
+          hl7-fhir-r4b-core.observation-geneticsAminoAcidChange
+          hl7-fhir-r4b-core.observation-geneticsPhaseSet
+          hl7-fhir-r4b-core.observation-geneticsAncestry
+          hl7-fhir-r4b-core.observation-geneticsVariant},
+ referenceRange-schema {:zen/tags #{zen/schema
+                                    zen.fhir/structure-schema},
+                        :zen.fhir/version "0.6.20-2"},
+ schema {:zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen/desc "Describes how the observation resource is used to report structured genetic test results",
+         :zen.fhir/type "Observation",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/observation-genetics",
+         :zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.Observation/schema},
+         :type zen/map,
+         :keys {:CopyNumberEvent {:confirms #{hl7-fhir-r4b-core.observation-geneticsCopyNumberEvent/schema},
+                                  :fhir/extensionUri "http://hl7.org/fhir/StructureDefinition/observation-geneticsCopyNumberEvent",
+                                  :zen/desc "Copy number variation"},
+                :referenceRange {:confirms #{hl7-fhir-r4b-core.observation-genetics/referenceRange-schema}},
+                :DNARegionName {:confirms #{hl7-fhir-r4b-core.observation-geneticsDNARegionName/schema},
+                                :fhir/extensionUri "http://hl7.org/fhir/StructureDefinition/observation-geneticsDNARegionName",
+                                :zen/desc "DNA region name"},
+                :interpretation {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r4b-core.observation-geneticsInterpretation/schema},
+                                         :zen/desc "Clinical interpretations for variant"},
+                                 :maxItems 1},
+                :Ancestry {:confirms #{hl7-fhir-r4b-core.observation-geneticsAncestry/schema},
+                           :fhir/extensionUri "http://hl7.org/fhir/StructureDefinition/observation-geneticsAncestry",
+                           :zen/desc "Ancestry"},
+                :Gene {:confirms #{hl7-fhir-r4b-core.observation-geneticsGene/schema},
+                       :fhir/extensionUri "http://hl7.org/fhir/StructureDefinition/observation-geneticsGene",
+                       :zen/desc "HGNC gene symbol"},
+                :PhaseSet {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r4b-core.observation-geneticsPhaseSet/schema},
+                                   :fhir/extensionUri "http://hl7.org/fhir/StructureDefinition/observation-geneticsPhaseSet",
+                                   :zen/desc "Phase set"}},
+                :Allele {:confirms #{hl7-fhir-r4b-core.observation-geneticsAllele/schema},
+                         :fhir/extensionUri "http://hl7.org/fhir/StructureDefinition/observation-geneticsAllele",
+                         :zen/desc "Allele"},
+                :GenomicSourceClass {:confirms #{hl7-fhir-r4b-core.observation-geneticsGenomicSourceClass/schema},
+                                     :fhir/extensionUri "http://hl7.org/fhir/StructureDefinition/observation-geneticsGenomicSourceClass",
+                                     :zen/desc "Genomic source class"},
+                :Variant {:confirms #{hl7-fhir-r4b-core.observation-geneticsVariant/schema},
+                          :fhir/extensionUri "http://hl7.org/fhir/StructureDefinition/observation-geneticsVariant",
+                          :zen/desc "Variant"},
+                :AminoAcidChange {:confirms #{hl7-fhir-r4b-core.observation-geneticsAminoAcidChange/schema},
+                                  :fhir/extensionUri "http://hl7.org/fhir/StructureDefinition/observation-geneticsAminoAcidChange",
+                                  :zen/desc "AminoAcidChange"}}}}

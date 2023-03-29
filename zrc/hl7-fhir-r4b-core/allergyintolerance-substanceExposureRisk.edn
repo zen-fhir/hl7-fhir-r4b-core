@@ -1,0 +1,16 @@
+{ns hl7-fhir-r4b-core.allergyintolerance-substanceExposureRisk,
+ import #{zen.fhir
+          hl7-fhir-r4b-core.value-set.substance-code
+          hl7-fhir-r4b-core.CodeableConcept},
+ schema {:zen.fhir/version "0.6.20-2",
+         :zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/allergyintolerance-substanceExposureRisk",
+         :require #{:substance :exposureRisk},
+         :type zen/map,
+         :zen/desc "A complex extension allowing structured capture of the exposure risk of the patient for an adverse reaction (allergy or intolerance) to the specified substance/product.",
+         :keys {:substance {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                            :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.substance-code/value-set,
+                                                 :strength :example},
+                            :zen/desc "Substance (or pharmaceutical product)"},
+                :exposureRisk {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                               :zen/desc "known-reaction-risk | no-known-reaction-risk"}}}}

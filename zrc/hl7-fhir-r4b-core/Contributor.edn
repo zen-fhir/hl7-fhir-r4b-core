@@ -1,0 +1,29 @@
+{ns hl7-fhir-r4b-core.Contributor,
+ import #{hl7-fhir-r4b-core.value-set.contributor-type
+          zen.fhir
+          hl7-fhir-r4b-core.ContactDetail
+          hl7-fhir-r4b-core.string
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.Element},
+ schema {:zen.fhir/version "0.6.20-2",
+         :confirms #{hl7-fhir-r4b-core.Element/schema},
+         :zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Contributor",
+         :require #{:name :type},
+         :type zen/map,
+         :zen/desc "Base StructureDefinition for Contributor Type: A contributor to the content of a knowledge asset, including authors, editors, reviewers, and endorsers.",
+         :keys {:type {:confirms #{hl7-fhir-r4b-core.code/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contributor-type/value-set,
+                                            :strength :required},
+                       :zen/desc "author | editor | reviewer | endorser"},
+                :_type {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :name {:confirms #{hl7-fhir-r4b-core.string/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Who contributed the content"},
+                :_name {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :contact {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r4b-core.ContactDetail/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Contact details of the contributor"}}},
+         :zen.fhir/type "Contributor"}}

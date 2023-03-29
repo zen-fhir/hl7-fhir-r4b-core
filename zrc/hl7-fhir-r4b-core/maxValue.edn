@@ -1,0 +1,26 @@
+{ns hl7-fhir-r4b-core.maxValue,
+ import #{zen.fhir
+          hl7-fhir-r4b-core.date
+          hl7-fhir-r4b-core.decimal
+          hl7-fhir-r4b-core.integer
+          hl7-fhir-r4b-core.dateTime
+          hl7-fhir-r4b-core.instant
+          hl7-fhir-r4b-core.time},
+ schema {:fhir/polymorphic true,
+         :zen.fhir/version "0.6.20-2",
+         :zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/maxValue",
+         :type zen/map,
+         :zen/desc "The inclusive upper bound on the range of allowed values for the data element.",
+         :keys {:date {:confirms #{hl7-fhir-r4b-core.date/schema}},
+                :dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                :time {:confirms #{hl7-fhir-r4b-core.time/schema}},
+                :instant {:confirms #{hl7-fhir-r4b-core.instant/schema}},
+                :decimal {:confirms #{hl7-fhir-r4b-core.decimal/schema}},
+                :integer {:confirms #{hl7-fhir-r4b-core.integer/schema}}},
+         :exclusive-keys #{#{:date
+                             :instant
+                             :time
+                             :dateTime
+                             :integer
+                             :decimal}}}}

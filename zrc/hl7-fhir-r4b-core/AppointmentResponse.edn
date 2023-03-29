@@ -1,0 +1,70 @@
+{ns hl7-fhir-r4b-core.AppointmentResponse,
+ import #{hl7-fhir-r4b-core.DomainResource
+          zen.fhir
+          hl7-fhir-r4b-core.value-set.encounter-participant-type
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.Patient
+          hl7-fhir-r4b-core.Location
+          hl7-fhir-r4b-core.string
+          hl7-fhir-r4b-core.Practitioner
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.HealthcareService
+          hl7-fhir-r4b-core.Appointment
+          hl7-fhir-r4b-core.Device
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.instant
+          hl7-fhir-r4b-core.PractitionerRole
+          hl7-fhir-r4b-core.Element
+          hl7-fhir-r4b-core.RelatedPerson
+          hl7-fhir-r4b-core.value-set.participationstatus},
+ schema {:zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/AppointmentResponse",
+         :require #{:appointment :participantStatus},
+         :type zen/map,
+         :zen/desc "A reply to an appointment request for a patient and/or practitioner(s), such as a confirmation or rejection.",
+         :keys {:appointment {:confirms #{zen.fhir/Reference
+                                          hl7-fhir-r4b-core.Reference/schema},
+                              :fhir/flags #{:SU},
+                              :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Appointment/schema}},
+                              :zen/desc "Appointment this response relates to"},
+                :_end {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :start {:confirms #{hl7-fhir-r4b-core.instant/schema},
+                        :zen/desc "Time from appointment, or requested new start time"},
+                :participantStatus {:confirms #{hl7-fhir-r4b-core.code/schema},
+                                    :fhir/flags #{:SU :?!},
+                                    :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.participationstatus/value-set,
+                                                         :strength :required},
+                                    :zen/desc "accepted | declined | tentative | needs-action"},
+                :participantType {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.encounter-participant-type/value-set,
+                                                               :strength :extensible},
+                                          :zen/desc "Role of participant in the appointment"}},
+                :comment {:confirms #{hl7-fhir-r4b-core.string/schema},
+                          :zen/desc "Additional comments"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "External Ids for this item"}},
+                :_participantStatus {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :end {:confirms #{hl7-fhir-r4b-core.instant/schema},
+                      :zen/desc "Time from appointment, or requested new end time"},
+                :_start {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :_comment {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :actor {:confirms #{zen.fhir/Reference
+                                    hl7-fhir-r4b-core.Reference/schema},
+                        :fhir/flags #{:SU},
+                        :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                       hl7-fhir-r4b-core.PractitionerRole/schema
+                                                       hl7-fhir-r4b-core.Patient/schema
+                                                       hl7-fhir-r4b-core.HealthcareService/schema
+                                                       hl7-fhir-r4b-core.Device/schema
+                                                       hl7-fhir-r4b-core.Location/schema
+                                                       hl7-fhir-r4b-core.Practitioner/schema}},
+                        :zen/desc "Person, Location, HealthcareService, or Device"}},
+         :zen.fhir/type "AppointmentResponse"}}

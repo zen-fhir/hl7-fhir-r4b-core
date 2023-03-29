@@ -1,0 +1,12 @@
+{ns hl7-fhir-r4b-core.structuredefinition-normative-version,
+ import #{zen.fhir
+          hl7-fhir-r4b-core.value-set.FHIR-version
+          hl7-fhir-r4b-core.code},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "If this StructureDefinition is normative, which was the first normative version.",
+         :zen.fhir/type "code",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/structuredefinition-normative-version",
+         :zen.fhir/version "0.6.20-2",
+         :confirms #{hl7-fhir-r4b-core.code/schema},
+         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.FHIR-version/value-set,
+                              :strength :required}}}

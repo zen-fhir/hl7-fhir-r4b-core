@@ -1,0 +1,761 @@
+{ns hl7-fhir-r4b-core.Contract,
+ import #{hl7-fhir-r4b-core.value-set.contract-security-category
+          hl7-fhir-r4b-core.value-set.contract-signer-type
+          hl7-fhir-r4b-core.value-set.contract-publicationstatus
+          hl7-fhir-r4b-core.value-set.contract-definition-type
+          hl7-fhir-r4b-core.value-set.asset-availability
+          hl7-fhir-r4b-core.Period
+          hl7-fhir-r4b-core.Group
+          hl7-fhir-r4b-core.DomainResource
+          hl7-fhir-r4b-core.value-set.contract-status
+          hl7-fhir-r4b-core.value-set.provenance-participant-type
+          zen.fhir
+          hl7-fhir-r4b-core.value-set.contract-decision-mode
+          hl7-fhir-r4b-core.value-set.contract-content-derivative
+          hl7-fhir-r4b-core.boolean
+          hl7-fhir-r4b-core.value-set.contract-assetcontext
+          hl7-fhir-r4b-core.value-set.contract-scope
+          hl7-fhir-r4b-core.Money
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Condition
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.date
+          hl7-fhir-r4b-core.Patient
+          hl7-fhir-r4b-core.Timing
+          hl7-fhir-r4b-core.DocumentReference
+          hl7-fhir-r4b-core.Location
+          hl7-fhir-r4b-core.value-set.contract-security-classification
+          hl7-fhir-r4b-core.markdown
+          hl7-fhir-r4b-core.Encounter
+          hl7-fhir-r4b-core.CareTeam
+          hl7-fhir-r4b-core.string
+          hl7-fhir-r4b-core.Observation
+          hl7-fhir-r4b-core.Substance
+          hl7-fhir-r4b-core.BackboneElement
+          hl7-fhir-r4b-core.Practitioner
+          hl7-fhir-r4b-core.Contract
+          hl7-fhir-r4b-core.Organization
+          hl7-fhir-r4b-core.Signature
+          hl7-fhir-r4b-core.decimal
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.integer
+          hl7-fhir-r4b-core.value-set.consent-content-class
+          hl7-fhir-r4b-core.value-set.contract-type
+          hl7-fhir-r4b-core.Annotation
+          hl7-fhir-r4b-core.EpisodeOfCare
+          hl7-fhir-r4b-core.Attachment
+          hl7-fhir-r4b-core.unsignedInt
+          hl7-fhir-r4b-core.value-set.contract-assetscope
+          hl7-fhir-r4b-core.value-set.contract-security-control
+          hl7-fhir-r4b-core.value-set.contract-assettype
+          hl7-fhir-r4b-core.value-set.contract-actorrole
+          hl7-fhir-r4b-core.uri
+          hl7-fhir-r4b-core.value-set.contract-subtype
+          hl7-fhir-r4b-core.Composition
+          hl7-fhir-r4b-core.Provenance
+          hl7-fhir-r4b-core.value-set.contract-legalstate
+          hl7-fhir-r4b-core.SimpleQuantity
+          hl7-fhir-r4b-core.Coding
+          hl7-fhir-r4b-core.value-set.contract-action
+          hl7-fhir-r4b-core.Device
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.value-set.contract-assetsubtype
+          hl7-fhir-r4b-core.QuestionnaireResponse
+          hl7-fhir-r4b-core.DiagnosticReport
+          hl7-fhir-r4b-core.dateTime
+          hl7-fhir-r4b-core.value-set.contract-party-role
+          hl7-fhir-r4b-core.Questionnaire
+          hl7-fhir-r4b-core.value-set.contract-actionstatus
+          hl7-fhir-r4b-core.value-set.contract-term-type
+          hl7-fhir-r4b-core.Quantity
+          hl7-fhir-r4b-core.value-set.provenance-participant-role
+          hl7-fhir-r4b-core.PractitionerRole
+          hl7-fhir-r4b-core.Element
+          hl7-fhir-r4b-core.value-set.contract-definition-subtype
+          hl7-fhir-r4b-core.value-set.contract-expiration-type
+          hl7-fhir-r4b-core.RelatedPerson
+          hl7-fhir-r4b-core.value-set.contract-term-subtype
+          hl7-fhir-r4b-core.time},
+ schema {:zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen/desc "Legally enforceable, formally recorded unilateral or bilateral directive i.e., a policy or agreement.",
+         :zen.fhir/type "Contract",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Contract",
+         :zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :type zen/map,
+         :keys {:_issued {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :instantiatesCanonical {:confirms #{zen.fhir/Reference
+                                                    hl7-fhir-r4b-core.Reference/schema},
+                                        :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Contract/schema}},
+                                        :zen/desc "Source Contract Definition"},
+                :instantiatesUri {:confirms #{hl7-fhir-r4b-core.uri/schema},
+                                  :zen/desc "External Contract Definition"},
+                :site {:type zen/vector,
+                       :every {:confirms #{zen.fhir/Reference
+                                           hl7-fhir-r4b-core.Reference/schema},
+                               :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Location/schema}},
+                               :zen/desc "Specific Location"}},
+                :relevantHistory {:type zen/vector,
+                                  :every {:confirms #{zen.fhir/Reference
+                                                      hl7-fhir-r4b-core.Reference/schema},
+                                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Provenance/schema}},
+                                          :zen/desc "Key event in Contract History"}},
+                :supportingInfo {:type zen/vector,
+                                 :every {:confirms #{zen.fhir/Reference
+                                                     hl7-fhir-r4b-core.Reference/schema},
+                                         :zen.fhir/reference {:refers #{}},
+                                         :zen/desc "Extra Information"}},
+                :applies {:confirms #{hl7-fhir-r4b-core.Period/schema},
+                          :fhir/flags #{:SU},
+                          :zen/desc "Effective time"},
+                :name {:confirms #{hl7-fhir-r4b-core.string/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Computer friendly designation"},
+                :authority {:type zen/vector,
+                            :every {:confirms #{zen.fhir/Reference
+                                                hl7-fhir-r4b-core.Reference/schema},
+                                    :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Organization/schema}},
+                                    :zen/desc "Authority under which this Contract has standing"}},
+                :rule {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                               :type zen/map,
+                               :keys {:content {:fhir/polymorphic true,
+                                                :type zen/map,
+                                                :exclusive-keys #{#{:Attachment
+                                                                    :Reference}},
+                                                :keys {:Attachment {:confirms #{hl7-fhir-r4b-core.Attachment/schema}},
+                                                       :Reference {:confirms #{zen.fhir/Reference
+                                                                               hl7-fhir-r4b-core.Reference/schema},
+                                                                   :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.DocumentReference/schema}}}},
+                                                :zen/desc "Computable Contract Rules"}},
+                               :require #{:content},
+                               :zen/desc "Computable Contract Language"}},
+                :_status {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :type {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-type/value-set,
+                                            :strength :example},
+                       :zen/desc "Legal instrument category"},
+                :legal {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                :type zen/map,
+                                :keys {:content {:fhir/polymorphic true,
+                                                 :type zen/map,
+                                                 :exclusive-keys #{#{:Attachment
+                                                                     :Reference}},
+                                                 :keys {:Attachment {:confirms #{hl7-fhir-r4b-core.Attachment/schema}},
+                                                        :Reference {:confirms #{zen.fhir/Reference
+                                                                                hl7-fhir-r4b-core.Reference/schema},
+                                                                    :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.QuestionnaireResponse/schema
+                                                                                                   hl7-fhir-r4b-core.Composition/schema
+                                                                                                   hl7-fhir-r4b-core.DocumentReference/schema}}}},
+                                                 :zen/desc "Contract Legal Text"}},
+                                :require #{:content},
+                                :zen/desc "Contract Legal Language"}},
+                :contentDerivative {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                    :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-content-derivative/value-set,
+                                                         :strength :example},
+                                    :zen/desc "Content derived from the basal information"},
+                :topic {:fhir/polymorphic true,
+                        :type zen/map,
+                        :exclusive-keys #{#{:CodeableConcept
+                                            :Reference}},
+                        :keys {:CodeableConcept {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema}},
+                               :Reference {:confirms #{zen.fhir/Reference
+                                                       hl7-fhir-r4b-core.Reference/schema},
+                                           :zen.fhir/reference {:refers #{}}}},
+                        :zen/desc "Focus of contract interest"},
+                :legalState {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                             :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-legalstate/value-set,
+                                                  :strength :extensible},
+                             :zen/desc "Negotiation status"},
+                :contentDefinition {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:publisher {:confirms #{zen.fhir/Reference
+                                                                   hl7-fhir-r4b-core.Reference/schema},
+                                                       :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.PractitionerRole/schema
+                                                                                      hl7-fhir-r4b-core.Organization/schema
+                                                                                      hl7-fhir-r4b-core.Practitioner/schema}},
+                                                       :zen/desc "Publisher Entity"},
+                                           :copyright {:confirms #{hl7-fhir-r4b-core.markdown/schema},
+                                                       :zen/desc "Publication Ownership"},
+                                           :type {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                  :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-definition-type/value-set,
+                                                                       :strength :example},
+                                                  :zen/desc "Content structure and use"},
+                                           :_publicationStatus {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                           :_publicationDate {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                           :publicationStatus {:confirms #{hl7-fhir-r4b-core.code/schema},
+                                                               :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-publicationstatus/value-set,
+                                                                                    :strength :required},
+                                                               :zen/desc "amended | appended | cancelled | disputed | entered-in-error | executable | executed | negotiable | offered | policy | rejected | renewed | revoked | resolved | terminated"},
+                                           :_copyright {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                           :subType {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                     :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-definition-subtype/value-set,
+                                                                          :strength :example},
+                                                     :zen/desc "Detailed Content Type Definition"},
+                                           :publicationDate {:confirms #{hl7-fhir-r4b-core.dateTime/schema},
+                                                             :zen/desc "When published"}},
+                                    :require #{:type
+                                               :publicationStatus},
+                                    :zen/desc "Contract precursor content"},
+                :scope {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                        :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-scope/value-set,
+                                             :strength :example},
+                        :zen/desc "Range of Legal Concerns"},
+                :title {:confirms #{hl7-fhir-r4b-core.string/schema},
+                        :fhir/flags #{:SU},
+                        :zen/desc "Human Friendly name"},
+                :signer {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                 :type zen/map,
+                                 :keys {:type {:confirms #{hl7-fhir-r4b-core.Coding/schema},
+                                               :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-signer-type/value-set,
+                                                                    :strength :preferred},
+                                               :zen/desc "Contract Signatory Role"},
+                                        :party {:confirms #{zen.fhir/Reference
+                                                            hl7-fhir-r4b-core.Reference/schema},
+                                                :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                                               hl7-fhir-r4b-core.PractitionerRole/schema
+                                                                               hl7-fhir-r4b-core.Patient/schema
+                                                                               hl7-fhir-r4b-core.Organization/schema
+                                                                               hl7-fhir-r4b-core.Practitioner/schema}},
+                                                :zen/desc "Contract Signatory Party"},
+                                        :signature {:type zen/vector,
+                                                    :every {:confirms #{hl7-fhir-r4b-core.Signature/schema},
+                                                            :zen/desc "Contract Documentation Signature"},
+                                                    :minItems 1}},
+                                 :require #{:party :signature :type},
+                                 :zen/desc "Contract Signatory"}},
+                :author {:confirms #{zen.fhir/Reference
+                                     hl7-fhir-r4b-core.Reference/schema},
+                         :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.PractitionerRole/schema
+                                                        hl7-fhir-r4b-core.Patient/schema
+                                                        hl7-fhir-r4b-core.Organization/schema
+                                                        hl7-fhir-r4b-core.Practitioner/schema}},
+                         :zen/desc "Source of Contract"},
+                :term {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r4b-core.Contract/term-schema}}},
+                :friendly {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                   :type zen/map,
+                                   :keys {:content {:fhir/polymorphic true,
+                                                    :type zen/map,
+                                                    :exclusive-keys #{#{:Attachment
+                                                                        :Reference}},
+                                                    :keys {:Attachment {:confirms #{hl7-fhir-r4b-core.Attachment/schema}},
+                                                           :Reference {:confirms #{zen.fhir/Reference
+                                                                                   hl7-fhir-r4b-core.Reference/schema},
+                                                                       :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.QuestionnaireResponse/schema
+                                                                                                      hl7-fhir-r4b-core.Composition/schema
+                                                                                                      hl7-fhir-r4b-core.DocumentReference/schema}}}},
+                                                    :zen/desc "Easily comprehended representation of this Contract"}},
+                                   :require #{:content},
+                                   :zen/desc "Contract Friendly Language"}},
+                :alias {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                :zen/desc "Acronym or short name"}},
+                :status {:confirms #{hl7-fhir-r4b-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-status/value-set,
+                                              :strength :required},
+                         :zen/desc "amended | appended | cancelled | disputed | entered-in-error | executable | executed | negotiable | offered | policy | rejected | renewed | revoked | resolved | terminated"},
+                :subtitle {:confirms #{hl7-fhir-r4b-core.string/schema},
+                           :zen/desc "Subordinate Friendly name"},
+                :_name {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :url {:confirms #{hl7-fhir-r4b-core.uri/schema},
+                      :zen/desc "Basal definition"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Contract number"}},
+                :_subtitle {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :expirationType {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                 :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-expiration-type/value-set,
+                                                      :strength :example},
+                                 :zen/desc "Contract cessation cause"},
+                :issued {:confirms #{hl7-fhir-r4b-core.dateTime/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "When this Contract was issued"},
+                :_title {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :domain {:type zen/vector,
+                         :every {:confirms #{zen.fhir/Reference
+                                             hl7-fhir-r4b-core.Reference/schema},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Location/schema}},
+                                 :zen/desc "A sphere of control governed by an authoritative jurisdiction, organization, or person"}},
+                :subType {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-subtype/value-set,
+                                                       :strength :example},
+                                  :zen/desc "Subtype within the context of type"}},
+                :_alias {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                :version {:confirms #{hl7-fhir-r4b-core.string/schema},
+                          :fhir/flags #{:SU},
+                          :zen/desc "Business edition"},
+                :_version {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :subject {:type zen/vector,
+                          :every {:confirms #{zen.fhir/Reference
+                                              hl7-fhir-r4b-core.Reference/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/reference {:refers #{}},
+                                  :zen/desc "Contract Target Entity"}},
+                :_url {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :legallyBinding {:fhir/polymorphic true,
+                                 :type zen/map,
+                                 :exclusive-keys #{#{:Attachment
+                                                     :Reference}},
+                                 :keys {:Attachment {:confirms #{hl7-fhir-r4b-core.Attachment/schema}},
+                                        :Reference {:confirms #{zen.fhir/Reference
+                                                                hl7-fhir-r4b-core.Reference/schema},
+                                                    :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.QuestionnaireResponse/schema
+                                                                                   hl7-fhir-r4b-core.Contract/schema
+                                                                                   hl7-fhir-r4b-core.Composition/schema
+                                                                                   hl7-fhir-r4b-core.DocumentReference/schema}}}},
+                                 :zen/desc "Binding Contract"},
+                :_instantiatesUri {:confirms #{hl7-fhir-r4b-core.Element/schema}}}},
+ term-offer-answer-schema {:zen/tags #{zen/schema
+                                       zen.fhir/structure-schema},
+                           :zen.fhir/version "0.6.20-2",
+                           :confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                           :type zen/map,
+                           :keys {:value {:fhir/polymorphic true,
+                                          :type zen/map,
+                                          :exclusive-keys #{#{:date
+                                                              :time
+                                                              :string
+                                                              :dateTime
+                                                              :integer
+                                                              :decimal
+                                                              :Attachment
+                                                              :Coding
+                                                              :uri
+                                                              :Quantity
+                                                              :boolean
+                                                              :Reference}},
+                                          :keys {:_decimal {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                 :date {:confirms #{hl7-fhir-r4b-core.date/schema}},
+                                                 :_uri {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                 :_date {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                 :_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                 :time {:confirms #{hl7-fhir-r4b-core.time/schema}},
+                                                 :string {:confirms #{hl7-fhir-r4b-core.string/schema}},
+                                                 :dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                                                 :_time {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                 :integer {:confirms #{hl7-fhir-r4b-core.integer/schema}},
+                                                 :_boolean {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                 :decimal {:confirms #{hl7-fhir-r4b-core.decimal/schema}},
+                                                 :Attachment {:confirms #{hl7-fhir-r4b-core.Attachment/schema}},
+                                                 :Coding {:confirms #{hl7-fhir-r4b-core.Coding/schema}},
+                                                 :_integer {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                 :uri {:confirms #{hl7-fhir-r4b-core.uri/schema}},
+                                                 :Quantity {:confirms #{hl7-fhir-r4b-core.Quantity/schema}},
+                                                 :boolean {:confirms #{hl7-fhir-r4b-core.boolean/schema}},
+                                                 :_string {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                 :Reference {:confirms #{zen.fhir/Reference
+                                                                         hl7-fhir-r4b-core.Reference/schema},
+                                                             :zen.fhir/reference {:refers #{}}}},
+                                          :zen/desc "The actual answer response"}},
+                           :require #{:value},
+                           :zen/desc "Response to offer text"},
+ term-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+              :zen.fhir/version "0.6.20-2",
+              :confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+              :type zen/map,
+              :keys {:_issued {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                     :group {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Contract/term-schema},
+                                     :zen/desc "Nested Contract Term Group"}},
+                     :applies {:confirms #{hl7-fhir-r4b-core.Period/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "Contract Term Effective Time"},
+                     :offer {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                             :type zen/map,
+                             :keys {:party {:type zen/vector,
+                                            :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                                    :type zen/map,
+                                                    :keys {:reference {:type zen/vector,
+                                                                       :every {:confirms #{zen.fhir/Reference
+                                                                                           hl7-fhir-r4b-core.Reference/schema},
+                                                                               :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                                                                              hl7-fhir-r4b-core.Group/schema
+                                                                                                              hl7-fhir-r4b-core.PractitionerRole/schema
+                                                                                                              hl7-fhir-r4b-core.Patient/schema
+                                                                                                              hl7-fhir-r4b-core.Organization/schema
+                                                                                                              hl7-fhir-r4b-core.Device/schema
+                                                                                                              hl7-fhir-r4b-core.Practitioner/schema}},
+                                                                               :zen/desc "Referenced entity"},
+                                                                       :minItems 1},
+                                                           :role {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                                  :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-party-role/value-set,
+                                                                                       :strength :example},
+                                                                  :zen/desc "Participant engagement type"}},
+                                                    :require #{:role
+                                                               :reference},
+                                                    :zen/desc "Offer Recipient"}},
+                                    :_securityLabelNumber {:type zen/vector,
+                                                           :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                    :linkId {:type zen/vector,
+                                             :every {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                     :zen/desc "Pointer to text"}},
+                                    :decisionMode {:type zen/vector,
+                                                   :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                           :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-decision-mode/value-set,
+                                                                                :strength :example},
+                                                           :zen/desc "How decision is conveyed"}},
+                                    :type {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                           :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-term-type/value-set,
+                                                                :strength :example},
+                                           :zen/desc "Contract Offer Type or Form"},
+                                    :topic {:confirms #{zen.fhir/Reference
+                                                        hl7-fhir-r4b-core.Reference/schema},
+                                            :fhir/flags #{:SU},
+                                            :zen.fhir/reference {:refers #{}},
+                                            :zen/desc "Negotiable offer asset"},
+                                    :_linkId {:type zen/vector,
+                                              :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                    :securityLabelNumber {:type zen/vector,
+                                                          :every {:confirms #{hl7-fhir-r4b-core.unsignedInt/schema},
+                                                                  :zen/desc "Offer restriction numbers"}},
+                                    :answer {:type zen/vector,
+                                             :every {:confirms #{hl7-fhir-r4b-core.Contract/term-offer-answer-schema}}},
+                                    :identifier {:type zen/vector,
+                                                 :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                                         :zen/desc "Offer business ID"}},
+                                    :_text {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                    :decision {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                               :zen/desc "Accepting party choice"},
+                                    :text {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                           :zen/desc "Human readable offer text"}},
+                             :zen/desc "Context of the Contract term"},
+                     :type {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                            :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-term-type/value-set,
+                                                 :strength :example},
+                            :zen/desc "Contract Term Type or Form"},
+                     :topic {:fhir/polymorphic true,
+                             :type zen/map,
+                             :exclusive-keys #{#{:CodeableConcept
+                                                 :Reference}},
+                             :keys {:CodeableConcept {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema}},
+                                    :Reference {:confirms #{zen.fhir/Reference
+                                                            hl7-fhir-r4b-core.Reference/schema},
+                                                :zen.fhir/reference {:refers #{}}}},
+                             :zen/desc "Term Concern"},
+                     :identifier {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Contract Term Number"},
+                     :_text {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                     :action {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                      :type zen/map,
+                                      :keys {:requesterLinkId {:type zen/vector,
+                                                               :every {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                                       :zen/desc "Pointer to specific item"}},
+                                             :performerType {:type zen/vector,
+                                                             :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                                     :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.provenance-participant-type/value-set,
+                                                                                          :strength :example},
+                                                                     :zen/desc "Kind of service performer"}},
+                                             :_securityLabelNumber {:type zen/vector,
+                                                                    :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                             :linkId {:type zen/vector,
+                                                      :every {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                              :zen/desc "Pointer to specific item"}},
+                                             :performerRole {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                             :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.provenance-participant-role/value-set,
+                                                                                  :strength :example},
+                                                             :zen/desc "Competency of the performer"},
+                                             :_contextLinkId {:type zen/vector,
+                                                              :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                             :_performerLinkId {:type zen/vector,
+                                                                :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                             :_reasonLinkId {:type zen/vector,
+                                                             :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                             :reasonLinkId {:type zen/vector,
+                                                            :every {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                                    :zen/desc "Pointer to specific item"}},
+                                             :_doNotPerform {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                             :reasonCode {:type zen/vector,
+                                                          :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                                  :zen/desc "Why is action (not) needed?"}},
+                                             :type {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                    :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-action/value-set,
+                                                                         :strength :example},
+                                                    :zen/desc "Type or form of the action"},
+                                             :_linkId {:type zen/vector,
+                                                       :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                             :note {:type zen/vector,
+                                                    :every {:confirms #{hl7-fhir-r4b-core.Annotation/schema},
+                                                            :zen/desc "Comments about the action"}},
+                                             :_requesterLinkId {:type zen/vector,
+                                                                :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                             :reason {:type zen/vector,
+                                                      :every {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                              :zen/desc "Why action is to be performed"}},
+                                             :requester {:type zen/vector,
+                                                         :every {:confirms #{zen.fhir/Reference
+                                                                             hl7-fhir-r4b-core.Reference/schema},
+                                                                 :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                                                                hl7-fhir-r4b-core.Group/schema
+                                                                                                hl7-fhir-r4b-core.PractitionerRole/schema
+                                                                                                hl7-fhir-r4b-core.Patient/schema
+                                                                                                hl7-fhir-r4b-core.Organization/schema
+                                                                                                hl7-fhir-r4b-core.Device/schema
+                                                                                                hl7-fhir-r4b-core.Practitioner/schema}},
+                                                                 :zen/desc "Who asked for action"}},
+                                             :securityLabelNumber {:type zen/vector,
+                                                                   :every {:confirms #{hl7-fhir-r4b-core.unsignedInt/schema},
+                                                                           :zen/desc "Action restriction numbers"}},
+                                             :status {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                      :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-actionstatus/value-set,
+                                                                           :strength :example},
+                                                      :zen/desc "State of the action"},
+                                             :doNotPerform {:confirms #{hl7-fhir-r4b-core.boolean/schema},
+                                                            :fhir/flags #{:?!},
+                                                            :zen/desc "True if the term prohibits the  action"},
+                                             :_reason {:type zen/vector,
+                                                       :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                             :context {:confirms #{zen.fhir/Reference
+                                                                   hl7-fhir-r4b-core.Reference/schema},
+                                                       :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Encounter/schema
+                                                                                      hl7-fhir-r4b-core.EpisodeOfCare/schema}},
+                                                       :zen/desc "Episode associated with action"},
+                                             :intent {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                      :zen/desc "Purpose for the Contract Term Action"},
+                                             :performerLinkId {:type zen/vector,
+                                                               :every {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                                       :zen/desc "Pointer to specific item"}},
+                                             :subject {:type zen/vector,
+                                                       :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                                               :type zen/map,
+                                                               :keys {:reference {:type zen/vector,
+                                                                                  :every {:confirms #{zen.fhir/Reference
+                                                                                                      hl7-fhir-r4b-core.Reference/schema},
+                                                                                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                                                                                         hl7-fhir-r4b-core.Group/schema
+                                                                                                                         hl7-fhir-r4b-core.PractitionerRole/schema
+                                                                                                                         hl7-fhir-r4b-core.Patient/schema
+                                                                                                                         hl7-fhir-r4b-core.Organization/schema
+                                                                                                                         hl7-fhir-r4b-core.Device/schema
+                                                                                                                         hl7-fhir-r4b-core.Practitioner/schema}},
+                                                                                          :zen/desc "Entity of the action"},
+                                                                                  :minItems 1},
+                                                                      :role {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                                             :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-actorrole/value-set,
+                                                                                                  :strength :example},
+                                                                             :zen/desc "Role type of the agent"}},
+                                                               :require #{:reference},
+                                                               :zen/desc "Entity of the action"}},
+                                             :occurrence {:fhir/polymorphic true,
+                                                          :type zen/map,
+                                                          :exclusive-keys #{#{:dateTime
+                                                                              :Period
+                                                                              :Timing}},
+                                                          :keys {:dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                                                                 :_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                                 :Period {:confirms #{hl7-fhir-r4b-core.Period/schema}},
+                                                                 :Timing {:confirms #{hl7-fhir-r4b-core.Timing/schema}}},
+                                                          :zen/desc "When action happens"},
+                                             :performer {:confirms #{zen.fhir/Reference
+                                                                     hl7-fhir-r4b-core.Reference/schema},
+                                                         :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                                                        hl7-fhir-r4b-core.CareTeam/schema
+                                                                                        hl7-fhir-r4b-core.PractitionerRole/schema
+                                                                                        hl7-fhir-r4b-core.Patient/schema
+                                                                                        hl7-fhir-r4b-core.Organization/schema
+                                                                                        hl7-fhir-r4b-core.Device/schema
+                                                                                        hl7-fhir-r4b-core.Location/schema
+                                                                                        hl7-fhir-r4b-core.Practitioner/schema
+                                                                                        hl7-fhir-r4b-core.Substance/schema}},
+                                                         :zen/desc "Actor that wil execute (or not) the action"},
+                                             :contextLinkId {:type zen/vector,
+                                                             :every {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                                     :zen/desc "Pointer to specific item"}},
+                                             :reasonReference {:type zen/vector,
+                                                               :every {:confirms #{zen.fhir/Reference
+                                                                                   hl7-fhir-r4b-core.Reference/schema},
+                                                                       :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Condition/schema
+                                                                                                      hl7-fhir-r4b-core.QuestionnaireResponse/schema
+                                                                                                      hl7-fhir-r4b-core.Questionnaire/schema
+                                                                                                      hl7-fhir-r4b-core.Observation/schema
+                                                                                                      hl7-fhir-r4b-core.DocumentReference/schema
+                                                                                                      hl7-fhir-r4b-core.DiagnosticReport/schema}},
+                                                                       :zen/desc "Why is action (not) needed?"}}},
+                                      :require #{:type
+                                                 :status
+                                                 :intent},
+                                      :zen/desc "Entity being ascribed responsibility"}},
+                     :issued {:confirms #{hl7-fhir-r4b-core.dateTime/schema},
+                              :fhir/flags #{:SU},
+                              :zen/desc "Contract Term Issue Date Time"},
+                     :subType {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                               :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-term-subtype/value-set,
+                                                    :strength :example},
+                               :zen/desc "Contract Term Type specific classification"},
+                     :securityLabel {:type zen/vector,
+                                     :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                             :type zen/map,
+                                             :keys {:number {:type zen/vector,
+                                                             :every {:confirms #{hl7-fhir-r4b-core.unsignedInt/schema},
+                                                                     :zen/desc "Link to Security Labels"}},
+                                                    :_number {:type zen/vector,
+                                                              :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                                    :classification {:confirms #{hl7-fhir-r4b-core.Coding/schema},
+                                                                     :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-security-classification/value-set,
+                                                                                          :strength :example},
+                                                                     :zen/desc "Confidentiality Protection"},
+                                                    :category {:type zen/vector,
+                                                               :every {:confirms #{hl7-fhir-r4b-core.Coding/schema},
+                                                                       :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-security-category/value-set,
+                                                                                            :strength :example},
+                                                                       :zen/desc "Applicable Policy"}},
+                                                    :control {:type zen/vector,
+                                                              :every {:confirms #{hl7-fhir-r4b-core.Coding/schema},
+                                                                      :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-security-control/value-set,
+                                                                                           :strength :example},
+                                                                      :zen/desc "Handling Instructions"}}},
+                                             :require #{:classification},
+                                             :zen/desc "Protection for the Term"}},
+                     :asset {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                     :type zen/map,
+                                     :keys {:periodType {:type zen/vector,
+                                                         :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                                 :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.asset-availability/value-set,
+                                                                                      :strength :example},
+                                                                 :zen/desc "Asset availability types"}},
+                                            :_securityLabelNumber {:type zen/vector,
+                                                                   :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                            :usePeriod {:type zen/vector,
+                                                        :every {:confirms #{hl7-fhir-r4b-core.Period/schema},
+                                                                :zen/desc "Time period"}},
+                                            :linkId {:type zen/vector,
+                                                     :every {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                             :zen/desc "Pointer to asset text"}},
+                                            :relationship {:confirms #{hl7-fhir-r4b-core.Coding/schema},
+                                                           :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.consent-content-class/value-set,
+                                                                                :strength :extensible},
+                                                           :zen/desc "Kinship of the asset"},
+                                            :type {:type zen/vector,
+                                                   :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                           :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-assettype/value-set,
+                                                                                :strength :example},
+                                                           :zen/desc "Asset category"}},
+                                            :_linkId {:type zen/vector,
+                                                      :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                            :scope {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                    :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-assetscope/value-set,
+                                                                         :strength :example},
+                                                    :zen/desc "Range of asset"},
+                                            :securityLabelNumber {:type zen/vector,
+                                                                  :every {:confirms #{hl7-fhir-r4b-core.unsignedInt/schema},
+                                                                          :zen/desc "Asset restriction numbers"}},
+                                            :_condition {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                            :typeReference {:type zen/vector,
+                                                            :every {:confirms #{zen.fhir/Reference
+                                                                                hl7-fhir-r4b-core.Reference/schema},
+                                                                    :zen.fhir/reference {:refers #{}},
+                                                                    :zen/desc "Associated entities"}},
+                                            :condition {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                        :zen/desc "Quality desctiption of asset"},
+                                            :answer {:type zen/vector,
+                                                     :every {:confirms #{hl7-fhir-r4b-core.Contract/term-offer-answer-schema},
+                                                             :zen/desc "Response to assets"}},
+                                            :_text {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                            :context {:type zen/vector,
+                                                      :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                                              :type zen/map,
+                                                              :keys {:reference {:confirms #{zen.fhir/Reference
+                                                                                             hl7-fhir-r4b-core.Reference/schema},
+                                                                                 :zen.fhir/reference {:refers #{}},
+                                                                                 :zen/desc "Creator,custodian or owner"},
+                                                                     :code {:type zen/vector,
+                                                                            :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                                                    :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-assetcontext/value-set,
+                                                                                                         :strength :example},
+                                                                                    :zen/desc "Codeable asset context"}},
+                                                                     :text {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                                            :zen/desc "Context description"},
+                                                                     :_text {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                                              :zen/desc "Circumstance of the asset"}},
+                                            :period {:type zen/vector,
+                                                     :every {:confirms #{hl7-fhir-r4b-core.Period/schema},
+                                                             :zen/desc "Time period of the asset"}},
+                                            :valuedItem {:type zen/vector,
+                                                         :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                                                 :type zen/map,
+                                                                 :keys {:_securityLabelNumber {:type zen/vector,
+                                                                                               :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                                                        :linkId {:type zen/vector,
+                                                                                 :every {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                                                         :zen/desc "Pointer to specific item"}},
+                                                                        :_effectiveTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                                        :payment {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                                                  :zen/desc "Terms of valuation"},
+                                                                        :_factor {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                                        :recipient {:confirms #{zen.fhir/Reference
+                                                                                                hl7-fhir-r4b-core.Reference/schema},
+                                                                                    :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                                                                                   hl7-fhir-r4b-core.PractitionerRole/schema
+                                                                                                                   hl7-fhir-r4b-core.Patient/schema
+                                                                                                                   hl7-fhir-r4b-core.Organization/schema
+                                                                                                                   hl7-fhir-r4b-core.Practitioner/schema}},
+                                                                                    :zen/desc "Who will receive payment"},
+                                                                        :net {:confirms #{hl7-fhir-r4b-core.Money/schema},
+                                                                              :zen/desc "Total Contract Valued Item Value"},
+                                                                        :points {:confirms #{hl7-fhir-r4b-core.decimal/schema},
+                                                                                 :zen/desc "Contract Valued Item Difficulty Scaling Factor"},
+                                                                        :_linkId {:type zen/vector,
+                                                                                  :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                                                        :responsible {:confirms #{zen.fhir/Reference
+                                                                                                  hl7-fhir-r4b-core.Reference/schema},
+                                                                                      :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                                                                                     hl7-fhir-r4b-core.PractitionerRole/schema
+                                                                                                                     hl7-fhir-r4b-core.Patient/schema
+                                                                                                                     hl7-fhir-r4b-core.Organization/schema
+                                                                                                                     hl7-fhir-r4b-core.Practitioner/schema}},
+                                                                                      :zen/desc "Who will make payment"},
+                                                                        :_points {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                                        :securityLabelNumber {:type zen/vector,
+                                                                                              :every {:confirms #{hl7-fhir-r4b-core.unsignedInt/schema},
+                                                                                                      :zen/desc "Security Labels that define affected terms"}},
+                                                                        :factor {:confirms #{hl7-fhir-r4b-core.decimal/schema},
+                                                                                 :zen/desc "Contract Valued Item Price Scaling Factor"},
+                                                                        :paymentDate {:confirms #{hl7-fhir-r4b-core.dateTime/schema},
+                                                                                      :zen/desc "When payment is due"},
+                                                                        :identifier {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                                                                     :zen/desc "Contract Valued Item Number"},
+                                                                        :_paymentDate {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                                        :effectiveTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema},
+                                                                                        :zen/desc "Contract Valued Item Effective Tiem"},
+                                                                        :quantity {:confirms #{hl7-fhir-r4b-core.SimpleQuantity/schema
+                                                                                               hl7-fhir-r4b-core.Quantity/schema},
+                                                                                   :zen/desc "Count of Contract Valued Items"},
+                                                                        :entity {:fhir/polymorphic true,
+                                                                                 :type zen/map,
+                                                                                 :exclusive-keys #{#{:CodeableConcept
+                                                                                                     :Reference}},
+                                                                                 :keys {:CodeableConcept {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema}},
+                                                                                        :Reference {:confirms #{zen.fhir/Reference
+                                                                                                                hl7-fhir-r4b-core.Reference/schema},
+                                                                                                    :zen.fhir/reference {:refers #{}}}},
+                                                                                 :zen/desc "Contract Valued Item Type"},
+                                                                        :_payment {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                                        :unitPrice {:confirms #{hl7-fhir-r4b-core.Money/schema},
+                                                                                    :zen/desc "Contract Valued Item fee, charge, or cost"}},
+                                                                 :zen/desc "Contract Valued Item List"}},
+                                            :subtype {:type zen/vector,
+                                                      :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                              :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.contract-assetsubtype/value-set,
+                                                                                   :strength :example},
+                                                              :zen/desc "Asset sub-category"}},
+                                            :text {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                   :zen/desc "Asset clause or question text"}},
+                                     :zen/desc "Contract Term Asset List"}},
+                     :text {:confirms #{hl7-fhir-r4b-core.string/schema},
+                            :fhir/flags #{:SU},
+                            :zen/desc "Term Statement"}},
+              :require #{:offer},
+              :zen/desc "Contract Term List"}}

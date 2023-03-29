@@ -1,0 +1,144 @@
+{ns hl7-fhir-r4b-core.RiskAssessment,
+ import #{hl7-fhir-r4b-core.Period
+          hl7-fhir-r4b-core.Group
+          hl7-fhir-r4b-core.DomainResource
+          zen.fhir
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Condition
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.Patient
+          hl7-fhir-r4b-core.DocumentReference
+          hl7-fhir-r4b-core.Range
+          hl7-fhir-r4b-core.Encounter
+          hl7-fhir-r4b-core.value-set.observation-status
+          hl7-fhir-r4b-core.string
+          hl7-fhir-r4b-core.Observation
+          hl7-fhir-r4b-core.BackboneElement
+          hl7-fhir-r4b-core.Practitioner
+          hl7-fhir-r4b-core.decimal
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.Annotation
+          hl7-fhir-r4b-core.value-set.risk-probability
+          hl7-fhir-r4b-core.Device
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.DiagnosticReport
+          hl7-fhir-r4b-core.dateTime
+          hl7-fhir-r4b-core.PractitionerRole
+          hl7-fhir-r4b-core.Element},
+ schema {:zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/RiskAssessment",
+         :require #{:status :subject},
+         :type zen/map,
+         :zen/desc "An assessment of the likely outcome(s) for a patient or other subject as well as the likelihood of each outcome.",
+         :keys {:_mitigation {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :parent {:confirms #{zen.fhir/Reference
+                                     hl7-fhir-r4b-core.Reference/schema},
+                         :zen.fhir/reference {:refers #{}},
+                         :zen/desc "Part of this occurrence"},
+                :encounter {:confirms #{zen.fhir/Reference
+                                        hl7-fhir-r4b-core.Reference/schema},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Encounter/schema}},
+                            :zen/desc "Where was assessment performed?"},
+                :prediction {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                     :type zen/map,
+                                     :keys {:outcome {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                      :zen/desc "Possible outcome for the subject"},
+                                            :probability {:fhir/polymorphic true,
+                                                          :type zen/map,
+                                                          :exclusive-keys #{#{:Range
+                                                                              :decimal}},
+                                                          :keys {:decimal {:confirms #{hl7-fhir-r4b-core.decimal/schema}},
+                                                                 :_decimal {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                                 :Range {:confirms #{hl7-fhir-r4b-core.Range/schema}}},
+                                                          :zen/desc "Likelihood of specified outcome"},
+                                            :qualitativeRisk {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                              :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.risk-probability/value-set,
+                                                                                   :strength :example},
+                                                              :zen/desc "Likelihood of specified outcome as a qualitative value"},
+                                            :relativeRisk {:confirms #{hl7-fhir-r4b-core.decimal/schema},
+                                                           :zen/desc "Relative likelihood"},
+                                            :_relativeRisk {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                            :when {:fhir/polymorphic true,
+                                                   :type zen/map,
+                                                   :exclusive-keys #{#{:Range
+                                                                       :Period}},
+                                                   :keys {:Period {:confirms #{hl7-fhir-r4b-core.Period/schema}},
+                                                          :Range {:confirms #{hl7-fhir-r4b-core.Range/schema}}},
+                                                   :zen/desc "Timeframe or age range"},
+                                            :rationale {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                        :zen/desc "Explanation of prediction"},
+                                            :_rationale {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                     :zen/desc "Outcome predicted"}},
+                :method {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "Evaluation mechanism"},
+                :_status {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :basis {:type zen/vector,
+                        :every {:confirms #{zen.fhir/Reference
+                                            hl7-fhir-r4b-core.Reference/schema},
+                                :zen.fhir/reference {:refers #{}},
+                                :zen/desc "Information used in assessment"}},
+                :reasonCode {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                     :zen/desc "Why the assessment was necessary?"}},
+                :mitigation {:confirms #{hl7-fhir-r4b-core.string/schema},
+                             :zen/desc "How to reduce risk"},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r4b-core.Annotation/schema},
+                               :zen/desc "Comments on the risk assessment"}},
+                :status {:confirms #{hl7-fhir-r4b-core.code/schema},
+                         :fhir/flags #{:SU},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.observation-status/value-set,
+                                              :strength :required},
+                         :zen/desc "registered | preliminary | final | amended +"},
+                :condition {:confirms #{zen.fhir/Reference
+                                        hl7-fhir-r4b-core.Reference/schema},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Condition/schema}},
+                            :zen/desc "Condition assessed"},
+                :code {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Type of assessment"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Unique identifier for the assessment"}},
+                :basedOn {:confirms #{zen.fhir/Reference
+                                      hl7-fhir-r4b-core.Reference/schema},
+                          :zen.fhir/reference {:refers #{}},
+                          :zen/desc "Request fulfilled by this assessment"},
+                :subject {:confirms #{zen.fhir/Reference
+                                      hl7-fhir-r4b-core.Reference/schema},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Group/schema
+                                                         hl7-fhir-r4b-core.Patient/schema}},
+                          :zen/desc "Who/what does assessment apply to?"},
+                :occurrence {:fhir/polymorphic true,
+                             :type zen/map,
+                             :exclusive-keys #{#{:dateTime :Period}},
+                             :keys {:dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                                    :_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                    :Period {:confirms #{hl7-fhir-r4b-core.Period/schema}}},
+                             :fhir/flags #{:SU},
+                             :zen/desc "When was assessment made?"},
+                :performer {:confirms #{zen.fhir/Reference
+                                        hl7-fhir-r4b-core.Reference/schema},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.PractitionerRole/schema
+                                                           hl7-fhir-r4b-core.Device/schema
+                                                           hl7-fhir-r4b-core.Practitioner/schema}},
+                            :zen/desc "Who did assessment?"},
+                :reasonReference {:type zen/vector,
+                                  :every {:confirms #{zen.fhir/Reference
+                                                      hl7-fhir-r4b-core.Reference/schema},
+                                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Condition/schema
+                                                                         hl7-fhir-r4b-core.Observation/schema
+                                                                         hl7-fhir-r4b-core.DocumentReference/schema
+                                                                         hl7-fhir-r4b-core.DiagnosticReport/schema}},
+                                          :zen/desc "Why the assessment was necessary?"}}},
+         :zen.fhir/type "RiskAssessment"}}

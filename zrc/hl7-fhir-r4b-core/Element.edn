@@ -1,0 +1,13 @@
+{ns hl7-fhir-r4b-core.Element,
+ import #{zen.fhir hl7-fhir-r4b-core.Extension hl7-fhir-r4b-core.id},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "Base StructureDefinition for Element Type: Base definition for all elements in a resource.",
+         :zen.fhir/type "Element",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Element",
+         :zen.fhir/version "0.6.20-2",
+         :type zen/map,
+         :keys {:id {:confirms #{hl7-fhir-r4b-core.id/schema},
+                     :zen/desc "Unique id for inter-element referencing"},
+                :extension {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r4b-core.Extension/schema},
+                                    :zen/desc "Additional content defined by implementations"}}}}}

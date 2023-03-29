@@ -1,0 +1,12 @@
+{ns hl7-fhir-r4b-core.actualgroup,
+ import #{hl7-fhir-r4b-core.Group zen.fhir},
+ schema {:zen.fhir/version "0.6.20-2",
+         :confirms #{hl7-fhir-r4b-core.Group/schema zen.fhir/Resource},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/actualgroup",
+         :require #{:actual},
+         :type zen/map,
+         :zen/desc "Enforces an actual group, rather than a definitional group",
+         :keys {:actual {:const {:value true}},
+                :characteristic {:type zen/vector, :maxItems 0}},
+         :zen.fhir/type "Group"}}

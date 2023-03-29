@@ -1,0 +1,12 @@
+{ns hl7-fhir-r4b-core.cqf-qualityOfEvidence,
+ import #{zen.fhir
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.value-set.evidence-quality},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "The quality of the evidence described. The code system used specifies the quality scale used to grade this evidence source while the code specifies the actual quality score (represented as a coded value) associated with the evidence.",
+         :zen.fhir/type "CodeableConcept",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/cqf-qualityOfEvidence",
+         :zen.fhir/version "0.6.20-2",
+         :confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.evidence-quality/value-set,
+                              :strength :example}}}

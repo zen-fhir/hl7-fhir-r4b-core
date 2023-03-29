@@ -1,0 +1,16 @@
+{ns hl7-fhir-r4b-core.servicerequest-genetics,
+ import #{zen.fhir
+          hl7-fhir-r4b-core.ServiceRequest
+          hl7-fhir-r4b-core.servicerequest-geneticsItem},
+ schema {:zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen/desc "Describes how the ServiceRequest resource is used to for genetics",
+         :zen.fhir/type "ServiceRequest",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/servicerequest-genetics",
+         :zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.ServiceRequest/schema},
+         :type zen/map,
+         :keys {:Item {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r4b-core.servicerequest-geneticsItem/schema},
+                               :fhir/extensionUri "http://hl7.org/fhir/StructureDefinition/servicerequest-geneticsItem",
+                               :zen/desc "The items the orderer requested"}}}}}

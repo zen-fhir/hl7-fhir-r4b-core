@@ -1,0 +1,57 @@
+{ns hl7-fhir-r4b-core.EnrollmentResponse,
+ import #{hl7-fhir-r4b-core.DomainResource
+          zen.fhir
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.string
+          hl7-fhir-r4b-core.Practitioner
+          hl7-fhir-r4b-core.Organization
+          hl7-fhir-r4b-core.value-set.remittance-outcome
+          hl7-fhir-r4b-core.EnrollmentRequest
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.dateTime
+          hl7-fhir-r4b-core.PractitionerRole
+          hl7-fhir-r4b-core.Element
+          hl7-fhir-r4b-core.value-set.fm-status},
+ schema {:zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen/desc "This resource provides enrollment and plan details from the processing of an EnrollmentRequest resource.",
+         :zen.fhir/type "EnrollmentResponse",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/EnrollmentResponse",
+         :zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :type zen/map,
+         :keys {:_created {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :request {:confirms #{zen.fhir/Reference
+                                      hl7-fhir-r4b-core.Reference/schema},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.EnrollmentRequest/schema}},
+                          :zen/desc "Claim reference"},
+                :requestProvider {:confirms #{zen.fhir/Reference
+                                              hl7-fhir-r4b-core.Reference/schema},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.PractitionerRole/schema
+                                                                 hl7-fhir-r4b-core.Organization/schema
+                                                                 hl7-fhir-r4b-core.Practitioner/schema}},
+                                  :zen/desc "Responsible practitioner"},
+                :_disposition {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :_status {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :created {:confirms #{hl7-fhir-r4b-core.dateTime/schema},
+                          :zen/desc "Creation date"},
+                :outcome {:confirms #{hl7-fhir-r4b-core.code/schema},
+                          :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.remittance-outcome/value-set,
+                                               :strength :required},
+                          :zen/desc "queued | complete | error | partial"},
+                :organization {:confirms #{zen.fhir/Reference
+                                           hl7-fhir-r4b-core.Reference/schema},
+                               :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Organization/schema}},
+                               :zen/desc "Insurer"},
+                :_outcome {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :disposition {:confirms #{hl7-fhir-r4b-core.string/schema},
+                              :zen/desc "Disposition Message"},
+                :status {:confirms #{hl7-fhir-r4b-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.fm-status/value-set,
+                                              :strength :required},
+                         :zen/desc "active | cancelled | draft | entered-in-error"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :zen/desc "Business Identifier"}}}}}

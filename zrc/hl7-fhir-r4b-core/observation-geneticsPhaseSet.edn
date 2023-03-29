@@ -1,0 +1,19 @@
+{ns hl7-fhir-r4b-core.observation-geneticsPhaseSet,
+ import #{hl7-fhir-r4b-core.MolecularSequence
+          zen.fhir
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.uri},
+ schema {:zen.fhir/version "0.6.20-2",
+         :zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/observation-geneticsPhaseSet",
+         :require #{:MolecularSequence},
+         :type zen/map,
+         :zen/desc "Phase set information.",
+         :keys {:Id {:confirms #{hl7-fhir-r4b-core.uri/schema},
+                     :zen/desc "Phase set ID"},
+                :MolecularSequence {:type zen/vector,
+                                    :every {:confirms #{zen.fhir/Reference
+                                                        hl7-fhir-r4b-core.Reference/schema},
+                                            :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.MolecularSequence/schema}},
+                                            :zen/desc "Phase set sequence"},
+                                    :minItems 1}}}}

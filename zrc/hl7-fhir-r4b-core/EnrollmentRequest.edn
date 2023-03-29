@@ -1,0 +1,52 @@
+{ns hl7-fhir-r4b-core.EnrollmentRequest,
+ import #{hl7-fhir-r4b-core.DomainResource
+          zen.fhir
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.Patient
+          hl7-fhir-r4b-core.Practitioner
+          hl7-fhir-r4b-core.Organization
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.dateTime
+          hl7-fhir-r4b-core.PractitionerRole
+          hl7-fhir-r4b-core.Element
+          hl7-fhir-r4b-core.Coverage
+          hl7-fhir-r4b-core.value-set.fm-status},
+ schema {:zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen/desc "This resource provides the insurance enrollment details to the insurer regarding a specified coverage.",
+         :zen.fhir/type "EnrollmentRequest",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/EnrollmentRequest",
+         :zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :type zen/map,
+         :keys {:_created {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :candidate {:confirms #{zen.fhir/Reference
+                                        hl7-fhir-r4b-core.Reference/schema},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Patient/schema}},
+                            :zen/desc "The subject to be enrolled"},
+                :_status {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :coverage {:confirms #{zen.fhir/Reference
+                                       hl7-fhir-r4b-core.Reference/schema},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Coverage/schema}},
+                           :zen/desc "Insurance information"},
+                :created {:confirms #{hl7-fhir-r4b-core.dateTime/schema},
+                          :zen/desc "Creation date"},
+                :insurer {:confirms #{zen.fhir/Reference
+                                      hl7-fhir-r4b-core.Reference/schema},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Organization/schema}},
+                          :zen/desc "Target"},
+                :status {:confirms #{hl7-fhir-r4b-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.fm-status/value-set,
+                                              :strength :required},
+                         :zen/desc "active | cancelled | draft | entered-in-error"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :zen/desc "Business Identifier"}},
+                :provider {:confirms #{zen.fhir/Reference
+                                       hl7-fhir-r4b-core.Reference/schema},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.PractitionerRole/schema
+                                                          hl7-fhir-r4b-core.Organization/schema
+                                                          hl7-fhir-r4b-core.Practitioner/schema}},
+                           :zen/desc "Responsible practitioner"}}}}

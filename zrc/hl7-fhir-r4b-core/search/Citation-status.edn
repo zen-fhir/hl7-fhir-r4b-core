@@ -1,0 +1,12 @@
+{ns hl7-fhir-r4b-core.search.Citation-status,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Citation-status",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Citation-status",
+         :fhir/type "token",
+         :name "status",
+         :expr {:Citation {:knife [["status"]],
+                           :jsonpath ["$.\"status\"[*]"],
+                           :data-types #{{:type "code",
+                                          :polymorphic? false}},
+                           :template :token}}}}

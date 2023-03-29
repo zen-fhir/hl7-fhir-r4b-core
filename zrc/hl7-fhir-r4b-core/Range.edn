@@ -1,0 +1,20 @@
+{ns hl7-fhir-r4b-core.Range,
+ import #{zen.fhir
+          hl7-fhir-r4b-core.SimpleQuantity
+          hl7-fhir-r4b-core.Quantity
+          hl7-fhir-r4b-core.Element},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "Base StructureDefinition for Range Type: A set of ordered Quantities defined by a low and high limit.",
+         :zen.fhir/type "Range",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Range",
+         :zen.fhir/version "0.6.20-2",
+         :confirms #{hl7-fhir-r4b-core.Element/schema},
+         :type zen/map,
+         :keys {:low {:confirms #{hl7-fhir-r4b-core.SimpleQuantity/schema
+                                  hl7-fhir-r4b-core.Quantity/schema},
+                      :fhir/flags #{:SU},
+                      :zen/desc "Low limit"},
+                :high {:confirms #{hl7-fhir-r4b-core.SimpleQuantity/schema
+                                   hl7-fhir-r4b-core.Quantity/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "High limit"}}}}

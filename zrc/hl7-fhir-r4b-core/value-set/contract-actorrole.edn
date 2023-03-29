@@ -1,0 +1,9 @@
+{ns hl7-fhir-r4b-core.value-set.contract-actorrole,
+ import #{zen.fhir},
+ value-set {:zen/tags #{zen.fhir/value-set},
+            :zen/desc "This value set includes sample Contract Actor Role codes.",
+            :zen.fhir/version "0.6.20-2",
+            :fhir/code-systems #{{:fhir/url "http://terminology.hl7.org/CodeSystem/contractactorrole",
+                                  :zen.fhir/content :not-present}},
+            :uri "http://hl7.org/fhir/ValueSet/contract-actorrole",
+            :version "4.3.0"}}

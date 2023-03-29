@@ -1,0 +1,156 @@
+{ns hl7-fhir-r4b-core.Coverage,
+ import #{hl7-fhir-r4b-core.value-set.coverage-financial-exception
+          hl7-fhir-r4b-core.Period
+          hl7-fhir-r4b-core.DomainResource
+          zen.fhir
+          hl7-fhir-r4b-core.boolean
+          hl7-fhir-r4b-core.Money
+          hl7-fhir-r4b-core.value-set.subscriber-relationship
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.Patient
+          hl7-fhir-r4b-core.value-set.coverage-type
+          hl7-fhir-r4b-core.string
+          hl7-fhir-r4b-core.BackboneElement
+          hl7-fhir-r4b-core.positiveInt
+          hl7-fhir-r4b-core.Contract
+          hl7-fhir-r4b-core.Organization
+          hl7-fhir-r4b-core.value-set.coverage-class
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.Quantity
+          hl7-fhir-r4b-core.Element
+          hl7-fhir-r4b-core.value-set.coverage-copay-type
+          hl7-fhir-r4b-core.value-set.fm-status
+          hl7-fhir-r4b-core.RelatedPerson},
+ schema {:zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Coverage",
+         :require #{:beneficiary :payor :status},
+         :type zen/map,
+         :zen/desc "Financial instrument which may be used to reimburse or pay for health care products and services. Includes both insurance and self-payment.",
+         :keys {:_order {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :policyHolder {:confirms #{zen.fhir/Reference
+                                           hl7-fhir-r4b-core.Reference/schema},
+                               :fhir/flags #{:SU},
+                               :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                              hl7-fhir-r4b-core.Patient/schema
+                                                              hl7-fhir-r4b-core.Organization/schema}},
+                               :zen/desc "Owner of the policy"},
+                :beneficiary {:confirms #{zen.fhir/Reference
+                                          hl7-fhir-r4b-core.Reference/schema},
+                              :fhir/flags #{:SU},
+                              :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Patient/schema}},
+                              :zen/desc "Plan beneficiary"},
+                :contract {:type zen/vector,
+                           :every {:confirms #{zen.fhir/Reference
+                                               hl7-fhir-r4b-core.Reference/schema},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Contract/schema}},
+                                   :zen/desc "Contract details"}},
+                :_status {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :relationship {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                               :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.subscriber-relationship/value-set,
+                                                    :strength :extensible},
+                               :zen/desc "Beneficiary relationship to the subscriber"},
+                :type {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.coverage-type/value-set,
+                                            :strength :preferred},
+                       :zen/desc "Coverage category such as medical or accident"},
+                :costToBeneficiary {:type zen/vector,
+                                    :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                            :type zen/map,
+                                            :keys {:type {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                          :fhir/flags #{:SU},
+                                                          :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.coverage-copay-type/value-set,
+                                                                               :strength :extensible},
+                                                          :zen/desc "Cost category"},
+                                                   :value {:fhir/polymorphic true,
+                                                           :type zen/map,
+                                                           :exclusive-keys #{#{:Money
+                                                                               :Quantity}},
+                                                           :keys {:Quantity {:confirms #{hl7-fhir-r4b-core.Quantity/schema}},
+                                                                  :Money {:confirms #{hl7-fhir-r4b-core.Money/schema}}},
+                                                           :fhir/flags #{:SU},
+                                                           :zen/desc "The amount or percentage due from the beneficiary"},
+                                                   :exception {:type zen/vector,
+                                                               :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                                                       :type zen/map,
+                                                                       :keys {:type {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                                                     :fhir/flags #{:SU},
+                                                                                     :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.coverage-financial-exception/value-set,
+                                                                                                          :strength :example},
+                                                                                     :zen/desc "Exception category"},
+                                                                              :period {:confirms #{hl7-fhir-r4b-core.Period/schema},
+                                                                                       :fhir/flags #{:SU},
+                                                                                       :zen/desc "The effective period of the exception"}},
+                                                                       :require #{:type},
+                                                                       :zen/desc "Exceptions for patient payments"}}},
+                                            :require #{:value},
+                                            :zen/desc "Patient payments for services/products"}},
+                :subrogation {:confirms #{hl7-fhir-r4b-core.boolean/schema},
+                              :zen/desc "Reimbursement to insurer"},
+                :subscriber {:confirms #{zen.fhir/Reference
+                                         hl7-fhir-r4b-core.Reference/schema},
+                             :fhir/flags #{:SU},
+                             :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                            hl7-fhir-r4b-core.Patient/schema}},
+                             :zen/desc "Subscriber to the policy"},
+                :payor {:type zen/vector,
+                        :every {:confirms #{zen.fhir/Reference
+                                            hl7-fhir-r4b-core.Reference/schema},
+                                :fhir/flags #{:SU},
+                                :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                               hl7-fhir-r4b-core.Patient/schema
+                                                               hl7-fhir-r4b-core.Organization/schema}},
+                                :zen/desc "Issuer of the policy"},
+                        :minItems 1},
+                :status {:confirms #{hl7-fhir-r4b-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.fm-status/value-set,
+                                              :strength :required},
+                         :zen/desc "active | cancelled | draft | entered-in-error"},
+                :class {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                :type zen/map,
+                                :keys {:type {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                              :fhir/flags #{:SU},
+                                              :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.coverage-class/value-set,
+                                                                   :strength :extensible},
+                                              :zen/desc "Type of class such as 'group' or 'plan'"},
+                                       :value {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                               :fhir/flags #{:SU},
+                                               :zen/desc "Value associated with the type"},
+                                       :_value {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                       :name {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                              :fhir/flags #{:SU},
+                                              :zen/desc "Human readable description of the type and value"},
+                                       :_name {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                :require #{:value :type},
+                                :zen/desc "Additional coverage classifications"}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Business Identifier for the coverage"}},
+                :order {:confirms #{hl7-fhir-r4b-core.positiveInt/schema},
+                        :fhir/flags #{:SU},
+                        :zen/desc "Relative order of the coverage"},
+                :network {:confirms #{hl7-fhir-r4b-core.string/schema},
+                          :fhir/flags #{:SU},
+                          :zen/desc "Insurer network"},
+                :period {:confirms #{hl7-fhir-r4b-core.Period/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "Coverage start and end dates"},
+                :_network {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :dependent {:confirms #{hl7-fhir-r4b-core.string/schema},
+                            :fhir/flags #{:SU},
+                            :zen/desc "Dependent number"},
+                :_subscriberId {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :_dependent {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :_subrogation {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :subscriberId {:confirms #{hl7-fhir-r4b-core.string/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "ID assigned to the subscriber"}},
+         :zen.fhir/type "Coverage"}}

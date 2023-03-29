@@ -1,0 +1,20 @@
+{ns hl7-fhir-r4b-core.value-set.all-types,
+ import #{zen.fhir},
+ value-set {:zen/tags #{zen.fhir/value-set},
+            :zen/desc "A list of all the concrete types defined in this version of the FHIR specification - Abstract Types, Data Types and Resource Types.",
+            :zen.fhir/version "0.6.20-2",
+            :fhir/code-systems #{{:fhir/url "http://hl7.org/fhir/abstract-types",
+                                  :zen.fhir/content :bundled}
+                                 {:fhir/url "http://hl7.org/fhir/resource-types",
+                                  :zen.fhir/content :bundled}
+                                 {:fhir/url "http://hl7.org/fhir/data-types",
+                                  :zen.fhir/content :bundled}},
+            :uri "http://hl7.org/fhir/ValueSet/all-types",
+            :version "4.3.0",
+            :ftr {:module "hl7-fhir-r4b-core",
+                  :source-url "https://storage.googleapis.com",
+                  :source-type :cloud-storage,
+                  :ftr-path "ftr",
+                  :tag "init",
+                  :validation-index {:type :nippy,
+                                     :file "index.nippy"}}}}

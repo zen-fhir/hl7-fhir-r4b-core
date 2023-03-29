@@ -1,0 +1,100 @@
+{ns hl7-fhir-r4b-core.DocumentManifest,
+ import #{hl7-fhir-r4b-core.Group
+          hl7-fhir-r4b-core.DomainResource
+          zen.fhir
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.Patient
+          hl7-fhir-r4b-core.string
+          hl7-fhir-r4b-core.BackboneElement
+          hl7-fhir-r4b-core.Practitioner
+          hl7-fhir-r4b-core.Organization
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.uri
+          hl7-fhir-r4b-core.Device
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.dateTime
+          hl7-fhir-r4b-core.PractitionerRole
+          hl7-fhir-r4b-core.value-set.document-reference-status
+          hl7-fhir-r4b-core.Element
+          hl7-fhir-r4b-core.RelatedPerson},
+ schema {:zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/DocumentManifest",
+         :require #{:content :status},
+         :type zen/map,
+         :zen/desc "A collection of documents compiled for a purpose together with metadata that applies to the collection.",
+         :keys {:_created {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :description {:confirms #{hl7-fhir-r4b-core.string/schema},
+                              :fhir/flags #{:SU},
+                              :zen/desc "Human-readable description (title)"},
+                :content {:type zen/vector,
+                          :every {:confirms #{zen.fhir/Reference
+                                              hl7-fhir-r4b-core.Reference/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/reference {:refers #{}},
+                                  :zen/desc "Items in manifest"},
+                          :minItems 1},
+                :_status {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :recipient {:type zen/vector,
+                            :every {:confirms #{zen.fhir/Reference
+                                                hl7-fhir-r4b-core.Reference/schema},
+                                    :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                                   hl7-fhir-r4b-core.PractitionerRole/schema
+                                                                   hl7-fhir-r4b-core.Patient/schema
+                                                                   hl7-fhir-r4b-core.Organization/schema
+                                                                   hl7-fhir-r4b-core.Practitioner/schema}},
+                                    :zen/desc "Intended to get notified about this set of documents"}},
+                :type {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Kind of document set"},
+                :created {:confirms #{hl7-fhir-r4b-core.dateTime/schema},
+                          :zen/desc "When this document manifest created"},
+                :related {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                  :type zen/map,
+                                  :keys {:identifier {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                                      :zen/desc "Identifiers of things that are related"},
+                                         :ref {:confirms #{zen.fhir/Reference
+                                                           hl7-fhir-r4b-core.Reference/schema},
+                                               :zen.fhir/reference {:refers #{}},
+                                               :zen/desc "Related Resource"}},
+                                  :zen/desc "Related things"}},
+                :source {:confirms #{hl7-fhir-r4b-core.uri/schema},
+                         :zen/desc "The source system/application/software"},
+                :_description {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :author {:type zen/vector,
+                         :every {:confirms #{zen.fhir/Reference
+                                             hl7-fhir-r4b-core.Reference/schema},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                                hl7-fhir-r4b-core.PractitionerRole/schema
+                                                                hl7-fhir-r4b-core.Patient/schema
+                                                                hl7-fhir-r4b-core.Organization/schema
+                                                                hl7-fhir-r4b-core.Device/schema
+                                                                hl7-fhir-r4b-core.Practitioner/schema}},
+                                 :zen/desc "Who and/or what authored the DocumentManifest"}},
+                :masterIdentifier {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen/desc "Unique Identifier for the set of documents"},
+                :status {:confirms #{hl7-fhir-r4b-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.document-reference-status/value-set,
+                                              :strength :required},
+                         :zen/desc "current | superseded | entered-in-error"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Other identifiers for the manifest"}},
+                :_source {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :subject {:confirms #{zen.fhir/Reference
+                                      hl7-fhir-r4b-core.Reference/schema},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Group/schema
+                                                         hl7-fhir-r4b-core.Patient/schema
+                                                         hl7-fhir-r4b-core.Device/schema
+                                                         hl7-fhir-r4b-core.Practitioner/schema}},
+                          :zen/desc "The subject of the set of documents"}},
+         :zen.fhir/type "DocumentManifest"}}

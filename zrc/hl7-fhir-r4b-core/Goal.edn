@@ -1,0 +1,170 @@
+{ns hl7-fhir-r4b-core.Goal,
+ import #{hl7-fhir-r4b-core.value-set.observation-codes
+          hl7-fhir-r4b-core.RiskAssessment
+          hl7-fhir-r4b-core.Duration
+          hl7-fhir-r4b-core.Group
+          hl7-fhir-r4b-core.DomainResource
+          hl7-fhir-r4b-core.value-set.clinical-findings
+          zen.fhir
+          hl7-fhir-r4b-core.boolean
+          hl7-fhir-r4b-core.MedicationStatement
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Condition
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.date
+          hl7-fhir-r4b-core.Patient
+          hl7-fhir-r4b-core.value-set.goal-category
+          hl7-fhir-r4b-core.Range
+          hl7-fhir-r4b-core.string
+          hl7-fhir-r4b-core.Observation
+          hl7-fhir-r4b-core.BackboneElement
+          hl7-fhir-r4b-core.Practitioner
+          hl7-fhir-r4b-core.Organization
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.integer
+          hl7-fhir-r4b-core.value-set.goal-priority
+          hl7-fhir-r4b-core.Annotation
+          hl7-fhir-r4b-core.ServiceRequest
+          hl7-fhir-r4b-core.value-set.goal-start-event
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.value-set.goal-achievement
+          hl7-fhir-r4b-core.value-set.goal-status
+          hl7-fhir-r4b-core.Ratio
+          hl7-fhir-r4b-core.Quantity
+          hl7-fhir-r4b-core.PractitionerRole
+          hl7-fhir-r4b-core.Element
+          hl7-fhir-r4b-core.NutritionOrder
+          hl7-fhir-r4b-core.RelatedPerson},
+ schema {:zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Goal",
+         :require #{:description :subject :lifecycleStatus},
+         :type zen/map,
+         :zen/desc "Describes the intended objective(s) for a patient, group or organization care, for example, weight loss, restoring an activity of daily living, obtaining herd immunity via immunization, meeting a process improvement objective, etc.",
+         :keys {:description {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                              :fhir/flags #{:SU},
+                              :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.clinical-findings/value-set,
+                                                   :strength :example},
+                              :zen/desc "Code or text describing goal"},
+                :category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.goal-category/value-set,
+                                                        :strength :example},
+                                   :zen/desc "E.g. Treatment, dietary, behavioral, etc."}},
+                :addresses {:type zen/vector,
+                            :every {:confirms #{zen.fhir/Reference
+                                                hl7-fhir-r4b-core.Reference/schema},
+                                    :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Condition/schema
+                                                                   hl7-fhir-r4b-core.MedicationStatement/schema
+                                                                   hl7-fhir-r4b-core.RiskAssessment/schema
+                                                                   hl7-fhir-r4b-core.NutritionOrder/schema
+                                                                   hl7-fhir-r4b-core.Observation/schema
+                                                                   hl7-fhir-r4b-core.ServiceRequest/schema}},
+                                    :zen/desc "Issues addressed by this goal"}},
+                :expressedBy {:confirms #{zen.fhir/Reference
+                                          hl7-fhir-r4b-core.Reference/schema},
+                              :fhir/flags #{:SU},
+                              :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.RelatedPerson/schema
+                                                             hl7-fhir-r4b-core.PractitionerRole/schema
+                                                             hl7-fhir-r4b-core.Patient/schema
+                                                             hl7-fhir-r4b-core.Practitioner/schema}},
+                              :zen/desc "Who's responsible for creating Goal?"},
+                :start {:fhir/polymorphic true,
+                        :type zen/map,
+                        :exclusive-keys #{#{:date :CodeableConcept}},
+                        :keys {:date {:confirms #{hl7-fhir-r4b-core.date/schema}},
+                               :_date {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                               :CodeableConcept {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema}}},
+                        :fhir/flags #{:SU},
+                        :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.goal-start-event/value-set,
+                                             :strength :example},
+                        :zen/desc "When goal pursuit begins"},
+                :achievementStatus {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                    :fhir/flags #{:SU},
+                                    :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.goal-achievement/value-set,
+                                                         :strength :preferred},
+                                    :zen/desc "in-progress | improving | worsening | no-change | achieved | sustaining | not-achieved | no-progress | not-attainable"},
+                :statusReason {:confirms #{hl7-fhir-r4b-core.string/schema},
+                               :zen/desc "Reason for current status"},
+                :_lifecycleStatus {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r4b-core.Annotation/schema},
+                               :zen/desc "Comments about the goal"}},
+                :priority {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.goal-priority/value-set,
+                                                :strength :preferred},
+                           :zen/desc "high-priority | medium-priority | low-priority"},
+                :outcomeCode {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                      :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.clinical-findings/value-set,
+                                                           :strength :example},
+                                      :zen/desc "What result was achieved regarding the goal?"}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :zen/desc "External Ids for this goal"}},
+                :statusDate {:confirms #{hl7-fhir-r4b-core.date/schema},
+                             :fhir/flags #{:SU},
+                             :zen/desc "When goal status took effect"},
+                :target {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                 :type zen/map,
+                                 :keys {:measure {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                  :fhir/flags #{:SU},
+                                                  :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.observation-codes/value-set,
+                                                                       :strength :example},
+                                                  :zen/desc "The parameter whose value is being tracked"},
+                                        :detail {:fhir/polymorphic true,
+                                                 :type zen/map,
+                                                 :exclusive-keys #{#{:string
+                                                                     :Range
+                                                                     :integer
+                                                                     :Ratio
+                                                                     :CodeableConcept
+                                                                     :Quantity
+                                                                     :boolean}},
+                                                 :keys {:string {:confirms #{hl7-fhir-r4b-core.string/schema}},
+                                                        :Range {:confirms #{hl7-fhir-r4b-core.Range/schema}},
+                                                        :integer {:confirms #{hl7-fhir-r4b-core.integer/schema}},
+                                                        :Ratio {:confirms #{hl7-fhir-r4b-core.Ratio/schema}},
+                                                        :_boolean {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                        :_integer {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                        :CodeableConcept {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema}},
+                                                        :Quantity {:confirms #{hl7-fhir-r4b-core.Quantity/schema}},
+                                                        :boolean {:confirms #{hl7-fhir-r4b-core.boolean/schema}},
+                                                        :_string {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+                                                 :fhir/flags #{:SU},
+                                                 :zen/desc "The target value to be achieved"},
+                                        :due {:fhir/polymorphic true,
+                                              :type zen/map,
+                                              :exclusive-keys #{#{:date
+                                                                  :Duration}},
+                                              :keys {:date {:confirms #{hl7-fhir-r4b-core.date/schema}},
+                                                     :_date {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                                     :Duration {:confirms #{hl7-fhir-r4b-core.Duration/schema}}},
+                                              :fhir/flags #{:SU},
+                                              :zen/desc "Reach goal on or before"}},
+                                 :zen/desc "Target outcome for the goal"}},
+                :outcomeReference {:type zen/vector,
+                                   :every {:confirms #{zen.fhir/Reference
+                                                       hl7-fhir-r4b-core.Reference/schema},
+                                           :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Observation/schema}},
+                                           :zen/desc "Observation that resulted from goal"}},
+                :subject {:confirms #{zen.fhir/Reference
+                                      hl7-fhir-r4b-core.Reference/schema},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Group/schema
+                                                         hl7-fhir-r4b-core.Patient/schema
+                                                         hl7-fhir-r4b-core.Organization/schema}},
+                          :zen/desc "Who this goal is intended for"},
+                :_statusReason {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :lifecycleStatus {:confirms #{hl7-fhir-r4b-core.code/schema},
+                                  :fhir/flags #{:SU :?!},
+                                  :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.goal-status/value-set,
+                                                       :strength :required},
+                                  :zen/desc "proposed | planned | accepted | active | on-hold | completed | cancelled | entered-in-error | rejected"},
+                :_statusDate {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
+         :zen.fhir/type "Goal"}}

@@ -1,0 +1,20 @@
+{ns hl7-fhir-r4b-core.CodeableReference,
+ import #{zen.fhir
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.Element},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "Base StructureDefinition for CodeableReference Type: A reference to a resource (by instance), or instead, a reference to a concept defined in a terminology or ontology (by class).",
+         :zen.fhir/type "CodeableReference",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/CodeableReference",
+         :zen.fhir/version "0.6.20-2",
+         :confirms #{hl7-fhir-r4b-core.Element/schema},
+         :type zen/map,
+         :keys {:concept {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                          :fhir/flags #{:SU},
+                          :zen/desc "Reference to a concept (by class)"},
+                :reference {:confirms #{zen.fhir/Reference
+                                        hl7-fhir-r4b-core.Reference/schema},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{}},
+                            :zen/desc "Reference to a resource (by instance)"}}}}

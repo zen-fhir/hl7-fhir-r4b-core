@@ -1,0 +1,28 @@
+{ns hl7-fhir-r4b-core.Population,
+ import #{zen.fhir
+          hl7-fhir-r4b-core.Range
+          hl7-fhir-r4b-core.BackboneElement
+          hl7-fhir-r4b-core.CodeableConcept},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "Base StructureDefinition for Population Type: A populatioof people with some set of grouping criteria.",
+         :zen.fhir/type "Population",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Population",
+         :zen.fhir/version "0.6.20-2",
+         :confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+         :type zen/map,
+         :keys {:age {:fhir/polymorphic true,
+                      :type zen/map,
+                      :exclusive-keys #{#{:Range :CodeableConcept}},
+                      :keys {:Range {:confirms #{hl7-fhir-r4b-core.Range/schema}},
+                             :CodeableConcept {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema}}},
+                      :fhir/flags #{:SU},
+                      :zen/desc "The age of the specific population"},
+                :gender {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "The gender of the specific population"},
+                :race {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Race of the specific population"},
+                :physiologicalCondition {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                         :fhir/flags #{:SU},
+                                         :zen/desc "The existing physiological conditions of the specific population to which this applies"}}}}

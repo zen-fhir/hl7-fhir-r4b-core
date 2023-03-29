@@ -1,0 +1,166 @@
+{ns hl7-fhir-r4b-core.DiagnosticReport,
+ import #{hl7-fhir-r4b-core.Specimen
+          hl7-fhir-r4b-core.Period
+          hl7-fhir-r4b-core.Group
+          hl7-fhir-r4b-core.DomainResource
+          hl7-fhir-r4b-core.value-set.clinical-findings
+          hl7-fhir-r4b-core.CarePlan
+          zen.fhir
+          hl7-fhir-r4b-core.Identifier
+          hl7-fhir-r4b-core.Reference
+          hl7-fhir-r4b-core.Patient
+          hl7-fhir-r4b-core.value-set.report-codes
+          hl7-fhir-r4b-core.Location
+          hl7-fhir-r4b-core.ImmunizationRecommendation
+          hl7-fhir-r4b-core.Encounter
+          hl7-fhir-r4b-core.CareTeam
+          hl7-fhir-r4b-core.string
+          hl7-fhir-r4b-core.Observation
+          hl7-fhir-r4b-core.Substance
+          hl7-fhir-r4b-core.value-set.diagnostic-report-status
+          hl7-fhir-r4b-core.BackboneElement
+          hl7-fhir-r4b-core.Practitioner
+          hl7-fhir-r4b-core.Organization
+          hl7-fhir-r4b-core.MedicationRequest
+          hl7-fhir-r4b-core.CodeableConcept
+          hl7-fhir-r4b-core.Attachment
+          hl7-fhir-r4b-core.ServiceRequest
+          hl7-fhir-r4b-core.Device
+          hl7-fhir-r4b-core.code
+          hl7-fhir-r4b-core.Medication
+          hl7-fhir-r4b-core.dateTime
+          hl7-fhir-r4b-core.ImagingStudy
+          hl7-fhir-r4b-core.instant
+          hl7-fhir-r4b-core.PractitionerRole
+          hl7-fhir-r4b-core.Element
+          hl7-fhir-r4b-core.NutritionOrder
+          hl7-fhir-r4b-core.Media
+          hl7-fhir-r4b-core.Procedure
+          hl7-fhir-r4b-core.value-set.diagnostic-service-sections},
+ schema {:zen.fhir/version "0.6.20-2",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4b-core.DomainResource/schema},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/DiagnosticReport",
+         :require #{:status :code},
+         :type zen/map,
+         :zen/desc "The findings and interpretation of diagnostic  tests performed on patients, groups of patients, devices, and locations, and/or specimens derived from these. The report includes clinical context such as requesting and provider information, and some mix of atomic results, images, textual and coded interpretations, and formatted representation of diagnostic reports.",
+         :keys {:category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.diagnostic-service-sections/value-set,
+                                                        :strength :example},
+                                   :zen/desc "Service category"}},
+                :conclusionCode {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.clinical-findings/value-set,
+                                                              :strength :example},
+                                         :zen/desc "Codes for the clinical conclusion of test results"}},
+                :_issued {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :conclusion {:confirms #{hl7-fhir-r4b-core.string/schema},
+                             :zen/desc "Clinical conclusion (interpretation) of test results"},
+                :encounter {:confirms #{zen.fhir/Reference
+                                        hl7-fhir-r4b-core.Reference/schema},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Encounter/schema}},
+                            :zen/desc "Health care event when test ordered"},
+                :specimen {:type zen/vector,
+                           :every {:confirms #{zen.fhir/Reference
+                                               hl7-fhir-r4b-core.Reference/schema},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Specimen/schema}},
+                                   :zen/desc "Specimens this report is based on"}},
+                :_status {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :resultsInterpreter {:type zen/vector,
+                                     :every {:confirms #{zen.fhir/Reference
+                                                         hl7-fhir-r4b-core.Reference/schema},
+                                             :fhir/flags #{:SU},
+                                             :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.CareTeam/schema
+                                                                            hl7-fhir-r4b-core.PractitionerRole/schema
+                                                                            hl7-fhir-r4b-core.Organization/schema
+                                                                            hl7-fhir-r4b-core.Practitioner/schema}},
+                                             :zen/desc "Primary result interpreter"}},
+                :status {:confirms #{hl7-fhir-r4b-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.diagnostic-report-status/value-set,
+                                              :strength :required},
+                         :zen/desc "registered | partial | preliminary | final +"},
+                :result {:type zen/vector,
+                         :every {:confirms #{zen.fhir/Reference
+                                             hl7-fhir-r4b-core.Reference/schema},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Observation/schema}},
+                                 :zen/desc "Observations"}},
+                :effective {:fhir/polymorphic true,
+                            :type zen/map,
+                            :exclusive-keys #{#{:dateTime :Period}},
+                            :keys {:dateTime {:confirms #{hl7-fhir-r4b-core.dateTime/schema}},
+                                   :_dateTime {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                   :Period {:confirms #{hl7-fhir-r4b-core.Period/schema}}},
+                            :fhir/flags #{:SU},
+                            :zen/desc "Clinically relevant time/time-period for report"},
+                :code {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r4b-core.value-set.report-codes/value-set,
+                                            :strength :preferred},
+                       :zen/desc "Name/Code for this diagnostic report"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r4b-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Business identifier for report"}},
+                :issued {:confirms #{hl7-fhir-r4b-core.instant/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "DateTime this version was made"},
+                :presentedForm {:type zen/vector,
+                                :every {:confirms #{hl7-fhir-r4b-core.Attachment/schema},
+                                        :zen/desc "Entire report as issued"}},
+                :basedOn {:type zen/vector,
+                          :every {:confirms #{zen.fhir/Reference
+                                              hl7-fhir-r4b-core.Reference/schema},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.MedicationRequest/schema
+                                                                 hl7-fhir-r4b-core.NutritionOrder/schema
+                                                                 hl7-fhir-r4b-core.CarePlan/schema
+                                                                 hl7-fhir-r4b-core.ServiceRequest/schema
+                                                                 hl7-fhir-r4b-core.ImmunizationRecommendation/schema}},
+                                  :zen/desc "What was requested"}},
+                :imagingStudy {:type zen/vector,
+                               :every {:confirms #{zen.fhir/Reference
+                                                   hl7-fhir-r4b-core.Reference/schema},
+                                       :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.ImagingStudy/schema}},
+                                       :zen/desc "Reference to full details of imaging associated with the diagnostic report"}},
+                :media {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
+                                :type zen/map,
+                                :keys {:comment {:confirms #{hl7-fhir-r4b-core.string/schema},
+                                                 :zen/desc "Comment about the image (e.g. explanation)"},
+                                       :_comment {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                                       :link {:confirms #{zen.fhir/Reference
+                                                          hl7-fhir-r4b-core.Reference/schema},
+                                              :fhir/flags #{:SU},
+                                              :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Media/schema}},
+                                              :zen/desc "Reference to the image source"}},
+                                :require #{:link},
+                                :fhir/flags #{:SU},
+                                :zen/desc "Key images associated with this report"}},
+                :subject {:confirms #{zen.fhir/Reference
+                                      hl7-fhir-r4b-core.Reference/schema},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Procedure/schema
+                                                         hl7-fhir-r4b-core.Group/schema
+                                                         hl7-fhir-r4b-core.Medication/schema
+                                                         hl7-fhir-r4b-core.Patient/schema
+                                                         hl7-fhir-r4b-core.Organization/schema
+                                                         hl7-fhir-r4b-core.Device/schema
+                                                         hl7-fhir-r4b-core.Location/schema
+                                                         hl7-fhir-r4b-core.Practitioner/schema
+                                                         hl7-fhir-r4b-core.Substance/schema}},
+                          :zen/desc "The subject of the report - usually, but not always, the patient"},
+                :_conclusion {:confirms #{hl7-fhir-r4b-core.Element/schema}},
+                :performer {:type zen/vector,
+                            :every {:confirms #{zen.fhir/Reference
+                                                hl7-fhir-r4b-core.Reference/schema},
+                                    :fhir/flags #{:SU},
+                                    :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.CareTeam/schema
+                                                                   hl7-fhir-r4b-core.PractitionerRole/schema
+                                                                   hl7-fhir-r4b-core.Organization/schema
+                                                                   hl7-fhir-r4b-core.Practitioner/schema}},
+                                    :zen/desc "Responsible Diagnostic Service"}}},
+         :zen.fhir/type "DiagnosticReport"}}
