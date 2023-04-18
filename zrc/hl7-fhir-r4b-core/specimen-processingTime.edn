@@ -3,7 +3,7 @@
           hl7-fhir-r4b-core.Duration
           zen.fhir},
  schema {:fhir/polymorphic true,
-         :zen.fhir/version "0.6.20-2",
+         :zen.fhir/version "0.6.21-2",
          :zen/tags #{zen/schema zen.fhir/structure-schema},
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/specimen-processingTime",
          :type zen/map,
