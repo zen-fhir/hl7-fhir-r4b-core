@@ -43,7 +43,7 @@
           hl7-fhir-r4b-core.value-set.substance-name-type},
  molecularWeight-schema {:zen/tags #{zen/schema
                                      zen.fhir/structure-schema},
-                         :zen.fhir/version "0.6.21-2",
+                         :zen.fhir/version "0.6.22",
                          :confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
                          :type zen/map,
                          :keys {:method {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
@@ -63,7 +63,7 @@
                          :fhir/flags #{:SU},
                          :zen/desc "The molecular weight or weight range"},
  name-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
-              :zen.fhir/version "0.6.21-2",
+              :zen.fhir/version "0.6.22",
               :confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
               :type zen/map,
               :keys {:official {:type zen/vector,
@@ -142,7 +142,7 @@
          :zen/desc "The detailed description of a substance, typically at a level beyond what is used for prescribing.",
          :zen.fhir/type "SubstanceDefinition",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/SubstanceDefinition",
-         :zen.fhir/version "0.6.21-2",
+         :zen.fhir/version "0.6.22",
          :confirms #{zen.fhir/Resource
                      hl7-fhir-r4b-core.DomainResource/schema},
          :type zen/map,
