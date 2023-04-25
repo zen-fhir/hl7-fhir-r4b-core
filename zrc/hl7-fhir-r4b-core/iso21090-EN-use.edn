@@ -4,5 +4,5 @@
          :zen/desc "A set of codes advising a system or user which name in a set of names to select for a given purpose.",
          :zen.fhir/type "code",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/iso21090-EN-use",
-         :zen.fhir/version "0.6.23",
+         :zen.fhir/version "0.6.23-1",
          :confirms #{hl7-fhir-r4b-core.code/schema}}}
