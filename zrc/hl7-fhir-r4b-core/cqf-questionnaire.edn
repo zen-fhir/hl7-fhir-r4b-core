@@ -1,19 +1,15 @@
 {ns hl7-fhir-r4b-core.cqf-questionnaire,
  import #{zen.fhir
-          hl7-fhir-r4b-core.cqf-questionnaire
           hl7-fhir-r4b-core.cqf-library
           hl7-fhir-r4b-core.Questionnaire},
- item-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
-              :zen.fhir/version "0.6.23-1"},
  schema {:zen/tags #{zen.fhir/profile-schema zen/schema},
          :zen/desc "A questionnaire with the ability to specify behavior associated with questions or groups of questions",
          :zen.fhir/type "Questionnaire",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/cqf-questionnaire",
-         :zen.fhir/version "0.6.23-1",
+         :zen.fhir/version "0.6.24",
          :confirms #{zen.fhir/Resource
                      hl7-fhir-r4b-core.Questionnaire/schema},
          :type zen/map,
          :keys {:library {:confirms #{hl7-fhir-r4b-core.cqf-library/schema},
                           :fhir/extensionUri "http://hl7.org/fhir/StructureDefinition/cqf-library",
-                          :zen/desc "A library containing logic referenced by the questionnaire"},
-                :item {:confirms #{hl7-fhir-r4b-core.cqf-questionnaire/item-schema}}}}}
+                          :zen/desc "A library containing logic referenced by the questionnaire"}}}}

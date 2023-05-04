@@ -1,9 +1,6 @@
 {ns hl7-fhir-r4b-core.bmi,
- import #{hl7-fhir-r4b-core.bmi zen.fhir hl7-fhir-r4b-core.vitalsigns},
- referenceRange-schema {:zen/tags #{zen/schema
-                                    zen.fhir/structure-schema},
-                        :zen.fhir/version "0.6.23-1"},
- schema {:zen.fhir/version "0.6.23-1",
+ import #{zen.fhir hl7-fhir-r4b-core.vitalsigns},
+ schema {:zen.fhir/version "0.6.24",
          :confirms #{hl7-fhir-r4b-core.vitalsigns/schema
                      zen.fhir/Resource},
          :zen/tags #{zen.fhir/profile-schema zen/schema},
@@ -38,6 +35,5 @@
                                                      :unit
                                                      :value
                                                      :code}}},
-                        :require #{:Quantity}},
-                :referenceRange {:confirms #{hl7-fhir-r4b-core.bmi/referenceRange-schema}}},
+                        :require #{:Quantity}}},
          :zen.fhir/type "Observation"}}

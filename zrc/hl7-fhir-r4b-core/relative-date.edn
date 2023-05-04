@@ -6,7 +6,7 @@
           hl7-fhir-r4b-core.Extension
           hl7-fhir-r4b-core.CodeableConcept
           hl7-fhir-r4b-core.code},
- schema {:zen.fhir/version "0.6.23-1",
+ schema {:zen.fhir/version "0.6.24",
          :zen/tags #{zen/schema zen.fhir/structure-schema},
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/relative-date",
          :require #{:offset :relationship :event},
