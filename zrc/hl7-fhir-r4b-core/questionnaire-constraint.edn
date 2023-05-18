@@ -4,7 +4,7 @@
           hl7-fhir-r4b-core.code
           hl7-fhir-r4b-core.id
           hl7-fhir-r4b-core.value-set.constraint-severity},
- schema {:zen.fhir/version "0.6.24",
+ schema {:zen.fhir/version "0.6.25-1",
          :zen/tags #{zen/schema zen.fhir/structure-schema},
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/questionnaire-constraint",
          :require #{:expression :key :human :severity},

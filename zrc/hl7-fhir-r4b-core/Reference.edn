@@ -5,8 +5,9 @@
           hl7-fhir-r4b-core.value-set.resource-types
           hl7-fhir-r4b-core.uri
           hl7-fhir-r4b-core.Element},
- schema {:zen.fhir/version "0.6.24",
-         :confirms #{zen.fhir/Reference},
+ schema {:zen.fhir/version "0.6.25-1",
+         :confirms #{hl7-fhir-r4b-core.Element/schema
+                     zen.fhir/Reference},
          :zen/tags #{zen/schema zen.fhir/structure-schema},
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Reference",
          :zen.fhir/reference {:refers #{}},
