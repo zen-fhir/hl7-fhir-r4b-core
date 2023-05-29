@@ -26,7 +26,7 @@
          :zen/desc "A kind of specimen with associated set of requirements.",
          :zen.fhir/type "SpecimenDefinition",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/SpecimenDefinition",
-         :zen.fhir/version "0.6.25-1",
+         :zen.fhir/version "0.6.27",
          :confirms #{zen.fhir/Resource
                      hl7-fhir-r4b-core.DomainResource/schema},
          :type zen/map,
