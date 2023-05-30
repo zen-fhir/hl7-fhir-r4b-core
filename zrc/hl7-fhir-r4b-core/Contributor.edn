@@ -5,7 +5,7 @@
           hl7-fhir-r4b-core.string
           hl7-fhir-r4b-core.code
           hl7-fhir-r4b-core.Element},
- schema {:zen.fhir/version "0.6.27",
+ schema {:zen.fhir/version "0.6.28",
          :confirms #{hl7-fhir-r4b-core.Element/schema},
          :zen/tags #{zen/schema zen.fhir/structure-schema},
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Contributor",

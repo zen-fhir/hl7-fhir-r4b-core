@@ -5,8 +5,10 @@
           hl7-fhir-r4b-core.Observation
           hl7-fhir-r4b-core.CodeableConcept
           hl7-fhir-r4b-core.code},
- schema {:zen.fhir/version "0.6.27",
-         :zen/tags #{zen/schema zen.fhir/structure-schema},
+ schema {:zen.fhir/version "0.6.28",
+         :zen/tags #{zen.fhir/extension
+                     zen/schema
+                     zen.fhir/structure-schema},
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/servicerequest-geneticsItem",
          :require #{:code},
          :type zen/map,

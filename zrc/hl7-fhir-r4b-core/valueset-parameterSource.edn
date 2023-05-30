@@ -1,8 +1,10 @@
 {ns hl7-fhir-r4b-core.valueset-parameterSource,
  import #{zen.fhir hl7-fhir-r4b-core.code},
- schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+ schema {:zen/tags #{zen.fhir/extension
+                     zen/schema
+                     zen.fhir/structure-schema},
          :zen/desc "Declares what the source of this parameter is.",
          :zen.fhir/type "code",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/valueset-parameterSource",
-         :zen.fhir/version "0.6.27",
+         :zen.fhir/version "0.6.28",
          :confirms #{hl7-fhir-r4b-core.code/schema}}}
