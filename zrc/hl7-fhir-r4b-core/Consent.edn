@@ -37,7 +37,7 @@
           hl7-fhir-r4b-core.Element
           hl7-fhir-r4b-core.RelatedPerson},
  provision-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
-                   :zen.fhir/version "0.6.28",
+                   :zen.fhir/version "0.6.29",
                    :confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
                    :type zen/map,
                    :keys {:provision {:type zen/vector,
@@ -123,7 +123,7 @@
                                          :zen/desc "Data controlled by this rule"}}},
                    :fhir/flags #{:SU},
                    :zen/desc "Constraints to the base Consent.policyRule"},
- schema {:zen.fhir/version "0.6.28",
+ schema {:zen.fhir/version "0.6.29",
          :confirms #{zen.fhir/Resource
                      hl7-fhir-r4b-core.DomainResource/schema},
          :zen/tags #{zen/schema zen.fhir/base-schema},

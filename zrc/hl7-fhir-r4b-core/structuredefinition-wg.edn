@@ -6,5 +6,5 @@
          :zen/desc "The work group that owns and maintains this resource.",
          :zen.fhir/type "code",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg",
-         :zen.fhir/version "0.6.28",
+         :zen.fhir/version "0.6.29",
          :confirms #{hl7-fhir-r4b-core.code/schema}}}
