@@ -5,7 +5,7 @@
           hl7-fhir-r4b-core.Extension
           hl7-fhir-r4b-core.value-set.languages
           hl7-fhir-r4b-core.code},
- schema {:zen.fhir/version "0.6.29",
+ schema {:zen.fhir/version "0.6.29-22",
          :zen/tags #{zen.fhir/extension
                      zen/schema
                      zen.fhir/structure-schema},
