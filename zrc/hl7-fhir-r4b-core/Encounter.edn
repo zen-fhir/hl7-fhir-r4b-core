@@ -1,5 +1,6 @@
 {ns hl7-fhir-r4b-core.Encounter,
- import #{hl7-fhir-r4b-core.value-set.encounter-type
+ import #{hl7-terminology-r4.value-set.v3-ActEncounterCode
+          hl7-fhir-r4b-core.value-set.encounter-type
           hl7-fhir-r4b-core.value-set.location-physical-type
           hl7-fhir-r4b-core.Account
           hl7-fhir-r4b-core.Period
@@ -25,6 +26,7 @@
           hl7-fhir-r4b-core.value-set.encounter-special-arrangements
           hl7-fhir-r4b-core.Practitioner
           hl7-fhir-r4b-core.Organization
+          hl7-terminology-r4.value-set.v3-ActPriority
           hl7-fhir-r4b-core.CodeableConcept
           hl7-fhir-r4b-core.value-set.encounter-reason
           hl7-fhir-r4b-core.value-set.service-type
@@ -39,8 +41,9 @@
           hl7-fhir-r4b-core.PractitionerRole
           hl7-fhir-r4b-core.Element
           hl7-fhir-r4b-core.Procedure
-          hl7-fhir-r4b-core.RelatedPerson},
- schema {:zen.fhir/version "0.6.29-22",
+          hl7-fhir-r4b-core.RelatedPerson
+          hl7-terminology-r4.value-set.v2-0092},
+ schema {:zen.fhir/version "0.6.29-4",
          :confirms #{zen.fhir/Resource
                      hl7-fhir-r4b-core.DomainResource/schema},
          :zen/tags #{zen/schema zen.fhir/base-schema},
@@ -130,12 +133,16 @@
                                :every {:confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
                                        :type zen/map,
                                        :keys {:class {:confirms #{hl7-fhir-r4b-core.Coding/schema},
+                                                      :zen.fhir/value-set {:symbol hl7-terminology-r4.value-set.v3-ActEncounterCode/value-set,
+                                                                           :strength :extensible},
                                                       :zen/desc "inpatient | outpatient | ambulatory | emergency +"},
                                               :period {:confirms #{hl7-fhir-r4b-core.Period/schema},
                                                        :zen/desc "The time that the episode was in the specified class"}},
                                        :require #{:class :period},
                                        :zen/desc "List of past encounter classes"}},
                 :priority {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                           :zen.fhir/value-set {:symbol hl7-terminology-r4.value-set.v3-ActPriority/value-set,
+                                                :strength :example},
                            :zen/desc "Indicates the urgency of the encounter"},
                 :status {:confirms #{hl7-fhir-r4b-core.code/schema},
                          :fhir/flags #{:SU :?!},
@@ -144,6 +151,8 @@
                          :zen/desc "planned | arrived | triaged | in-progress | onleave | finished | cancelled +"},
                 :class {:confirms #{hl7-fhir-r4b-core.Coding/schema},
                         :fhir/flags #{:SU},
+                        :zen.fhir/value-set {:symbol hl7-terminology-r4.value-set.v3-ActEncounterCode/value-set,
+                                             :strength :extensible},
                         :zen/desc "Classification of patient encounter"},
                 :length {:confirms #{hl7-fhir-r4b-core.Duration/schema},
                          :zen/desc "Quantity of time the encounter lasted (less time absent)"},
@@ -179,6 +188,8 @@
                                                                                         :strength :preferred},
                                                                    :zen/desc "Special courtesies (VIP, board member)"}},
                                          :reAdmission {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                       :zen.fhir/value-set {:symbol hl7-terminology-r4.value-set.v2-0092/value-set,
+                                                                            :strength :example},
                                                        :zen/desc "The type of hospital re-admission that has occurred (if any). If the value is absent, then this is not identified as a readmission"},
                                          :origin {:confirms #{zen.fhir/Reference
                                                               hl7-fhir-r4b-core.Reference/schema},

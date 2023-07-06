@@ -12,8 +12,10 @@
           hl7-fhir-r4b-core.Organization
           hl7-fhir-r4b-core.decimal
           hl7-fhir-r4b-core.CodeableConcept
+          hl7-terminology-r4.value-set.v2-0116
           hl7-fhir-r4b-core.Address
           hl7-fhir-r4b-core.Endpoint
+          hl7-terminology-r4.value-set.v3-ServiceDeliveryLocationRoleType
           hl7-fhir-r4b-core.Coding
           hl7-fhir-r4b-core.code
           hl7-fhir-r4b-core.value-set.days-of-week
@@ -25,7 +27,7 @@
          :zen/desc "Details and position information for a physical place where services are provided and resources and participants may be stored, found, contained, or accommodated.",
          :zen.fhir/type "Location",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Location",
-         :zen.fhir/version "0.6.29-22",
+         :zen.fhir/version "0.6.29-4",
          :confirms #{zen.fhir/Resource
                      hl7-fhir-r4b-core.DomainResource/schema},
          :type zen/map,
@@ -51,6 +53,8 @@
                 :type {:type zen/vector,
                        :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
                                :fhir/flags #{:SU},
+                               :zen.fhir/value-set {:symbol hl7-terminology-r4.value-set.v3-ServiceDeliveryLocationRoleType/value-set,
+                                                    :strength :extensible},
                                :zen/desc "Type of function performed"}},
                 :_description {:confirms #{hl7-fhir-r4b-core.Element/schema}},
                 :alias {:type zen/vector,
@@ -107,6 +111,8 @@
                                   :zen/desc "Contact details of the location"}},
                 :operationalStatus {:confirms #{hl7-fhir-r4b-core.Coding/schema},
                                     :fhir/flags #{:SU},
+                                    :zen.fhir/value-set {:symbol hl7-terminology-r4.value-set.v2-0116/value-set,
+                                                         :strength :preferred},
                                     :zen/desc "The operational status of the location (typically only for a bed/room)"},
                 :partOf {:confirms #{zen.fhir/Reference
                                      hl7-fhir-r4b-core.Reference/schema},

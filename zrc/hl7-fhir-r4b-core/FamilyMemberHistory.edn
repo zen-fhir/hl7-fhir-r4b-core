@@ -24,13 +24,14 @@
           hl7-fhir-r4b-core.canonical
           hl7-fhir-r4b-core.value-set.condition-outcome
           hl7-fhir-r4b-core.code
+          hl7-terminology-r4.value-set.v3-FamilyMember
           hl7-fhir-r4b-core.QuestionnaireResponse
           hl7-fhir-r4b-core.DiagnosticReport
           hl7-fhir-r4b-core.dateTime
           hl7-fhir-r4b-core.value-set.administrative-gender
           hl7-fhir-r4b-core.Element
           hl7-fhir-r4b-core.value-set.history-status},
- schema {:zen.fhir/version "0.6.29-22",
+ schema {:zen.fhir/version "0.6.29-4",
          :confirms #{zen.fhir/Resource
                      hl7-fhir-r4b-core.DomainResource/schema},
          :zen/tags #{zen/schema zen.fhir/base-schema},
@@ -75,6 +76,8 @@
                 :_status {:confirms #{hl7-fhir-r4b-core.Element/schema}},
                 :relationship {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
                                :fhir/flags #{:SU},
+                               :zen.fhir/value-set {:symbol hl7-terminology-r4.value-set.v3-FamilyMember/value-set,
+                                                    :strength :example},
                                :zen/desc "Relationship to the subject"},
                 :reasonCode {:type zen/vector,
                              :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},

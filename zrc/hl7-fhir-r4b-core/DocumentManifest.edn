@@ -10,6 +10,7 @@
           hl7-fhir-r4b-core.Practitioner
           hl7-fhir-r4b-core.Organization
           hl7-fhir-r4b-core.CodeableConcept
+          hl7-terminology-r4.value-set.v3-ActCode
           hl7-fhir-r4b-core.uri
           hl7-fhir-r4b-core.Device
           hl7-fhir-r4b-core.code
@@ -18,7 +19,7 @@
           hl7-fhir-r4b-core.value-set.document-reference-status
           hl7-fhir-r4b-core.Element
           hl7-fhir-r4b-core.RelatedPerson},
- schema {:zen.fhir/version "0.6.29-22",
+ schema {:zen.fhir/version "0.6.29-4",
          :confirms #{zen.fhir/Resource
                      hl7-fhir-r4b-core.DomainResource/schema},
          :zen/tags #{zen/schema zen.fhir/base-schema},
@@ -49,6 +50,8 @@
                                     :zen/desc "Intended to get notified about this set of documents"}},
                 :type {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
                        :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-terminology-r4.value-set.v3-ActCode/value-set,
+                                            :strength :example},
                        :zen/desc "Kind of document set"},
                 :created {:confirms #{hl7-fhir-r4b-core.dateTime/schema},
                           :zen/desc "When this document manifest created"},

@@ -11,10 +11,11 @@
           hl7-fhir-r4b-core.CodeableConcept
           hl7-fhir-r4b-core.value-set.service-type
           hl7-fhir-r4b-core.code
+          hl7-terminology-r4.value-set.v2-0276
           hl7-fhir-r4b-core.Schedule
           hl7-fhir-r4b-core.instant
           hl7-fhir-r4b-core.Element},
- schema {:zen.fhir/version "0.6.29-22",
+ schema {:zen.fhir/version "0.6.29-4",
          :confirms #{zen.fhir/Resource
                      hl7-fhir-r4b-core.DomainResource/schema},
          :zen/tags #{zen/schema zen.fhir/base-schema},
@@ -52,6 +53,8 @@
                                       :zen/desc "The type of appointments that can be booked into this slot (ideally this would be an identifiable service - which is at a location, rather than the location itself). If provided then this overrides the value provided on the availability resource"}},
                 :appointmentType {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
                                   :fhir/flags #{:SU},
+                                  :zen.fhir/value-set {:symbol hl7-terminology-r4.value-set.v2-0276/value-set,
+                                                       :strength :preferred},
                                   :zen/desc "The style of appointment or patient that may be booked in the slot (not service type)"},
                 :status {:confirms #{hl7-fhir-r4b-core.code/schema},
                          :fhir/flags #{:SU},

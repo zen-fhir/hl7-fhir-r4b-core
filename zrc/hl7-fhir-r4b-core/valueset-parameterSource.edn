@@ -1,10 +1,14 @@
 {ns hl7-fhir-r4b-core.valueset-parameterSource,
- import #{zen.fhir hl7-fhir-r4b-core.code},
+ import #{zen.fhir
+          hl7-terminology-r4.value-set.expansion-parameter-source
+          hl7-fhir-r4b-core.code},
  schema {:zen/tags #{zen.fhir/extension
                      zen/schema
                      zen.fhir/structure-schema},
          :zen/desc "Declares what the source of this parameter is.",
          :zen.fhir/type "code",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/valueset-parameterSource",
-         :zen.fhir/version "0.6.29-22",
-         :confirms #{hl7-fhir-r4b-core.code/schema}}}
+         :zen.fhir/version "0.6.29-4",
+         :confirms #{hl7-fhir-r4b-core.code/schema},
+         :zen.fhir/value-set {:symbol hl7-terminology-r4.value-set.expansion-parameter-source/value-set,
+                              :strength :required}}}

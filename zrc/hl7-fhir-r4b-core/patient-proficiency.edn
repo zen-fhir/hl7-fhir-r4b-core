@@ -1,14 +1,21 @@
 {ns hl7-fhir-r4b-core.patient-proficiency,
- import #{zen.fhir hl7-fhir-r4b-core.Coding},
+ import #{zen.fhir
+          hl7-terminology-r4.value-set.v3-LanguageAbilityMode
+          hl7-terminology-r4.value-set.v3-LanguageAbilityProficiency
+          hl7-fhir-r4b-core.Coding},
  schema {:zen/tags #{zen.fhir/extension
                      zen/schema
                      zen.fhir/structure-schema},
          :zen/desc "Proficiency level of the communication.",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/patient-proficiency",
-         :zen.fhir/version "0.6.29-22",
+         :zen.fhir/version "0.6.29-4",
          :type zen/map,
          :keys {:level {:confirms #{hl7-fhir-r4b-core.Coding/schema},
+                        :zen.fhir/value-set {:symbol hl7-terminology-r4.value-set.v3-LanguageAbilityProficiency/value-set,
+                                             :strength :preferred},
                         :zen/desc "The proficiency level of the communication"},
                 :type {:type zen/vector,
                        :every {:confirms #{hl7-fhir-r4b-core.Coding/schema},
+                               :zen.fhir/value-set {:symbol hl7-terminology-r4.value-set.v3-LanguageAbilityMode/value-set,
+                                                    :strength :preferred},
                                :zen/desc "The proficiency type of the communication"}}}}}

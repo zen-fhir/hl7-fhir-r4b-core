@@ -51,7 +51,7 @@
           hl7-fhir-r4b-core.value-set.surface},
  item-adjudication-schema {:zen/tags #{zen/schema
                                        zen.fhir/structure-schema},
-                           :zen.fhir/version "0.6.29-22",
+                           :zen.fhir/version "0.6.29-4",
                            :confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
                            :type zen/map,
                            :keys {:category {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
@@ -69,7 +69,7 @@
                                   :_value {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
                            :require #{:category},
                            :zen/desc "Adjudication details"},
- schema {:zen.fhir/version "0.6.29-22",
+ schema {:zen.fhir/version "0.6.29-4",
          :confirms #{zen.fhir/Resource
                      hl7-fhir-r4b-core.DomainResource/schema},
          :zen/tags #{zen/schema zen.fhir/base-schema},

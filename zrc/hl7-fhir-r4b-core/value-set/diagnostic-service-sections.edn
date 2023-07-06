@@ -2,8 +2,15 @@
  import #{zen.fhir},
  value-set {:zen/tags #{zen.fhir/value-set},
             :zen/desc "This value set includes all the codes in HL7 V2 table 0074.",
-            :zen.fhir/version "0.6.29-22",
+            :zen.fhir/version "0.6.29-4",
             :fhir/code-systems #{{:fhir/url "http://terminology.hl7.org/CodeSystem/v2-0074",
-                                  :zen.fhir/content :not-present}},
+                                  :zen.fhir/content :bundled}},
             :uri "http://hl7.org/fhir/ValueSet/diagnostic-service-sections",
-            :version "4.3.0"}}
+            :version "4.3.0",
+            :ftr {:module "hl7-fhir-r4b-core",
+                  :source-url "https://storage.googleapis.com",
+                  :source-type :cloud-storage,
+                  :ftr-path "ftr",
+                  :tag "init",
+                  :validation-index {:type :nippy,
+                                     :file "index.nippy"}}}}

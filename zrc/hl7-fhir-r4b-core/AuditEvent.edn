@@ -21,6 +21,7 @@
           hl7-fhir-r4b-core.value-set.object-role
           hl7-fhir-r4b-core.uri
           hl7-fhir-r4b-core.value-set.audit-event-type
+          hl7-terminology-r4.value-set.v3-PurposeOfUse
           hl7-fhir-r4b-core.Coding
           hl7-fhir-r4b-core.Device
           hl7-fhir-r4b-core.code
@@ -33,7 +34,7 @@
           hl7-fhir-r4b-core.Element
           hl7-fhir-r4b-core.value-set.audit-event-sub-type
           hl7-fhir-r4b-core.RelatedPerson},
- schema {:zen.fhir/version "0.6.29-22",
+ schema {:zen.fhir/version "0.6.29-4",
          :confirms #{zen.fhir/Resource
                      hl7-fhir-r4b-core.DomainResource/schema},
          :zen/tags #{zen/schema zen.fhir/base-schema},
@@ -115,6 +116,8 @@
                                                         :zen/desc "Policy that authorized event"}},
                                        :purposeOfUse {:type zen/vector,
                                                       :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                              :zen.fhir/value-set {:symbol hl7-terminology-r4.value-set.v3-PurposeOfUse/value-set,
+                                                                                   :strength :extensible},
                                                               :zen/desc "Reason given for this user"}},
                                        :_policy {:type zen/vector,
                                                  :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},
@@ -146,6 +149,8 @@
                 :purposeOfEvent {:type zen/vector,
                                  :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
                                          :fhir/flags #{:SU},
+                                         :zen.fhir/value-set {:symbol hl7-terminology-r4.value-set.v3-PurposeOfUse/value-set,
+                                                              :strength :extensible},
                                          :zen/desc "The purposeOfUse of the event"}},
                 :action {:confirms #{hl7-fhir-r4b-core.code/schema},
                          :fhir/flags #{:SU},

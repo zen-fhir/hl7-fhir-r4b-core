@@ -15,6 +15,8 @@
           hl7-fhir-r4b-core.Substance
           hl7-fhir-r4b-core.BackboneElement
           hl7-fhir-r4b-core.CodeableConcept
+          hl7-terminology-r4.value-set.v2-0487
+          hl7-terminology-r4.value-set.v2-0371
           hl7-fhir-r4b-core.value-set.container-material
           hl7-fhir-r4b-core.SimpleQuantity
           hl7-fhir-r4b-core.code
@@ -26,7 +28,7 @@
          :zen/desc "A kind of specimen with associated set of requirements.",
          :zen.fhir/type "SpecimenDefinition",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/SpecimenDefinition",
-         :zen.fhir/version "0.6.29-22",
+         :zen.fhir/version "0.6.29-4",
          :confirms #{zen.fhir/Resource
                      hl7-fhir-r4b-core.DomainResource/schema},
          :type zen/map,
@@ -35,6 +37,8 @@
                              :zen/desc "Business identifier of a kind of specimen"},
                 :typeCollected {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
                                 :fhir/flags #{:SU},
+                                :zen.fhir/value-set {:symbol hl7-terminology-r4.value-set.v2-0487/value-set,
+                                                     :strength :example},
                                 :zen/desc "Kind of material to collect"},
                 :patientPreparation {:type zen/vector,
                                      :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
@@ -64,6 +68,8 @@
                                                         :zen/desc "Primary or secondary specimen"},
                                             :_isDerived {:confirms #{hl7-fhir-r4b-core.Element/schema}},
                                             :type {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                   :zen.fhir/value-set {:symbol hl7-terminology-r4.value-set.v2-0487/value-set,
+                                                                        :strength :example},
                                                    :zen/desc "Type of intended specimen"},
                                             :rejectionCriterion {:type zen/vector,
                                                                  :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
@@ -131,6 +137,8 @@
                                                                                                            :Reference {:confirms #{zen.fhir/Reference
                                                                                                                                    hl7-fhir-r4b-core.Reference/schema},
                                                                                                                        :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Substance/schema}}}},
+                                                                                                    :zen.fhir/value-set {:symbol hl7-terminology-r4.value-set.v2-0371/value-set,
+                                                                                                                         :strength :example},
                                                                                                     :zen/desc "Additive associated with container"}},
                                                                                   :require #{:additive},
                                                                                   :zen/desc "Additive associated with container"}}},

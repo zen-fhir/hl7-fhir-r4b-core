@@ -24,6 +24,7 @@
           hl7-fhir-r4b-core.markdown
           hl7-fhir-r4b-core.value-set.goal-category
           hl7-fhir-r4b-core.value-set.action-relationship-type
+          hl7-terminology-r4.value-set.action-participant-role
           hl7-fhir-r4b-core.Range
           hl7-fhir-r4b-core.value-set.condition-code
           hl7-fhir-r4b-core.string
@@ -53,7 +54,7 @@
           hl7-fhir-r4b-core.value-set.action-participant-type
           hl7-fhir-r4b-core.value-set.action-cardinality-behavior},
  action-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
-                :zen.fhir/version "0.6.29-22",
+                :zen.fhir/version "0.6.29-4",
                 :confirms #{hl7-fhir-r4b-core.BackboneElement/schema},
                 :type zen/map,
                 :keys {:_groupingBehavior {:confirms #{hl7-fhir-r4b-core.Element/schema}},
@@ -113,6 +114,8 @@
                                                            :zen/desc "patient | practitioner | related-person | device"},
                                                     :_type {:confirms #{hl7-fhir-r4b-core.Element/schema}},
                                                     :role {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                                                           :zen.fhir/value-set {:symbol hl7-terminology-r4.value-set.action-participant-role/value-set,
+                                                                                :strength :example},
                                                            :zen/desc "E.g. Nurse, Surgeon, Parent"}},
                                              :require #{:type},
                                              :zen/desc "Who should participate in the action"}},
@@ -229,7 +232,7 @@
                                                                   :strength :required},
                                              :zen/desc "single | multiple"}},
                 :zen/desc "Action defined by the plan"},
- schema {:zen.fhir/version "0.6.29-22",
+ schema {:zen.fhir/version "0.6.29-4",
          :confirms #{zen.fhir/Resource
                      hl7-fhir-r4b-core.DomainResource/schema},
          :zen/tags #{zen/schema zen.fhir/base-schema},

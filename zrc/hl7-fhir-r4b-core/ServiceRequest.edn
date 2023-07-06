@@ -17,6 +17,7 @@
           hl7-fhir-r4b-core.Timing
           hl7-fhir-r4b-core.DocumentReference
           hl7-fhir-r4b-core.Location
+          hl7-terminology-r4.value-set.action-participant-role
           hl7-fhir-r4b-core.Range
           hl7-fhir-r4b-core.Encounter
           hl7-fhir-r4b-core.CareTeam
@@ -31,6 +32,7 @@
           hl7-fhir-r4b-core.Annotation
           hl7-fhir-r4b-core.ServiceRequest
           hl7-fhir-r4b-core.uri
+          hl7-terminology-r4.value-set.v3-ServiceDeliveryLocationRoleType
           hl7-fhir-r4b-core.Provenance
           hl7-fhir-r4b-core.canonical
           hl7-fhir-r4b-core.Device
@@ -48,7 +50,7 @@
           hl7-fhir-r4b-core.value-set.request-priority
           hl7-fhir-r4b-core.RelatedPerson
           hl7-fhir-r4b-core.value-set.procedure-code},
- schema {:zen.fhir/version "0.6.29-22",
+ schema {:zen.fhir/version "0.6.29-4",
          :confirms #{zen.fhir/Resource
                      hl7-fhir-r4b-core.DomainResource/schema},
          :zen/tags #{zen/schema zen.fhir/base-schema},
@@ -58,6 +60,8 @@
          :zen/desc "A record of a request for service such as diagnostic investigations, treatments, or operations to be performed.",
          :keys {:performerType {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
                                 :fhir/flags #{:SU},
+                                :zen.fhir/value-set {:symbol hl7-terminology-r4.value-set.action-participant-role/value-set,
+                                                     :strength :example},
                                 :zen/desc "Performer role"},
                 :category {:type zen/vector,
                            :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
@@ -217,6 +221,8 @@
                 :locationCode {:type zen/vector,
                                :every {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
                                        :fhir/flags #{:SU},
+                                       :zen.fhir/value-set {:symbol hl7-terminology-r4.value-set.v3-ServiceDeliveryLocationRoleType/value-set,
+                                                            :strength :example},
                                        :zen/desc "Requested location"}},
                 :_instantiatesCanonical {:type zen/vector,
                                          :every {:confirms #{hl7-fhir-r4b-core.Element/schema}}},

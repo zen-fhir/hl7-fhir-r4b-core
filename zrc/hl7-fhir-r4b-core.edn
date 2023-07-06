@@ -1,5 +1,5 @@
 {ns hl7-fhir-r4b-core,
- import #{zen.fhir},
+ import #{zen.fhir hl7-terminology-r4},
  base-schemas {:zen/tags #{zen.fhir/base-schemas},
                :schemas {"ImmunizationEvaluation" {"http://hl7.org/fhir/StructureDefinition/ImmunizationEvaluation" #zen/quote hl7-fhir-r4b-core.ImmunizationEvaluation/schema},
                          "Appointment" {"http://hl7.org/fhir/StructureDefinition/Appointment" #zen/quote hl7-fhir-r4b-core.Appointment/schema},

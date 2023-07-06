@@ -1,8 +1,9 @@
 {ns hl7-fhir-r4b-core.allergyintolerance-substanceExposureRisk,
  import #{zen.fhir
           hl7-fhir-r4b-core.value-set.substance-code
+          hl7-terminology-r4.value-set.allerg-intol-substance-exp-risk
           hl7-fhir-r4b-core.CodeableConcept},
- schema {:zen.fhir/version "0.6.29-22",
+ schema {:zen.fhir/version "0.6.29-4",
          :zen/tags #{zen.fhir/extension
                      zen/schema
                      zen.fhir/structure-schema},
@@ -15,4 +16,6 @@
                                                  :strength :example},
                             :zen/desc "Substance (or pharmaceutical product)"},
                 :exposureRisk {:confirms #{hl7-fhir-r4b-core.CodeableConcept/schema},
+                               :zen.fhir/value-set {:symbol hl7-terminology-r4.value-set.allerg-intol-substance-exp-risk/value-set,
+                                                    :strength :required},
                                :zen/desc "known-reaction-risk | no-known-reaction-risk"}}}}
