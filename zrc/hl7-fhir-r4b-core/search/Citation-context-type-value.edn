@@ -1,0 +1,17 @@
+{ns hl7-fhir-r4b-core.search.Citation-context-type-value,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Citation-context-type-value",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Citation-context-type-value",
+         :fhir/type "composite",
+         :name "context-type-value",
+         :expr {:Citation {:base-knife [["useContext"]],
+                           :base-jsonpath ["$.\"useContext\"[*]"],
+                           :component-knife [[["code"]]
+                                             [["value"
+                                               "CodeableConcept"]]],
+                           :component-jsonpath [["$.\"code\"[*]"]
+                                                ["$.\"value\".\"CodeableConcept\"[*]"]],
+                           :data-types #{},
+                           :search-types [:token :token],
+                           :template :composite}}}}
