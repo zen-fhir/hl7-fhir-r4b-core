@@ -6,6 +6,6 @@
          :zen/desc "The material on this page will be removed in a future release. This content is deprecated and SHOULD NOT be used. Implementers are instead directed to the ([Genomics Reporting Implementation Guide](http://hl7.org/fhir/uv/genomics-reporting/index.html)) for guidance. Clinical Interpretations for variant. It's a reference to an Observation resource.",
          :zen.fhir/type "Reference",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/observation-geneticsInterpretation",
-         :zen.fhir/version "0.6.30-3",
+         :zen.fhir/version "0.6.30-7",
          :confirms #{zen.fhir/Reference},
          :zen.fhir/reference {:refers #{hl7-fhir-r4b-core.Observation/schema}}}}
