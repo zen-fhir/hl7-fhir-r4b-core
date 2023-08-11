@@ -4,7 +4,7 @@
           hl7-fhir-r4b-core.CodeableConcept
           hl7-fhir-r4b-core.Goal
           hl7-terminology-r4.value-set.goal-relationship-type},
- schema {:zen.fhir/version "0.6.30-10",
+ schema {:zen.fhir/version "0.6.30-11",
          :zen/tags #{zen.fhir/extension
                      zen/schema
                      zen.fhir/structure-schema},

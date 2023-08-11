@@ -8,7 +8,7 @@
           hl7-fhir-r4b-core.canonical
           hl7-fhir-r4b-core.code
           hl7-fhir-r4b-core.Element},
- schema {:zen.fhir/version "0.6.30-10",
+ schema {:zen.fhir/version "0.6.30-11",
          :confirms #{hl7-fhir-r4b-core.Element/schema},
          :zen/tags #{zen/schema zen.fhir/structure-schema},
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/RelatedArtifact",
