@@ -43,7 +43,7 @@
           hl7-fhir-r4b-core.Procedure
           hl7-fhir-r4b-core.RelatedPerson
           hl7-terminology-r4.value-set.v2-0092},
- schema {:zen.fhir/version "0.6.30-7",
+ schema {:zen.fhir/version "0.6.30-10",
          :confirms #{zen.fhir/Resource
                      hl7-fhir-r4b-core.DomainResource/schema},
          :zen/tags #{zen/schema zen.fhir/base-schema},
