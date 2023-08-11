@@ -6,5 +6,5 @@
          :zen/desc "Marks that a particular element definition is one that is not expected/allowed to have a binding, even though it has types that may be bound to value sets.",
          :zen.fhir/type "boolean",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/no-binding",
-         :zen.fhir/version "0.6.30-12",
+         :zen.fhir/version "0.6.30-13",
          :confirms #{hl7-fhir-r4b-core.boolean/schema}}}
