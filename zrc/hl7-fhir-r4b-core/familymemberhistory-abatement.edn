@@ -4,7 +4,7 @@
           hl7-fhir-r4b-core.Age
           hl7-fhir-r4b-core.date},
  schema {:fhir/polymorphic true,
-         :zen.fhir/version "0.6.30-14",
+         :zen.fhir/version "0.6.31",
          :zen/tags #{zen.fhir/extension
                      zen/schema
                      zen.fhir/structure-schema},
