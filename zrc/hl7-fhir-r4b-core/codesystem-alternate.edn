@@ -3,7 +3,7 @@
           hl7-terminology-r4.value-set.codesystem-altcode-kind
           hl7-fhir-r4b-core.Coding
           hl7-fhir-r4b-core.code},
- schema {:zen.fhir/version "0.6.31",
+ schema {:zen.fhir/version "0.6.32",
          :zen/tags #{zen.fhir/extension
                      zen/schema
                      zen.fhir/structure-schema},
